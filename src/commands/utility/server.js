@@ -17,14 +17,13 @@ async execute(message, args, client) {
         }
 
         const test = await ping({host: 'MinecraftGolden.aternos.me'});
-        console.log(test);
 
         if(test.version.name === '§4● Offline') {
             const embed = new Discord.MessageEmbed()
                 .setTitle(`MinecraftGolden.aternos.me`)
                 .addFields(
                     /** @type {any} */ {name: '__**Status**__', value: 'Offline', inline: true},
-                    /** @type {any} */ {name: '__**Players**__', value: JSON.stringify(test.players.max) + ` playerslots`, inline: true},
+                    /** @type {any} */ {name: '__**Players**__', value: 'unknown', inline: true},
                     /** @type {any} */ {name: '__**Latency**__', value: JSON.stringify(test.latency), inline: true}
                 )
                 .setColor(color.red)
