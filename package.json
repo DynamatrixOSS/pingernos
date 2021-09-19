@@ -1,0 +1,8 @@
+{
+  "name": "serverpinger",
+  "version": "1.0.0",
+  "dependencies": {
+    "discord.js": "^13.1.0",
+    "minecraft-protocol": "^1.26.5"
+  }
+}
