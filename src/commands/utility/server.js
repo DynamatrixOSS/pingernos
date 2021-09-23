@@ -64,6 +64,7 @@ async execute(message, args, client) {
                 await message.reply({embeds: [embed]});
             }
         } catch (e) {
+            console.log(e)
             if (e instanceof TypeError) {
                 return message.reply(`Make sure \`${args}\` is a valid Aternos server IP. If it is, report this to my developers. (\`ping support\`)`)
             }
