@@ -9,7 +9,7 @@ module.exports = {
 
     aliases: ['s', 'status'],
 
-    usage: '<server IP (without .aternos.me)',
+    usage: '<Aternos server IP>',
 
     description: 'Get the server status',
 
