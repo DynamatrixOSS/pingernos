@@ -27,7 +27,7 @@ async execute(message, args, client) {
             const test = await ping({host: `${ip}.aternos.me`});
 
             if (test.description.text === '§4Server not found.') {
-                return await message.reply(`:warning: ${args} is not a known server.`)
+                return await message.reply(`:warning: \`${args}\` is not a known server.`)
             }
 
             if (test.version.name === '§4● Offline') {
@@ -64,6 +64,9 @@ async execute(message, args, client) {
                 await message.reply({embeds: [embed]});
             }
         } catch (e) {
+            if (e instanceof TypeError) {
+                return message.reply(`Make sure \`${args}\` is a valid Aternos server IP. If it is, report this to my developers. (\`ping support\`)`)
+            }
             const embed = new Discord.MessageEmbed()
                 .setTitle(`:warning: Fatal error :warning:`)
                 .setDescription(`A fatal error has occurred while attempting to run this command:\n\`${e}\`\nPlease report this to my developers in the [support server](${util.links.support})`)
