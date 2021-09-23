@@ -29,7 +29,7 @@ util.color ={
 
 util.links ={
     support: 'https://discord.gg/QMhvHuGPMx',
-    invite: 'https://notarickroll.com'
+    invite: 'https://discord.com/api/oauth2/authorize?client_id=889197952994791434&permissions=274878286848&scope=bot'
 }
 
 util.escapeFormatting = (string) => {
