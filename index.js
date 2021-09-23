@@ -4,6 +4,8 @@ const Discord = require('discord.js');
 const { Client, Intents } = require('discord.js');
 const config = require('./config.json');
 const fs = require('fs');
+const DEL = require("@zerotwobot/del.js")
+const del = new DEL(config.DELtoken, "889197952994791434")
 //const mysql = require('mysql2/promise')
 
 async function main() {
@@ -35,6 +37,10 @@ async function main() {
     client.on('ready', () => {
         client.user.setPresence( { activity: { type: 'WATCHING', name: 'my prefix (;)' }, status: 'dnd' } )
         console.log('I am ready!');
+        del.post(client.guilds.cache.size, 0)
+        setInterval(() => {
+            del.post(client.guilds.cache.size, 0) // You will probably need to change this.
+        }, 600000)
     });
 
     client.on('messageCreate', message => {
