@@ -22,7 +22,14 @@ async execute(message, args, client) {
         }
 
         try {
-            const ip = args[0].match(/^(\w+)(?:\.aternos\.me)?$/i)[1];
+            let ip = args[0].match(/^(\w+)(?:\.aternos\.me)?$/i);
+
+            if (!ip) {
+                await message.reply(`\`${args}\` is not a valid Aternos server IP or name.`)
+                return;
+            }
+
+            ip = ip[1];
 
             const test = await ping({host: `${ip}.aternos.me`});
 
@@ -65,9 +72,6 @@ async execute(message, args, client) {
             }
         } catch (e) {
             console.log(e)
-            if (e instanceof TypeError) {
-                return message.reply(`Make sure \`${args}\` is a valid Aternos server IP. If it is, report this to my developers. (\`ping support\`)`)
-            }
             const embed = new Discord.MessageEmbed()
                 .setTitle(`:warning: Fatal error :warning:`)
                 .setDescription(`A fatal error has occurred while attempting to run this command:\n\`${e}\`\nPlease report this to my developers in the [support server](${util.links.support})`)
