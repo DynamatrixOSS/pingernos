@@ -24,7 +24,8 @@ util.roleMentionToId = (mention) => {
 util.color ={
     blue: 0xADD8E6,
     red: 0xf04747,
-    green: 0x90ee90
+    green: 0x90ee90,
+    orange: 0xfaa61a
 }
 
 util.links ={
