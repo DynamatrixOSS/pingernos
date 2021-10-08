@@ -40,11 +40,12 @@ async execute(message, args, client) {
             if (test.version.name === '§4● Offline') {
                 const embed = new Discord.MessageEmbed()
                     .setTitle(`${ip}.aternos.me`)
-                    .addFields(
-                        /** @type {any} */ {name: '__**Status**__', value: 'Offline', inline: true},
-                        /** @type {any} */ {name: '__**Players**__', value: 'unknown', inline: true},
-                        /** @type {any} */ {name: '__**Latency**__', value: JSON.stringify(test.latency), inline: true}
-                    )
+                    //.addFields(
+                    //    /** @type {any} */ {name: '__**Status**__', value: 'Offline', inline: true},
+                    //    /** @type {any} */ {name: '__**Players**__', value: 'unknown', inline: true},
+                    //    /** @type {any} */ {name: '__**Latency**__', value: JSON.stringify(test.latency), inline: true}
+                    //)
+                    .setDescription(`We are not able to gather info from offline servers, sorry!\nProtocol Latency: ${JSON.stringify(test.latency)}\n\nIf you believe this is wrong, please [join our support server](${util.links.support}).`)
                     .setColor(util.color.red)
                     .setFooter(`Command executed by ${message.author.tag}`)
                     .setTimestamp()
