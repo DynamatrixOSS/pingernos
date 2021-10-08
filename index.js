@@ -35,7 +35,7 @@ async function main() {
         client.commands.set(command.name, command);
     }
     client.on('ready', () => {
-        client.user.setPresence( { activity: { type: 'WATCHING', name: 'my prefix (;)' }, status: 'dnd' } )
+        client.user.setPresence( { status: 'dnd', activities: [{ type: "WATCHING", name: "you (prefix \"ping \")" }] } );
         console.log('I am ready!');
         del.post(client.guilds.cache.size, 0)
         setInterval(() => {
