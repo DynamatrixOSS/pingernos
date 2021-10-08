@@ -17,6 +17,7 @@ module.exports = {
 
 async execute(message, args, client) {
         const data = [];
+        const color = [];
         function removeColorsFromString (text) { // Removing minecraft colors from strings, because console can`t read it and it will look crazy.
             return text.replace(/§./g, '')
         }
@@ -51,9 +52,15 @@ async execute(message, args, client) {
                     .setTimestamp()
                 await message.reply({embeds: [embed]})
             } else {
-                if (test.players.max === 0) data.push(`Loading...`)
-                if (test.players.max !== 0) data.push(`Online`)
-                console.log(data)
+                if (test.players.max === 0) {
+                    data.push(`loading...`)
+                    color.push(`0xfaa61a`);
+                }
+                if (test.players.max !== 0) {
+                    data.push(`online`)
+                    color.push(`0x90ee90`);
+                }
+                console.log(data + ` <- data | color -> ` + color)
 
                 const embed = new Discord.MessageEmbed()
                     .setTitle(`${ip}.aternos.me`)
@@ -64,9 +71,10 @@ async execute(message, args, client) {
                             value: JSON.stringify(test.players.online) + `/` + JSON.stringify(test.players.max),
                             inline: true
                         },
-                        /** @type {any} */ {name: '__**Latency**__', value: JSON.stringify(test.latency), inline: true}
+                        /** @type {any} */ {name: '__**Protocol latency**__', value: JSON.stringify(test.latency), inline: true}
                     )
-                    .setColor(util.color.green)
+                    //.setDescription(`Server is currently **${data.toString()}**.\n\n**Players:** \`${JSON.stringify(test.players.online) + "`" + " out of " + "`" + JSON.stringify(test.players.max)}\`\n**Protocol Latency:** ${JSON.stringify(test.latency)}`)
+                    .setColor(`${color}`)
                     .setFooter(`Command executed by ${message.author.tag}`)
                     .setTimestamp()
                 await message.reply({embeds: [embed]});
