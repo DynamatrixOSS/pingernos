@@ -71,7 +71,8 @@ async execute(message, args, client) {
                             value: JSON.stringify(test.players.online) + `/` + JSON.stringify(test.players.max),
                             inline: true
                         },
-                        /** @type {any} */ {name: '__**Protocol latency**__', value: JSON.stringify(test.latency), inline: true}
+                        /** @type {any} */ {name: '__**Software**__', value: removeColorsFromString(JSON.stringify(test.version.name)).replace(/"/g, ''), inline: true},
+                        /** @type {any} */ {name: '__**MOTD**__', value: removeColorsFromString(JSON.stringify(test.description.text)).replace(/"/g, ''), inline: false}
                     )
                     //.setDescription(`Server is currently **${data.toString()}**.\n\n**Players:** \`${JSON.stringify(test.players.online) + "`" + " out of " + "`" + JSON.stringify(test.players.max)}\`\n**Protocol Latency:** ${JSON.stringify(test.latency)}`)
                     .setColor(`${color}`)
@@ -80,6 +81,13 @@ async execute(message, args, client) {
                 await message.reply({embeds: [embed]});
             }
         } catch (e) {
+            if (e && e.code === 'ECONNREFUSED') {
+                return await message.reply(`:warning: **Could not establish connection with protocol. Try again later.**`);
+            }
+
+            if (e.message.includes("ETIMEDOUT")) {
+                return await message.reply(`:warning: **Protocol failed to respond, command timed out. Try again later.**`);
+            }
             console.log(e)
             const embed = new Discord.MessageEmbed()
                 .setTitle(`:warning: Fatal error :warning:`)
@@ -87,7 +95,7 @@ async execute(message, args, client) {
                 .setColor(util.color.red)
                 .setFooter(`Command executed by ${message.author.tag}`)
                 .setTimestamp()
-            return await message.reply( { embeds: [embed] } )
+            return await message.reply({embeds: [embed]})
         }
     },
 };
