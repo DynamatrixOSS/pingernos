@@ -10,9 +10,13 @@ module.exports = {
     cooldown: 60,
 
     async execute(message, args, client) {
-        const test = await ping({host: `example.aternos.me`});
-        
         const pong = await message.reply('Loading data');
-        await pong.edit(`🏓 Latency is ${pong.createdTimestamp - message.createdTimestamp}ms.\nAPI Latency is ${Math.round(client.ws.ping)}ms\nProtocol: ${JSON.stringify(test.latency)} ms`);
+        try {
+            const whatthefuck = await ping({host: `example.aternos.me`});
+            console.log(whatthefuck)
+            await pong.edit(`🏓 Latency is ${pong.createdTimestamp - message.createdTimestamp}ms.\nAPI Latency is ${Math.round(client.ws.ping)}ms\nProtocol: ${JSON.stringify(whatthefuck.latency)} ms`);
+        } catch (e) {
+            return await message.reply(`Error caught: \`${e}\``);
+        }
     },
 };
