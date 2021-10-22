@@ -18,6 +18,7 @@ module.exports = {
   async execute(message, args, client) {
     const data = [];
     const color = [];
+    const description = [];
     function removeColorsFromString(text) {
       // Removing minecraft colors from strings, because console can`t read it and it will look crazy.
       return text.replace(/§./g, "");
@@ -73,6 +74,12 @@ module.exports = {
         }
         console.log(data + ` <- data | color -> ` + color);
 
+        if (test.description.text !== '') {
+          description.push((JSON.stringify(test.description.text)).replace(/"/g, ""));
+        } else {
+          description.push("No MOTD");
+        }
+
         const embed = new Discord.MessageEmbed()
           .setTitle(`${ip}.aternos.me`)
           .addFields(
@@ -98,9 +105,7 @@ module.exports = {
             },
             /** @type {any} */ {
               name: "__**MOTD**__",
-              value: removeColorsFromString(
-                JSON.stringify(test.description.text)
-              ).replace(/"/g, ""),
+              value: description.toString(),
               inline: false,
             }
           )
