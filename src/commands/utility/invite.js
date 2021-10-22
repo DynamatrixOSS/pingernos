@@ -1,19 +1,20 @@
-const util = require('../../util');
+const util = require("../../util");
 const Discord = require("discord.js");
 
 module.exports = {
-    name: 'invite',
+  name: "invite",
 
-    aliases: ['inv'],
+  aliases: ["inv"],
 
-    description: 'Invite me to your server(s)!',
+  description: "Invite me to your server(s)!",
 
+  async execute(message, args, client) {
+    const embed = new Discord.MessageEmbed()
+      .setDescription(
+        `${client.user.username} is a Modraxis Development project. [Invite it here!](${util.links.invite})`
+      )
+      .setColor(util.color.blue);
 
-    async execute(message, args, client) {
-        const embed = new Discord.MessageEmbed()
-            .setDescription(`${client.user.username} is a Modraxis Development project. [Invite it here!](${util.links.invite})`)
-            .setColor(util.color.blue)
-
-        await message.reply({ embeds: [embed] });
-    },
+    await message.reply({ embeds: [embed] });
+  },
 };
