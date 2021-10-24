@@ -75,7 +75,7 @@ module.exports = {
         console.log(data + ` <- data | color -> ` + color);
 
         if (test.description.text !== '') {
-          description.push((JSON.stringify(test.description.text)).replace(/"/g, ""));
+          description.push(removeColorsFromString(JSON.stringify(test.description.text)).replace(/"/g, ""));
         } else {
           description.push("No MOTD");
         }
