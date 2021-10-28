@@ -24,7 +24,7 @@ async function main() {
 
   client.commands = new Discord.Collection();
   client.cooldowns = new Discord.Collection();
-  const prefix = config.prefix;
+  const prefix = new RegExp(`^<@!?${client.user.id}>`)
 
   const commandFolders = fs.readdirSync("./src/commands");
   for (const folder of commandFolders) {
