@@ -24,7 +24,7 @@ async function main() {
 
   client.commands = new Discord.Collection();
   client.cooldowns = new Discord.Collection();
-  const prefix = config.prefix;
+  const prefix = new RegExp(`^<@!?889197952994791434>)
 
   const commandFolders = fs.readdirSync("./src/commands");
   for (const folder of commandFolders) {
@@ -58,7 +58,7 @@ async function main() {
   });
 
   client.on("messageCreate", (message) => {
-    if (!message.content.startsWith(prefix) || message.author.bot) return;
+    if (!prefix.test(message.content) || message.author.bot) return;
     const args = message.content.slice(prefix.length).trim().split(/ +/);
     const commandName = args.shift().toLowerCase();
     const command =
