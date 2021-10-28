@@ -58,7 +58,7 @@ async function main() {
   });
 
   client.on("messageCreate", (message) => {
-    if (!message.content.startsWith(prefix) || message.author.bot) return;
+    if (!prefix.test(message.content) || message.author.bot) return;
     const args = message.content.slice(prefix.length).trim().split(/ +/);
     const commandName = args.shift().toLowerCase();
     const command =
