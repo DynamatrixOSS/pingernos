@@ -24,7 +24,7 @@ async function main() {
 
   client.commands = new Discord.Collection();
   client.cooldowns = new Discord.Collection();
-  const prefix = new RegExp(`^<@!?889197952994791434>`)
+  const prefix = /^<@!?889197952994791434>/
 
   const commandFolders = fs.readdirSync("./src/commands");
   for (const folder of commandFolders) {
