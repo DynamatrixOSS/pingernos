@@ -48,7 +48,7 @@ async function main() {
   client.on("ready", () => {
     client.user.setPresence({
       status: "dnd",
-      activities: [{ type: "WATCHING", name: 'you (prefix "<@889197952994791434> ")' }],
+      activities: [{ type: "WATCHING", name: 'you (prefix: @mention")' }],
     });
     console.log("I am ready!");
     del.post(client.guilds.cache.size, 0);
