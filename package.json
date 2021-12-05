@@ -2,7 +2,6 @@
   "name": "serverpinger",
   "version": "1.0.0",
   "dependencies": {
-    "@zerotwobot/del.js": "^1.0.1",
     "discord.js": "^13.1.0",
     "minecraft-protocol": "^1.26.5",
     "statcord.js": "^3.3.0"
