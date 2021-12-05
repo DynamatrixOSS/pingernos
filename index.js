@@ -6,6 +6,7 @@ const config = require("./config.json");
 const fs = require("fs");
 const DEL = require("@zerotwobot/del.js");
 const del = new DEL(config.DELtoken, "889197952994791434");
+const Statcord = require("statcord.js");
 //const mysql = require('mysql2/promise')
 
 async function main() {
@@ -20,6 +21,13 @@ async function main() {
       Intents.FLAGS.GUILD_MEMBERS,
     ],
     allowedMentions: { parse: [] },
+  });
+  const statcord = new Statcord.Client({
+    client,
+    key: config.statcord,
+    postCpuStatistics: true, /* Whether to post memory statistics or not, defaults to true */
+    postMemStatistics: true, /* Whether to post memory statistics or not, defaults to true */
+    postNetworkStatistics: true, /* Whether to post memory statistics or not, defaults to true */
   });
 
   client.commands = new Discord.Collection();
@@ -51,10 +59,19 @@ async function main() {
       activities: [{ type: "WATCHING", name: 'you (prefix "ping ")' }],
     });
     console.log("I am ready!");
-    del.post(client.guilds.cache.size, 0);
-    setInterval(() => {
-      del.post(client.guilds.cache.size, 0); // You will probably need to change this.
-    }, 600000);
+    statcord.autopost();
+  });
+
+  statcord.on("autopost-start", () => {
+    // Emitted when statcord autopost starts
+    console.log("Started autopost");
+  });
+
+  statcord.on("post", status => {
+    // status = false if the post was successful
+    // status = "Error message" or status = Error if there was an error
+    if (!status) console.log("Successful post");
+    else console.error(status);
   });
 
   client.on("messageCreate", (message) => {
