@@ -4,8 +4,6 @@ const Discord = require("discord.js");
 const { Client, Intents } = require("discord.js");
 const config = require("./config.json");
 const fs = require("fs");
-const DEL = require("@zerotwobot/del.js");
-const del = new DEL(config.DELtoken, "889197952994791434");
 const Statcord = require("statcord.js");
 //const mysql = require('mysql2/promise')
 
