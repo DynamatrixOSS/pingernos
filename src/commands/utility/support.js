@@ -9,7 +9,7 @@ module.exports = {
   async execute(message, args, client) {
     const embed = new Discord.MessageEmbed()
       .setDescription(
-        `[join our support server](${util.links.support}) or contact **modraxisorg@gmail.com**.`
+        `[join our support server](${util.links.support}) or contact **psychopsorg@gmail.com**.`
       )
       .setColor(util.color.blue);
 

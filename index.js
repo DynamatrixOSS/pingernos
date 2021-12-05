@@ -30,7 +30,7 @@ async function main() {
 
   client.commands = new Discord.Collection();
   client.cooldowns = new Discord.Collection();
-  const prefix = config.prefix;
+  const prefix = /^<@!?889197952994791434>/
 
   const commandFolders = fs.readdirSync("./src/commands");
   for (const folder of commandFolders) {
@@ -54,7 +54,7 @@ async function main() {
   client.on("ready", () => {
     client.user.setPresence({
       status: "dnd",
-      activities: [{ type: "WATCHING", name: 'you (prefix "ping ")' }],
+      activities: [{ type: "WATCHING", name: 'you (prefix: @mention")' }],
     });
     console.log("I am ready!");
     statcord.autopost();
@@ -73,8 +73,8 @@ async function main() {
   });
 
   client.on("messageCreate", (message) => {
-    if (!message.content.startsWith(prefix) || message.author.bot) return;
-    const args = message.content.slice(prefix.length).trim().split(/ +/);
+    if (!prefix.test(message.content) || message.author.bot) return;
+    const args = message.content.replace(prefix, '').trim().split(' ');
     const commandName = args.shift().toLowerCase();
     const command =
       client.commands.get(commandName) ||
