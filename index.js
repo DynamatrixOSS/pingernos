@@ -4,7 +4,6 @@ const Discord = require("discord.js");
 const { Client, Intents } = require("discord.js");
 const config = require("./config.json");
 const fs = require("fs");
-const Statcord = require("statcord.js");
 //const mysql = require('mysql2/promise')
 
 async function main() {
@@ -19,13 +18,6 @@ async function main() {
       Intents.FLAGS.GUILD_MEMBERS,
     ],
     allowedMentions: { parse: [] },
-  });
-  const statcord = new Statcord.Client({
-    client,
-    key: config.statcord,
-    postCpuStatistics: true, /* Whether to post memory statistics or not, defaults to true */
-    postMemStatistics: true, /* Whether to post memory statistics or not, defaults to true */
-    postNetworkStatistics: true, /* Whether to post memory statistics or not, defaults to true */
   });
 
   client.commands = new Discord.Collection();
@@ -57,19 +49,6 @@ async function main() {
       activities: [{ type: "WATCHING", name: 'you (prefix: @mention")' }],
     });
     console.log("I am ready!");
-    statcord.autopost();
-  });
-
-  statcord.on("autopost-start", () => {
-    // Emitted when statcord autopost starts
-    console.log("Started autopost");
-  });
-
-  statcord.on("post", status => {
-    // status = false if the post was successful
-    // status = "Error message" or status = Error if there was an error
-    if (!status) console.log("Successful post");
-    else console.error(status);
   });
 
   client.on("messageCreate", (message) => {
