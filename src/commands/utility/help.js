@@ -23,7 +23,7 @@ module.exports = {
       //data.push(`\nYou can send \`${prefix}help [command name]\` to get info on a specific command!`);
 
       const embed = new Discord.MessageEmbed()
-        .setTitle(`${client.user.username} commands | Prefix ${prefix}`)
+        .setTitle(`${client.user.username} commands | Prefix @mention`)
         .setDescription(data.toString())
         .setTimestamp()
         .setFooter(`Command executed by ${message.author.tag}`)
