@@ -11,7 +11,7 @@ module.exports = {
   async execute(message, args, client) {
     const embed = new Discord.MessageEmbed()
       .setDescription(
-        `${client.user.username} is a PsychOps Development project. [Invite it here!](${util.links.invite})`
+        `${client.user.username} is a PsychOps Studios project. [Invite it here!](${util.links.invite})`
       )
       .setColor(util.color.blue);
 
