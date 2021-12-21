@@ -12,9 +12,6 @@ async function main() {
   //await database.execute("CREATE TABLE IF NOT EXISTS `example` (`id` int PRIMARY KEY AUTO_INCREMENT , `content` TEXT NOT NULL)")
 
   const client = new Client({
-    intents: [
-      Intents.FLAGS.GUILDS
-    ],
     allowedMentions: { parse: [] },
   });
 
