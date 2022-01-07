@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 const config = require("../../../config.json");
+const util = require("../../util");
 
 module.exports = {
   name: "guilds",
