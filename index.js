@@ -98,10 +98,10 @@ async function main() {
           )} more second(s) before reusing the \`${command.name}\` command.`
         );
       }
-
-      timestamps.set(message.author.id, now);
-      setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
     }
+
+    timestamps.set(message.author.id, now);
+    setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
     try {
       command.execute(message, args, client); // Add ", database" behind client when using databases
