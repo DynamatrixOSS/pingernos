@@ -13,7 +13,7 @@ module.exports = {
 
   description: "Get the server status",
 
-  cooldown: 60,
+  cooldown: 5,
 
   async execute(message, args, client) {
     const data = [];
