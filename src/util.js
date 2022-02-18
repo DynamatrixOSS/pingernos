@@ -1,8 +1,28 @@
+
+const config = require('../config.json');
+const mysql = require('mysql2/promise')
 const util = {};
 
 util.toTitleCase = (s) => {
   return s.toLowerCase().replace(/^(\w)|\s(\w)/g, (c) => c.toUpperCase());
 };
+
+
+
+util.queryDB = (statement, args) => {
+  return new Promise((resolve, reject) => {
+    console.log(`promise not succeeded`)
+    connection.query(statement, args, (error, result) => {
+      if(error) {
+        reject(error);
+      }
+      else {
+        resolve(result);
+      }
+    });
+  });
+}
+
 
 /**
  * Converts a role mention (<@&roleId>) or role id to a role id
@@ -32,6 +52,11 @@ util.links = {
   support: "https://discord.gg/QMhvHuGPMx",
   invite:
     "https://discord.com/api/oauth2/authorize?client_id=889197952994791434&permissions=274878286848&scope=bot",
+};
+
+let connection;
+util.init = async() => {
+  connection = await mysql.createConnection(config.database);
 };
 
 util.escapeFormatting = (string) => {

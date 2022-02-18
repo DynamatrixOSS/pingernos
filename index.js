@@ -4,12 +4,12 @@ const Discord = require("discord.js");
 const { Client, Intents } = require("discord.js");
 const config = require("./config.json");
 const fs = require("fs");
-//const mysql = require('mysql2/promise')
+const util = require("./src/util");
 
 async function main() {
-  //const database = await mysql.createConnection(config.database);
+  await util.init();
   //create any tables needed if they don't already exist
-  //await database.execute("CREATE TABLE IF NOT EXISTS `example` (`id` int PRIMARY KEY AUTO_INCREMENT , `content` TEXT NOT NULL)")
+  util.queryDB("CREATE TABLE IF NOT EXISTS `server` (`guild_id` int PRIMARY KEY AUTO_INCREMENT , `server_ip` TEXT NOT NULL)")
 
   const client = new Client({
     intents: [
@@ -22,7 +22,7 @@ async function main() {
 
   client.commands = new Discord.Collection();
   client.cooldowns = new Discord.Collection();
-  const prefix = /^<@!?889197952994791434>/
+  const prefix = /^<@!?944178547193425920>/
 
   const commandFolders = fs.readdirSync("./src/commands");
   for (const folder of commandFolders) {

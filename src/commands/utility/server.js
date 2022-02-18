@@ -24,6 +24,10 @@ module.exports = {
       return text.replace(/§./g, "");
     }
 
+    //if(!args.length) {
+      //await util.queryDB("SELECT server_ip FROM servers WHERE guild_id = ?", [message.guild.id])
+    //}
+
     try {
       let ip = args[0].match(/^(\w+)(?:\.aternos\.me)?$/i);
 
@@ -37,9 +41,9 @@ module.exports = {
       ip = ip[1];
 
       const test = await ping({ host: `${ip}.aternos.me` });
-      //console.log(test)
+      console.log(test)
 
-      if (test.description.text === "§4Server not found.") {
+      if (test.version.name === "⚠ Error") {
         return await message.reply(
           `:warning: \`${args}\` is not a known server.`
         );
