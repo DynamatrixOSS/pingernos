@@ -37,7 +37,7 @@ module.exports = {
       ip = ip[1];
 
       const test = await ping({ host: `${ip}.aternos.me` });
-      console.log(test)
+      //console.log(test)
 
       if (test.description.text === "§4Server not found.") {
         return await message.reply(
