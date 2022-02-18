@@ -105,6 +105,7 @@ async function main() {
 
     try {
       command.execute(message, args, client); // Add ", database" behind client when using databases
+      console.log(`Command "${command.name}" was executed by ${message.author.tag} (${message.author.id})`)
     } catch (error) {
       console.error(error);
       message.reply(
