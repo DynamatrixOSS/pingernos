@@ -37,6 +37,7 @@ module.exports = {
       ip = ip[1];
 
       const test = await ping({ host: `${ip}.aternos.me` });
+      console.log(test)
 
       if (test.description.text === "§4Server not found.") {
         return await message.reply(
@@ -74,10 +75,18 @@ module.exports = {
         }
         console.log(data + ` <- data | color -> ` + color);
 
-        if (test.description.text !== '') {
-          description.push(removeColorsFromString(JSON.stringify(test.description.text)).replace(/"/g, ""));
+        if(!test.modinfo) {
+          if (test.description.text !== '') {
+            description.push(removeColorsFromString(test.description.text));
+          } else {
+            description.push("No MOTD");
+          }
         } else {
-          description.push("No MOTD");
+          if (test.description !== '') {
+            description.push(removeColorsFromString(test.description));
+          } else {
+            description.push("No MOTD");
+          }
         }
 
         const embed = new Discord.MessageEmbed()
