@@ -38,7 +38,6 @@ module.exports = {
         return;
       }
 
-      ip = ip[1];
 
       const test = await ping({ host: `${ip}.aternos.me` });
       console.log(test)
