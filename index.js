@@ -4,12 +4,15 @@ const Discord = require("discord.js");
 const { Client, Intents } = require("discord.js");
 const config = require("./config.json");
 const fs = require("fs");
-const util = require("./src/util");
+const mysql = require('mysql2/promise')
+//const util = require("./src/util");
 
 async function main() {
-  await util.init();
+  //await util.init();
+  const database = await mysql.createConnection(config.database);
   //create any tables needed if they don't already exist
-  util.queryDB("CREATE TABLE IF NOT EXISTS `server` (`guild_id` int PRIMARY KEY AUTO_INCREMENT , `server_ip` TEXT NOT NULL)")
+  await database.execute("CREATE TABLE IF NOT EXISTS `server` (`guild_id` char(18) PRIMARY KEY, `server_ip` TEXT NOT NULL)")
+  //util.queryDB("CREATE TABLE IF NOT EXISTS `server` (`guild_id` int PRIMARY KEY AUTO_INCREMENT , `server_ip` TEXT NOT NULL)")
 
   const client = new Client({
     intents: [

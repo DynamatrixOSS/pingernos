@@ -1,7 +1,9 @@
 const util = require("../../util");
 const Discord = require("discord.js");
 const {ping} = require("minecraft-protocol");
-
+//const { database } = require("/home/joshua/WebstormProjects/serverpinger/index.js")
+const mysql = require("mysql2/promise");
+const config = require("../../../config.json");
 
 module.exports = {
     name: "setserver",
@@ -17,6 +19,13 @@ module.exports = {
     cooldown: 5,
 
     async execute(message, args, client) {
+        if(args[0].match('delete')) {
+            const database = await mysql.createConnection(config.database);
+            await database.execute("DELETE FROM server WHERE guild_id = ?", [message.guild.id]);
+            await message.reply(`Server has been removed from the database.`);
+            return;
+        }
+
         let ip = args[0].match(/^(\w+)(?:\.aternos\.me)?$/i);
 
         if (!ip) {
@@ -33,13 +42,12 @@ module.exports = {
         if (test.version.name === "⚠ Error") {
             return await message.reply(`:warning: \`${args}\` is not a known server.`);
         } else {
-            await message.reply(`Checkpoint before sql`)
-            if (!(await util.queryDB("SELECT server_ip FROM server WHERE guild_id = ?", [message.guild.id])).length) {
-                await util.queryDB("INSERT INTO server (guild_id, server_ip) VALUES (?,?)", [message.guild.id, ip])
-                await message.reply("The server has been set as default successfully.")
-            } else {
-                await util.queryDB("UPDATE server SET server_ip = ? WHERE guild_id = ?", [ip, message.guild.id])
-                await message.reply("The server has been set as default successfully.")
+            const database = await mysql.createConnection(config.database);
+            try {
+                await database.execute("INSERT INTO server (guild_id, server_ip) VALUES (?,?) ON DUPLICATE KEY UPDATE server_ip = ?", [message.guild.id, ip, ip])
+                await message.reply(`Successfully set default server to ${ip}\nYou can remove it using \`@prefix set delete\``)
+            } catch (e) {
+                console.log(e);
             }
         }
     },
