@@ -1,13 +1,15 @@
 const { ping } = require("minecraft-protocol");
 const Discord = require("discord.js");
 const util = require("../../util");
+const mysql = require("mysql2/promise");
+const config = require("../../../config.json");
 
 module.exports = {
   name: "status",
 
-  args: true,
-
   aliases: ["s", "status"],
+
+  permissions: 'MANAGE_GUILD',
 
   usage: "<Aternos server IP>",
 
@@ -24,22 +26,39 @@ module.exports = {
       return text.replace(/§./g, "");
     }
 
-    try {
-      let ip = args[0].match(/^(\w+)(?:\.aternos\.me)?$/i);
+    //if(!args.length) {
+      //await util.queryDB("SELECT server_ip FROM servers WHERE guild_id = ?", [message.guild.id])
+    //}
+
+      try {
+      let ip;
+      if(!args.length){ // Using this condition as you are
+        const database = await mysql.createConnection(config.database);
+        const response = await database.query("SELECT server_ip FROM server WHERE guild_id = ?", [message.guild.id])
+        if(response[0][0] !== undefined){ // checking if we got an ip back
+          ip = response[0][0]["server_ip"]
+        }
+      } else {
+        ip = args[0].match(/^(\w+)(?:\.aternos\.me)?$/i)[1] // second match is the [name].aternos.me part
+      }
 
       if (!ip) {
-        await message.reply(
-          `\`${args}\` is not a valid Aternos server IP or name.`
-        );
+        if(args.length === 0){ // no ip
+          await message.reply(
+              `You didn't provide any Aternos server IP, nor is one configured for this guild.`);
+        } else { // wrong ip
+          await message.reply(
+              `\`${args}\` is not a valid Aternos server IP or name.`
+          );
+        }
         return;
       }
 
-      ip = ip[1];
 
       const test = await ping({ host: `${ip}.aternos.me` });
-      //console.log(test)
+      console.log(test)
 
-      if (test.description.text === "§4Server not found.") {
+      if (test.version.name === "⚠ Error") {
         return await message.reply(
           `:warning: \`${args}\` is not a known server.`
         );

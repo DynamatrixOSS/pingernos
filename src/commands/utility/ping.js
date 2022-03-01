@@ -7,7 +7,7 @@ module.exports = {
 
   description: "Get the bot and websocket latency",
 
-  cooldown: 60,
+  cooldown: 5,
 
   async execute(message, args, client) {
     const pong = await message.reply("Loading data");

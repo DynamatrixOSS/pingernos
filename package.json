@@ -4,6 +4,7 @@
   "dependencies": {
     "discord.js": "^13.1.0",
     "minecraft-protocol": "^1.26.5",
+    "mysql2": "^2.3.3",
     "statcord.js": "^3.3.0"
   }
 }
