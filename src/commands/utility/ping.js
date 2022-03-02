@@ -13,7 +13,7 @@ module.exports = {
     const pong = await message.reply("Loading data");
     try {
       const whatthefuck = await ping({ host: `example.aternos.me` });
-      console.log(whatthefuck);
+      //console.log(whatthefuck);
       await pong.edit(
         `🏓 Latency is ${
           pong.createdTimestamp - message.createdTimestamp
