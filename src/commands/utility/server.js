@@ -56,7 +56,7 @@ module.exports = {
 
 
       const test = await ping({ host: `${ip}.aternos.me` });
-      console.log(test)
+      //console.log(test)
 
       if (test.version.name === "⚠ Error") {
         return await message.reply(
