@@ -9,7 +9,7 @@ module.exports = {
   async execute(message, args, client) {
     const embed = new Discord.MessageEmbed()
       .setDescription(
-        `${client.user.username} is currently in ${client.guilds.cache.size} servers`
+        `${client.user.username} is currently in ${client.guilds.cache.size} servers with ${client.users.cache.size} users.`
       )
       .setColor(util.color.blue);
 
