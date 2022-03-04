@@ -22,7 +22,7 @@ module.exports = {
 
     const embed = new Discord.MessageEmbed()
     const test = await ping({ host: `${ip}.aternos.me` });
-    if(removeColorsFromString(test.description.match(/(Server not found)/gi))){
+      if (test.version.name === "⚠ Error") {
         embed.setDescription(`${ip}.aternos.me is free to use!`)
         embed.setColor(util.color.green)
     } else {
