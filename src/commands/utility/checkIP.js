@@ -22,12 +22,12 @@ module.exports = {
 
     const embed = new Discord.MessageEmbed()
     const test = await ping({ host: `${ip}.aternos.me` });
-    if(removeColorsFromString(test.description.match(/(Server not found)/gi))){
-        embed.setDescription(`**${ip}.aternos.me** is free to use!\nTo use it as your server address, head to **[the options of your server](https://aternos.org/options)**`)
-        embed.setColor(util.color.green)
+    if (test.version.name === "⚠ Error") {
+      embed.setDescription(`**${ip}.aternos.me** is free to use!\nTo use it as your server address, head to **[the options of your server](https://aternos.org/options)**`)
+      embed.setColor(util.color.green)
     } else {
-        embed.setDescription(`It seems a server with the IP **${ip}.aternos.me** already exists!`)
-        embed.setColor(util.color.red)
+      embed.setDescription(`It seems a server with the IP **${ip}.aternos.me** already exists!`)
+      embed.setColor(util.color.red)
     }
 
     await message.reply({ embeds: [embed] });
