@@ -5,7 +5,7 @@ const { ping } = require("minecraft-protocol");
 module.exports = {
   args: true,
   name: "checkip",
-  aliases: ["checkserverip"],
+  aliases: ["checkserverip", "check"],
   description: "Checks if an Aternos-IP is free to use.",
   
   async execute(message, args, client) {
