@@ -9,8 +9,6 @@ module.exports = {
 
   aliases: ["s", "status"],
 
-  permissions: 'MANAGE_GUILD',
-
   usage: "<Aternos server IP>",
 
   description: "Get the server status",
