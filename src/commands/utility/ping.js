@@ -13,7 +13,7 @@ module.exports = {
   async execute(message, args, client) {
     const pong = await message.reply("Loading data");
     try {
-      const result = await util.retry(ping, null, [{host: `${ip}.aternos.me`}]);
+      const result = await util.retry(ping, null, [{host: `example.aternos.me`}]);
       console.log(result);
       await pong.edit(
         `🏓 Latency is ${
