@@ -36,10 +36,10 @@ module.exports = {
         ip = ip[1];
 
 
-        const test = await ping({host: `${ip}.aternos.me`});
-        //console.log(test)
+        const result = await util.retry(ping, null, [{host: `${ip}.aternos.me`}]);
+        //console.log(result)
 
-        if (test.version.name === "⚠ Error") {
+        if (result.version.name === "⚠ Error") {
             return await message.reply(`:warning: \`${args}\` is not a known server.`);
         } else {
             const database = await mysql.createConnection(config.database);
