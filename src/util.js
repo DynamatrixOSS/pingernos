@@ -7,7 +7,24 @@ util.toTitleCase = (s) => {
   return s.toLowerCase().replace(/^(\w)|\s(\w)/g, (c) => c.toUpperCase());
 };
 
-
+util.retry = async (fn, thisArg, args = [], maxRetries = 5, returnValMatch = null) => {
+  let err;
+  for (let i = 0; i < maxRetries; i++) {
+    let res;
+    try {
+      res = await Promise.resolve(fn.apply(thisArg, args));
+    } catch (e) {
+      err = e;
+      continue;
+    }
+    if (typeof returnValMatch === 'function' && !returnValMatch(res)) {
+      err = new Error('Returned value did not match requirements');
+      continue;
+    }
+    return res;
+  }
+  throw err;
+};
 
 util.queryDB = (statement, args) => {
   return new Promise((resolve, reject) => {
