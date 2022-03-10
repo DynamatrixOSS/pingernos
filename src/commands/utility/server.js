@@ -52,27 +52,25 @@ module.exports = {
         return;
       }
 
+      const result = await util.retry(ping, null, [{host: `${ip}.aternos.me`}]);
 
-      const test = await ping({ host: `${ip}.aternos.me` });
-      //console.log(test)
-
-      if (test.version.name === "⚠ Error") {
+      if (result.version.name === "⚠ Error") {
         return await message.reply(
           `:warning: \`${args}\` is not a known server.`
         );
       }
 
-      if (test.version.name === "§4● Offline") {
+      if (result.version.name === "§4● Offline") {
         const embed = new Discord.MessageEmbed()
           .setTitle(`${ip}.aternos.me`)
           //.addFields(
           //    /** @type {any} */ {name: '__**Status**__', value: 'Offline', inline: true},
           //    /** @type {any} */ {name: '__**Players**__', value: 'unknown', inline: true},
-          //    /** @type {any} */ {name: '__**Latency**__', value: JSON.stringify(test.latency), inline: true}
+          //    /** @type {any} */ {name: '__**Latency**__', value: JSON.stringify(result.latency), inline: true}
           //)
           .setDescription(
             `We are not able to gather info from offline servers, sorry!\nProtocol Latency: ${JSON.stringify(
-              test.latency
+              result.latency
             )}\n\nIf you believe this is wrong, please [join our support server](${
               util.links.support
             }).`
@@ -82,25 +80,25 @@ module.exports = {
           .setTimestamp();
         await message.reply({ embeds: [embed] });
       } else {
-        if (test.players.max === 0) {
+        if (result.players.max === 0) {
           data.push(`loading...`);
           color.push(`0xfaa61a`);
         }
-        if (test.players.max !== 0) {
+        if (result.players.max !== 0) {
           data.push(`online`);
           color.push(`0x90ee90`);
         }
         console.log(data + ` <- data | color -> ` + color);
 
-        if(!test.modinfo) {
-          if (test.description.text !== '') {
-            description.push(removeColorsFromString(test.description.text));
+        if(!result.modinfo) {
+          if (result.description.text !== '') {
+            description.push(removeColorsFromString(result.description.text));
           } else {
             description.push("No MOTD");
           }
         } else {
-          if (test.description !== '') {
-            description.push(removeColorsFromString(test.description));
+          if (result.description !== '') {
+            description.push(removeColorsFromString(result.description));
           } else {
             description.push("No MOTD");
           }
@@ -117,15 +115,15 @@ module.exports = {
             /** @type {any} */ {
               name: "__**Players**__",
               value:
-                JSON.stringify(test.players.online) +
+                JSON.stringify(result.players.online) +
                 `/` +
-                JSON.stringify(test.players.max),
+                JSON.stringify(result.players.max),
               inline: true,
             },
             /** @type {any} */ {
               name: "__**Software**__",
               value: removeColorsFromString(
-                JSON.stringify(test.version.name)
+                JSON.stringify(result.version.name)
               ).replace(/"/g, ""),
               inline: true,
             },
@@ -135,7 +133,7 @@ module.exports = {
               inline: false,
             }
           )
-          //.setDescription(`Server is currently **${data.toString()}**.\n\n**Players:** \`${JSON.stringify(test.players.online) + "`" + " out of " + "`" + JSON.stringify(test.players.max)}\`\n**Protocol Latency:** ${JSON.stringify(test.latency)}`)
+          //.setDescription(`Server is currently **${data.toString()}**.\n\n**Players:** \`${JSON.stringify(result.players.online) + "`" + " out of " + "`" + JSON.stringify(result.players.max)}\`\n**Protocol Latency:** ${JSON.stringify(result.latency)}`)
           .setColor(`${color}`)
           .setFooter(`Command executed by ${message.author.tag}`)
           .setTimestamp();
