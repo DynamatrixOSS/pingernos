@@ -9,8 +9,6 @@ module.exports = {
 
   aliases: ["s", "status"],
 
-  permissions: 'MANAGE_GUILD',
-
   usage: "<Aternos server IP>",
 
   description: "Get the server status",
@@ -55,7 +53,6 @@ module.exports = {
       }
 
       const result = await util.retry(ping, null, [{host: `${ip}.aternos.me`}]);
-
 
       if (result.version.name === "⚠ Error") {
         return await message.reply(

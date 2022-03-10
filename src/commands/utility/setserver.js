@@ -47,7 +47,27 @@ module.exports = {
                 await database.execute("INSERT INTO server (guild_id, server_ip) VALUES (?,?) ON DUPLICATE KEY UPDATE server_ip = ?", [message.guild.id, ip, ip])
                 await message.reply(`Successfully set default server to ${ip}\nYou can remove it using \`@prefix set delete\``)
             } catch (e) {
-                console.log(e);
+              if (e && e.code === "ECONNREFUSED") {
+                return await message.reply(
+                  `:warning: **Could not establish connection with protocol. Try again later.**`
+                );
+              }
+
+              if (e.message.includes("ETIMEDOUT")) {
+                return await message.reply(
+                  `:warning: **Protocol failed to respond, command timed out. Try again later.**`
+                );
+              }
+              console.log(e);
+              const embed = new Discord.MessageEmbed()
+                .setTitle(`:warning: Fatal error :warning:`)
+                .setDescription(
+                  `A fatal error has occurred while attempting to run this command:\n\`${e}\`\nPlease report this to my developers in the [support server](${util.links.support})`
+                )
+                .setColor(util.color.red)
+                .setFooter(`Command executed by ${message.author.tag}`)
+                .setTimestamp();
+              return await message.reply({ embeds: [embed] });
             }
         }
     },

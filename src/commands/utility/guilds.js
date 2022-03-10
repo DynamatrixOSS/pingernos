@@ -8,9 +8,7 @@ module.exports = {
   
   async execute(message, args, client) {
     const embed = new Discord.MessageEmbed()
-      .setDescription(
-        `${client.user.username} is currently in ${client.guilds.cache.size} servers`
-      )
+      .setDescription(`${client.user.username} is currently in ${client.guilds.cache.size} servers with ${client.guilds.cache.reduce((count, guild) => count + guild.memberCount, 0)} users.`)
       .setColor(util.color.blue);
 
     await message.reply({ embeds: [embed] });
