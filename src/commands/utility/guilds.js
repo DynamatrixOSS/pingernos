@@ -3,7 +3,7 @@ const util = require("../../util");
 
 module.exports = {
   name: "guilds",
-  aliases: ["guildcounter"],
+  aliases: ["servers"],
   description: "Shows how many guilds the bot is in.",
   
   async execute(message, args, client) {
