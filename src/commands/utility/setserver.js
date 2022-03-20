@@ -18,6 +18,8 @@ module.exports = {
 
     cooldown: 5,
 
+    permissions: 'MANAGE_GUILD',
+
     async execute(message, args, client) {
         if(args[0].match('delete')) {
             const database = await mysql.createConnection(config.database);
