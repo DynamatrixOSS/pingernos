@@ -7,18 +7,23 @@ module.exports = {
   name: "checkip",
   aliases: ["checkserverip", "check"],
   description: "Checks if an Aternos-IP is free to use.",
-  
+
   async execute(message, args, client) {
     function removeColorsFromString(text) {
       // Removing minecraft colors from strings, because console can`t read it and it will look crazy.
       return text.replace(/§./g, "");
     }
+
     let ip = args[0].match(/^(\w+)(?:\.aternos\.me)?$/i);
     if (!ip) {
       await message.reply(`\`${args}\` is not a valid Aternos server IP or name.`);
       return;
     }
     ip = ip[1];
+    if (ip.length > 20) {
+      await message.reply(`Aternos IPs can only be 20 characters long, please try a shorter one. Yours is ${ip.length-20} ${(ip.length-20) === 1 ? "character" : "characters"} too long.`);
+      return;
+    }
 
     const embed = new Discord.MessageEmbed()
     const test = await ping({ host: `${ip}.aternos.me` });
