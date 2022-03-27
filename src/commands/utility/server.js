@@ -91,8 +91,10 @@ module.exports = {
         console.log(data + ` <- data | color -> ` + color);
 
         if(!result.modinfo) {
-          if (result.description.text !== '') {
+          if (result.description.text.trim() !== '') {
             description.push(removeColorsFromString(result.description.text));
+          } else if (result.description.text === ' ') {
+            description.push(removeColorsFromString(result.description.extra[0].text));
           } else {
             description.push("No MOTD");
           }
