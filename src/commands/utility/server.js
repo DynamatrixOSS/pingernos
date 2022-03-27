@@ -37,6 +37,10 @@ module.exports = {
           ip = response[0][0]["server_ip"]
         }
       } else {
+        if (args[0].match(/^(\w+)(?:\.aternos\.me)?$/i) === null) {
+          message.reply("We don't support custom domains or ports.")
+          return;
+        }
         ip = args[0].match(/^(\w+)(?:\.aternos\.me)?$/i)[1] // second match is the [name].aternos.me part
       }
 
