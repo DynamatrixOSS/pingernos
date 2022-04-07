@@ -22,6 +22,16 @@ util.retry = async (fn, thisArg, args = [], maxRetries = 5, returnValMatch = nul
   throw err;
 };
 
+util.getTextContent = function (component) { // Credit to Julian (https://vennen.me)
+  let text = component.text ?? '';
+  if (component.extra?.length) {
+    for (const extra of component.extra) {
+      text += util.getTextContent(extra);
+    }
+  }
+  return text;
+}
+
 util.color = {
   blue: 0xadd8e6,
   red: 0xf04747,
