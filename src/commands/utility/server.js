@@ -131,32 +131,26 @@ module.exports = {
           .setFooter(`Command executed by ${message.author.tag}`)
           .setTimestamp();
         const msg1 = await message.channel.send({ embeds: [embed] });
-        messages.push(msg1, ip);
-        console.log(messages[0][1]);
-        //await messages[0].react("🔄");
-
-        console.log(msg1.id)
-        messageid.push(msg1.id);
-        channelid.push(message.channel.id);
-        console.log(messageid.toString() + "\n" + channelid.toString());
+        messages.push([msg1, ip]);
 
         async function pinger() {
-          for (server in messages) {
-
-          }
-          const pinged = await util.retry(ping, null, [{host: `${ip}.aternos.me`}]);
-          console.log(pinged.version);
-
-          if (pinged.version.name === "§4● Offline") {
-            console.log(pinged.version.protocol)
-            const guild = message.guild;
-            const channel = await guild.channels.fetch(channelid.toString());
-            console.log(channel.messages.fetch(messageid.toString()))
-            await messages[0].delete()
-            await channel.messages.fetch(messageid.toString()).then(msg => msg.delete);
-            clearInterval()
+          x = 0;
+          while (messages.length !== 0 && x < messages.length) {
+            //check if index exists
+            if (messages.length < 2) {
+              x = 0;
+              }
+            servip = messages[x][1];
+            const pinged = await util.retry(ping, null, [{host: `${ip}.aternos.me`}]);
+            if (pinged.version.name === "§4● Offline") {
+              await messages[x][0].delete()
+              //delete item from array
+              messages.splice[x, 1];
+              clearInterval()
+            x++;
           }
         }
+      }
 
         setInterval(pinger, 5000)
       }
