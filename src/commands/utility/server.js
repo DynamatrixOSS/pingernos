@@ -18,6 +18,8 @@ module.exports = {
   async execute(message, args, client) {
     const data = [];
     const color = [];
+    const messageid = [];
+    const channelid = [];
     function removeColorsFromString(text) {
       // Removing minecraft colors from strings, because console can`t read it and it will look crazy.
       return text.replace(/§./g, "");
@@ -29,6 +31,7 @@ module.exports = {
 
       try {
       let ip;
+      let thevariableinfunction;
       if(!args.length){ // Using this condition as you are
         const database = await mysql.createConnection(config.database);
         const response = await database.query("SELECT server_ip FROM server WHERE guild_id = ?", [message.guild.id])
@@ -126,7 +129,28 @@ module.exports = {
           .setColor(`${color}`)
           .setFooter(`Command executed by ${message.author.tag}`)
           .setTimestamp();
-        await message.reply({ embeds: [embed] });
+        const msg1 = await message.channel.send({ embeds: [embed] });
+
+        console.log(msg1.id)
+        messageid.push(msg1.id);
+        channelid.push(message.channel.id);
+        console.log(messageid.toString() + "\n" + channelid.toString());
+
+        async function pinger() {
+          const pinged = await util.retry(ping, null, [{host: `${ip}.aternos.me`}]);
+          console.log(pinged.version);
+
+          if (pinged.version.name === "§4● Offline") {
+            console.log(pinged.version.protocol)
+            const guild = message.guild;
+            const channel = await guild.channels.fetch(channelid.toString());
+            console.log(channel.messages.fetch(messageid.toString()))
+            await channel.messages.fetch(messageid.toString()).then(msg => msg.delete);
+            clearInterval()
+          }
+        }
+
+        setInterval(pinger, 5000)
       }
     } catch (e) {
       if (e && e.code === "ECONNREFUSED") {
