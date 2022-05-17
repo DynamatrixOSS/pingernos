@@ -20,6 +20,7 @@ module.exports = {
     const color = [];
     const messageid = [];
     const channelid = [];
+    const messages = [];
     function removeColorsFromString(text) {
       // Removing minecraft colors from strings, because console can`t read it and it will look crazy.
       return text.replace(/§./g, "");
@@ -130,6 +131,9 @@ module.exports = {
           .setFooter(`Command executed by ${message.author.tag}`)
           .setTimestamp();
         const msg1 = await message.channel.send({ embeds: [embed] });
+        messages.push(msg1, ip);
+        console.log(messages[0][1]);
+        //await messages[0].react("🔄");
 
         console.log(msg1.id)
         messageid.push(msg1.id);
@@ -137,6 +141,9 @@ module.exports = {
         console.log(messageid.toString() + "\n" + channelid.toString());
 
         async function pinger() {
+          for (server in messages) {
+
+          }
           const pinged = await util.retry(ping, null, [{host: `${ip}.aternos.me`}]);
           console.log(pinged.version);
 
@@ -145,6 +152,7 @@ module.exports = {
             const guild = message.guild;
             const channel = await guild.channels.fetch(channelid.toString());
             console.log(channel.messages.fetch(messageid.toString()))
+            await messages[0].delete()
             await channel.messages.fetch(messageid.toString()).then(msg => msg.delete);
             clearInterval()
           }
