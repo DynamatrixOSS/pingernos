@@ -18,8 +18,6 @@ module.exports = {
   async execute(message, args, client) {
     const data = [];
     const color = [];
-    const messageid = [];
-    const channelid = [];
     const messages = [];
     function removeColorsFromString(text) {
       // Removing minecraft colors from strings, because console can`t read it and it will look crazy.
@@ -134,23 +132,21 @@ module.exports = {
         messages.push([msg1, ip]);
 
         async function pinger() {
-          x = 0;
-          while (messages.length !== 0 && x < messages.length) {
-            //check if index exists
-            if (messages.length < 2) {
-              x = 0;
-              }
-            servip = messages[x][1];
+          let x = 0;
+          let toDelete = [];
+          for (let i = 0; i < messages.length; i++) {
+            const ip = messages[i][1];
             const pinged = await util.retry(ping, null, [{host: `${ip}.aternos.me`}]);
             if (pinged.version.name === "§4● Offline") {
-              await messages[x][0].delete()
-              //delete item from array
-              messages.splice[x, 1];
-              clearInterval()
-            x++;
+              await messages[i][0].delete();
+              toDelete.push(x); //schedule the array index to be deleted without leaving a gap
+              clearInterval();
+            }
+          }
+          for (const item of toDelete) {  //deletes the to-be-deleted message-IP pairs
+            messages.splice(item, 1);
           }
         }
-      }
 
         setInterval(pinger, 5000)
       }
