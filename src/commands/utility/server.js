@@ -19,6 +19,7 @@ module.exports = {
     const data = [];
     const color = [];
     const messages = [];
+    
     function removeColorsFromString(text) {
       // Removing minecraft colors from strings, because console can`t read it and it will look crazy.
       return text.replace(/§./g, "");
@@ -30,7 +31,6 @@ module.exports = {
 
       try {
       let ip;
-      let thevariableinfunction;
       if(!args.length){ // Using this condition as you are
         const database = await mysql.createConnection(config.database);
         const response = await database.query("SELECT server_ip FROM server WHERE guild_id = ?", [message.guild.id])
@@ -147,7 +147,6 @@ module.exports = {
             messages.splice(item, 1);
           }
         }
-
         setInterval(pinger, 5000)
       }
     } catch (e) {
