@@ -132,19 +132,25 @@ module.exports = {
         messages.push([msg1, ip]);
 
         async function pinger() {
-          let x = 0;
           let toDelete = [];
           for (let i = 0; i < messages.length; i++) {
-            const ip = messages[i][1];
-            const pinged = await util.retry(ping, null, [{host: `${ip}.aternos.me`}]);
+            let ip = messages[i][1];
+            let message = messages[i][0];
+            let pinged = await util.retry(ping, null, [{host: `${ip}.aternos.me`}]);
             if (pinged.version.name === "§4● Offline") {
-              await messages[i][0].delete();
-              toDelete.push(x); //schedule the array index to be deleted without leaving a gap
-              clearInterval();
+              try {
+                await messages[i][0].delete();
+              } catch (e) {
+                console.log("Message could not be deleted, deleting entry in array...");
+              } finally {
+                toDelete.push(i); //schedule the array index to be deleted without leaving a gap
+                clearInterval();
+              }
             }
           }
           for (const item of toDelete) {  //deletes the to-be-deleted message-IP pairs
             messages.splice(item, 1);
+            console.log(messages.length)
           }
         }
         setInterval(pinger, 5000)
