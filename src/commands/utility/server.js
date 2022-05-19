@@ -150,7 +150,6 @@ module.exports = {
           }
           for (const item of toDelete) {  //deletes the to-be-deleted message-IP pairs
             messages.splice(item, 1);
-            console.log(messages.length)
           }
         }
         setInterval(pinger, 5000)
