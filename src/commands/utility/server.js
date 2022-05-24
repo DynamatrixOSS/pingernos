@@ -79,7 +79,7 @@ module.exports = {
             }).`
           )
           .setColor(util.color.red)
-          .setFooter(`Command executed by ${message.author.tag}`)
+          .setFooter( {text:`Command executed by ${message.author.tag}`} )
           .setTimestamp();
         await message.reply({ embeds: [embed] });
       } else {
@@ -92,6 +92,7 @@ module.exports = {
           color.push(`0x90ee90`);
         }
         console.log(data + ` <- data | color -> ` + color);
+        //create a EmbedFooterData object from Discord
 
         const embed = new Discord.MessageEmbed()
           .setTitle(`${ip}.aternos.me`)
@@ -124,7 +125,7 @@ module.exports = {
           )
           //.setDescription(`Server is currently **${data.toString()}**.\n\n**Players:** \`${JSON.stringify(result.players.online) + "`" + " out of " + "`" + JSON.stringify(result.players.max)}\`\n**Protocol Latency:** ${JSON.stringify(result.latency)}`)
           .setColor(`${color}`)
-          .setFooter(`Command executed by ${message.author.tag}`)
+          .setFooter( {text: `Command executed by ${message.author.tag}`} )
           .setTimestamp();
         await message.reply({ embeds: [embed] });
       }
@@ -147,7 +148,7 @@ module.exports = {
           `A fatal error has occurred while attempting to run this command:\n\`${e}\`\nPlease report this to my developers in the [support server](${util.links.support})`
         )
         .setColor(util.color.red)
-        .setFooter(`Command executed by ${message.author.tag}`)
+        .setFooter( {text: `Command executed by ${message.author.tag}`} )
         .setTimestamp();
       return await message.reply({ embeds: [embed] });
     }
