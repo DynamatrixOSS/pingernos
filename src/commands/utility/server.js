@@ -18,6 +18,8 @@ module.exports = {
   async execute(message, args, client) {
     const data = [];
     const color = [];
+    const messages = [];
+    
     function removeColorsFromString(text) {
       // Removing minecraft colors from strings, because console can`t read it and it will look crazy.
       return text.replace(/§./g, "");
@@ -127,7 +129,31 @@ module.exports = {
           .setColor(`${color}`)
           .setFooter( {text: `Command executed by ${message.author.tag}`} )
           .setTimestamp();
-        await message.reply({ embeds: [embed] });
+        const msg1 = await message.channel.send({ embeds: [embed] });
+        messages.push([msg1, ip]);
+
+        async function pinger() {
+          let toDelete = [];
+          for (let i = 0; i < messages.length; i++) {
+            let ip = messages[i][1];
+            let message = messages[i][0];
+            let pinged = await util.retry(ping, null, [{host: `${ip}.aternos.me`}]);
+            if (pinged.version.name === "§4● Offline") {
+              try {
+                await messages[i][0].delete();
+              } catch (e) {
+                console.log("Message could not be deleted, deleting entry in array...");
+              } finally {
+                toDelete.push(i); //schedule the array index to be deleted without leaving a gap
+                clearInterval();
+              }
+            }
+          }
+          for (const item of toDelete) {  //deletes the to-be-deleted message-IP pairs
+            messages.splice(item, 1);
+          }
+        }
+        setInterval(pinger, 5000)
       }
     } catch (e) {
       if (e && e.code === "ECONNREFUSED") {
