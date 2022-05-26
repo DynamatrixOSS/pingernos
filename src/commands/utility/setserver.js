@@ -67,7 +67,7 @@ module.exports = {
                   `A fatal error has occurred while attempting to run this command:\n\`${e}\`\nPlease report this to my developers in the [support server](${util.links.support})`
                 )
                 .setColor(util.color.red)
-                .setFooter(`Command executed by ${message.author.tag}`)
+                .setFooter( {text: `Command executed by ${message.author.tag}`})
                 .setTimestamp();
               return await message.reply({ embeds: [embed] });
             }

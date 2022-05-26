@@ -26,7 +26,7 @@ module.exports = {
         .setTitle(`${client.user.username} commands | Prefix @mention`)
         .setDescription(data.toString())
         .setTimestamp()
-        .setFooter(`Command executed by ${message.author.tag}`)
+        .setFooter( {text: `Command executed by ${message.author.tag}`} )
         .setColor(color.blue);
       message.channel.send({ embeds: [embed] }); // {split: true})
     } else {
@@ -59,7 +59,7 @@ module.exports = {
         .setTitle(`Help for ${command.name} | Prefix ${prefix}`)
         .setDescription(data.toString().replace(/[,]/g, ""))
         .setTimestamp()
-        .setFooter(`Command executed by ${message.author.tag}`)
+        .setFooter( {text:`Command executed by ${message.author.tag}`} )
         .setColor(color.blue);
 
       message.channel.send({ embeds: [embed] }, { split: true });
