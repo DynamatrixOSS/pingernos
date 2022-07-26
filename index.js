@@ -11,7 +11,7 @@ async function main() {
   //await util.init();
   const database = await mysql.createConnection(config.database);
   //create any tables needed if they don't already exist
-  await database.execute("CREATE TABLE IF NOT EXISTS `server` (`guild_id` char(18) PRIMARY KEY, `server_ip` TEXT NOT NULL)")
+  await database.execute("CREATE TABLE IF NOT EXISTS `server` (`guild_id` char(25) PRIMARY KEY, `server_ip` TEXT NOT NULL)")
   //util.queryDB("CREATE TABLE IF NOT EXISTS `server` (`guild_id` int PRIMARY KEY AUTO_INCREMENT , `server_ip` TEXT NOT NULL)")
 
   const client = new Client({
