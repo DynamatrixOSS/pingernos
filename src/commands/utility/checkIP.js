@@ -5,6 +5,7 @@ const { ping } = require("minecraft-protocol");
 module.exports = {
   args: true,
   name: "checkip",
+  usage: "<Aternos server ip>",
   aliases: ["checkserverip", "check"],
   description: "Checks if an Aternos-IP is free to use.",
 
@@ -12,11 +13,6 @@ module.exports = {
     function removeColorsFromString(text) {
       // Removing minecraft colors from strings, because console can`t read it and it will look crazy.
       return text.replace(/§./g, "");
-    }
-    
-    if(!args[0])) {
-      await message.reply("Please specify arguments for this command - `<Aternos server ip>`");
-      return;
     }
 
     let ip = args[0].match(/^(\w+)(?:\.aternos\.me)?$/i);
