@@ -13,6 +13,11 @@ module.exports = {
       // Removing minecraft colors from strings, because console can`t read it and it will look crazy.
       return text.replace(/§./g, "");
     }
+    
+    if(!args[0])) {
+      await message.reply("Please specify arguments for this command - `<Aternos server ip>`");
+      return;
+    }
 
     let ip = args[0].match(/^(\w+)(?:\.aternos\.me)?$/i);
     if (!ip) {
