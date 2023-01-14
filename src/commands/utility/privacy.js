@@ -11,7 +11,7 @@ module.exports = {
   async execute(message, args, client) {
     const embed = new Discord.MessageEmbed()
       .setDescription(
-        `${client.user.username} saves a minimal amount of data to allow for its functionality. Full information about what is collected can be found on [our website](https://psychops.tk/privacy.php#collected). For any concerns, Mail to miataboymx@gmail.com.`
+        `${client.user.username} saves a minimal amount of data to allow for its functionality. Full information about what is collected can be found on [W.I.P. bear with us]. For any concerns, Mail to miataboymx@gmail.com.`
       )
       .setColor(util.color.blue);
 
