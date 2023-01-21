@@ -19,7 +19,7 @@ module.exports = {
           pong.createdTimestamp - message.createdTimestamp
         }ms.\nAPI Latency is ${Math.round(
           client.ws.ping
-        )}ms\nProtocol: ${JSON.stringify(result.latency)} ms`
+        )}ms\nProtocol: ${JSON.stringify(result.latency)}ms`
       );
     } catch (e) {
       return await message.reply(`Error caught: \`${e}\``);
