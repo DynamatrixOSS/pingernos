@@ -1,6 +1,7 @@
-config.json
-node_modules
-.env
-.env.local
-.env.development
-local.gitignore
+js
+py/config.json
+py/.env
+.idea
+.vscode
+py/*/__pycache__
+py/*/*/*__pycache__
