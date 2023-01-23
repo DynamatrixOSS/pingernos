@@ -3,11 +3,11 @@ def getdata():
     if usejson:
         import json
         try:
-            with open('config.json', 'r') as f:
+            with open('utils/data/config.json', 'r') as f:
                 return json.load(f)
         except FileNotFoundError:
-            print('config.json not found! Attempting to use .env instead...')
-            usejson = False
+            print('config.json not found! Exiting now...')
+            exit()
     if not usejson:
         from dotenv import load_dotenv
         import os
