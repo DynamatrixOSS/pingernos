@@ -49,7 +49,7 @@ async function main() {
   client.on("ready", () => {
     client.user.setPresence({
       status: "dnd",
-      activities: [{ type: "WATCHING", name: 'you (prefix: @mention")' }],
+      activities: [{ type: "WATCHING", name: 'you (prefix: @mention)' }],
     });
     console.log("I am ready!");
   });
