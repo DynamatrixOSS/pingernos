@@ -1,7 +1,7 @@
 "use strict";
 
 const Discord = require("discord.js");
-const { Client, Intents } = require("discord.js");
+const { Client} = require("discord.js");
 const config = require("./config.json");
 const fs = require("fs");
 const mysql = require('mysql2/promise')
@@ -17,15 +17,14 @@ async function main() {
   const client = new Client({
     intents: [
       'GUILDS',
-      'GUILD_MESSAGES',
-      'GUILD_MESSAGE_REACTIONS'
+      'GUILD_MESSAGES'
       ],
     allowedMentions: { parse: [] },
   });
 
   client.commands = new Discord.Collection();
   client.cooldowns = new Discord.Collection();
-  const prefix = /^<@!?889197952994791434>/
+  const prefix = new RegExp(`^<@!?${config.prefix}>`);
 
   const commandFolders = fs.readdirSync("./src/commands");
   for (const folder of commandFolders) {

@@ -1,6 +1,3 @@
-
-const config = require('../config.json');
-const mysql = require('mysql2/promise')
 const util = {};
 
 util.retry = async (fn, thisArg, args = [], maxRetries = 5, returnValMatch = null) => {
