@@ -36,25 +36,25 @@ Database hostname or IP
 
 | type   | config file     | environment            |
 |--------|-----------------|------------------------|
-| string | `Database.Host` | `DATABASE_HOST` |
+| string | `Database.Host` | `DB_HOST` |
 
 ### User
 Database username
 
 | type   | config file     | environment            |
 |--------|-----------------|------------------------|
-| string | `Database.User` | `DATABASE_USER` |
+| string | `Database.User` | `DB_USER` |
 
 ### Password
 Database password
 
 | type   | config file         | environment                |
 |--------|---------------------|----------------------------|
-| string | `Database.Password` | `DATABASE_PASSWORD` |
+| string | `Database.Password` | `DB_PASSWORD` |
 
 ### Database
 Database name
 
 | type   | config file         | environment                |
 |--------|---------------------|----------------------------|
-| string | `Database.Database` | `DATABASE_DATABASE` |
+| string | `Database.Database` | `DB_DATABASE` |

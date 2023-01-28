@@ -1,7 +1,7 @@
 from discord.ext import commands
 from discord import Embed, utils as dutils
 from mcstatus import JavaServer
-from utils.data.utils import utils
+from utils.utils import utils
 class Server(commands.Cog):
     def __init__(self, bot):
         self.bot = bot

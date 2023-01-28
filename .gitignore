@@ -1,7 +1,6 @@
-js
-py/utils/data/config.json
-py/utils/data/.env
+py/utils/config.json
+py/utils/.env
 .idea
 .vscode
 py/*/__pycache__
-py/*/*/*__pycache__
+py/*/*/__pycache__

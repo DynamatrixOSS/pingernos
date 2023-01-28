@@ -1,7 +1,7 @@
 from discord.ext import commands
 from discord import Embed
-from utils.data.utils import utils
-import re
+from utils.utils import utils
+from re import match
 from mcstatus import JavaServer
 class CheckIP(commands.Cog):
     def __init__(self, bot):
@@ -11,7 +11,7 @@ class CheckIP(commands.Cog):
     async def checkip(self, ctx, ip):
         if ip is None:
             return await ctx.reply("Please provide a Aternos server ip!\nExample: example.aternos.me")
-        if not re.match(r"^(\w+)(?:\.aternos\.me)?$", ip):
+        if not match(r"^(\w+)(?:\.aternos\.me)?$", ip):
             return await ctx.reply(f"`{ip}`is not a valid Aternos server IP or name.")
         if ip.count(".") > 2:
             return await ctx.reply("Please provide a valid Aternos server ip!\nExample: example.aternos.me")
