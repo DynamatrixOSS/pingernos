@@ -1,7 +1,7 @@
 # Configuration
 Pingernos py offers three different ways to configure it, a config file, environment variables and a .env
 If you wish to use the config file, just copy the [example.config.json](./utils/data/example.config.json) to a new file called config.json in the utils/data folder and modify the options in it.
-If you wish to use environment variables, you must set the `usejson` variable in [getdata](./utils/data/getdata.py) to `False`.
+If you wish to use environment variables, you must set the `use_json` variable in [getdata](./utils/data/getdata.py) to `False`.
 If you wish to use a .env file, just copy the [example.env](./utils/data/example.env) to a new file called .env in the utils/data folder and modify the options in it, you can use environment variables and a .env file at the same time if you so desire.
 Environment variables use `SCREAMING_SNAKE_CASE`, the configuration file uses `PascalCase`.
 
@@ -58,3 +58,10 @@ Database name
 | type   | config file         | environment                |
 |--------|---------------------|----------------------------|
 | string | `Database.Database` | `DB_DATABASE` |
+
+### Port
+Database port
+
+| type   | config file     | environment            |
+|--------|-----------------|------------------------|
+| int    | `Database.Port` | `DB_PORT` |

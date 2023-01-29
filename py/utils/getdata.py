@@ -27,6 +27,7 @@ def getdata():
                 "Host": os.getenv('DB_HOST'),
                 "User": os.getenv('DB_USER'),
                 "Password": os.getenv('DB_PASSWORD'),
-                "Database": os.getenv('DB_DATABASE')
+                "Database": os.getenv('DB_DATABASE'),
+                "Port": os.getenv('DB_PORT')
             }
         }

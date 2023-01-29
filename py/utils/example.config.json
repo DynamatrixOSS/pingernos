@@ -7,6 +7,7 @@
         "Host": "DB host IP",
         "User": "DB user",
         "Password": "DB Password",
-        "Database": "DB name"
+        "Database": "DB name",
+        "Port": 3306
       }
 }
