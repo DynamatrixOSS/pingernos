@@ -1,12 +1,12 @@
+from re import match
 from discord.ext import commands
 from discord import Embed
 from utils.utils import utils
-from re import match
 from mcstatus import JavaServer
 class CheckIP(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-    
+
     @commands.command(aliases=["checkserverip", "check"], description = "Checks if an Aternos-IP is free to use.")
     async def checkip(self, ctx, ip):
         if ip is None:

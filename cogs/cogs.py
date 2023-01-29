@@ -1,6 +1,6 @@
+from os import listdir
 from discord.ext import commands
 from utils.getdata import getdata
-import os
 
 class Cogs(commands.Cog):
     def __init__(self, bot):
@@ -13,7 +13,7 @@ class Cogs(commands.Cog):
             return
         if ctx.author.id not in self.info['Owners']:
             return
-        if cog.lower() not in [f"{fn[:-3]}" for fn in os.listdir("./cogs")]:
+        if cog.lower() not in [f"{fn[:-3]}" for fn in listdir("./cogs")]:
             await ctx.respond("That cog doesn't exist!", ephemeral=True)
             return
         if action.lower() not in ["load", "unload", "reload"]:
@@ -26,10 +26,10 @@ class Cogs(commands.Cog):
                 self.bot.unload_extension(f"cogs.{cog}")
             if action.lower() == "reload":
                 self.bot.reload_extension(f"cogs.{cog}")
-        except Exception as e:
-            await ctx.reply(f"```py\n{e}\n```", mention_author=False)
+        except Exception as error:
+            await ctx.reply(f"```py\n{error}\n```", mention_author=False)
             return
         await ctx.reply(f"{action}ed {cog}", mention_author=False)
-        
+
 def setup(bot):
     bot.add_cog(Cogs(bot))

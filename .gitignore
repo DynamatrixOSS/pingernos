@@ -1,5 +1,5 @@
-py/utils/config.json
-py/utils/.env
+utils/config.json
+utils/.env
 .idea
 .vscode
-py/*/__pycache__
+*/__pycache__
