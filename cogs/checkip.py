@@ -1,8 +1,8 @@
 from re import match
 from discord.ext import commands
 from discord import Embed
-from utils.utils import utils
 from mcstatus import JavaServer
+from utils.utils import Utils
 class CheckIP(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -26,10 +26,10 @@ class CheckIP(commands.Cog):
             stat = await server.async_status()
             if stat.version.name == "⚠ Error":
                 embed.description=f"**{nip}.aternos.me** is free to use!\nTo use it as your server address, head to **[the options of your server](https://aternos.org/options)**"
-                embed.colour = utils.colors.green
+                embed.colour = Utils.Colors.green
             else:
                 embed.description=f"**{nip}.aternos.me** is already taken!"
-                embed.colour = utils.colors.red
+                embed.colour = Utils.Colors.red
             await ctx.reply (embed=embed)
 
 
