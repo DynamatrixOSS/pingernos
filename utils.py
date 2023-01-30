@@ -23,7 +23,7 @@ class Utils:
         if usejson:
             try:
                 with open('config.json', 'r', encoding="UTF-8") as file:
-                    return load(file)
+                    data = load(file)
             except FileNotFoundError:
                 print('config.json not found! Exiting now...')
                 sysexit()
@@ -35,7 +35,7 @@ class Utils:
                 sysexit()
         if not usejson:
             #If you don't fill out the environment variables, it will return empty and probably crash, so make sure you fill them out!
-            return {
+            data = {
                 "Token": getenv('TOKEN'),
                 "Prefix": getenv('PREFIX'),
                 "Owners": getenv('OWNERS').split(','),
@@ -47,3 +47,4 @@ class Utils:
                     "Port": getenv('DB_PORT')
                 }
             }
+        return data
