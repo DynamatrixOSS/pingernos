@@ -32,7 +32,7 @@ class Server(commands.Cog):
             embed.add_field(name="**__Status__**", value="Online", inline=True)
             embed.add_field(name="**__Players__**", value=str(stat.players.online) + "/" + str(stat.players.max), inline=True)
             embed.add_field(name="**__Software__**", value=stat.version.name, inline=True)
-            embed.add_field(name="**__MOTD__**", value=Utils.Remove_Colors_From_String(stat.description), inline=False)
+            embed.add_field(name="**__MOTD__**", value=Utils.remove_colors_from_string(stat.description), inline=False)
             embed.color = Utils.Colors.green
             embed.timestamp = dutils.utcnow()
             embed.set_footer(text="Command executed by " + ctx.author.name + "#" + ctx.author.discriminator)

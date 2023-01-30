@@ -1,7 +1,7 @@
 from discord import Intents, Status, Activity, ActivityType
 from discord.ext.bridge import Bot
 from utils import Utils
-data = Utils.GetData()
+data = Utils.get_data()
 intents = Intents(guilds=True, guild_messages=True)
 #intents.message_content = True #Uncomment this if you use prefixed command that are not mentions (e.g. !help)
 bot = Bot(intents=intents, command_prefix=data['Prefix'], status=Status.dnd, activity=Activity(type=ActivityType.playing, name="Booting..."))

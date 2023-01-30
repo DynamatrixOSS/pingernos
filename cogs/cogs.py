@@ -1,11 +1,11 @@
 from os import listdir
-from discord import slash_command
+from discord.ext.commands import slash_command
 from discord.ext import commands
 from utils import Utils
 class Cogs(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.info = Utils.GetData()
+        self.info = Utils.get_data()
 
     @slash_command(description='Only the owners of the bot can run this command', guild_ids=[773950337303314518])
     async def cogs(self, ctx, action, cog):
