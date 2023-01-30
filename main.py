@@ -1,11 +1,11 @@
 from discord import Intents, Status, Activity, ActivityType
-from discord.ext import commands
-from utils.getdata import getdata
-data = getdata()
+from discord.ext.bridge import Bot
+from utils import Utils
+data = Utils.GetData()
 intents = Intents(guilds=True, guild_messages=True)
 #intents.message_content = True #Uncomment this if you use prefixed command that are not mentions (e.g. !help)
-bot = commands.Bot(intents=intents, command_prefix=data['Prefix'], status=Status.dnd, activity=Activity(type=ActivityType.playing, name="Booting..."))
-bot.remove_command('help') #Removes the default help command
+bot = Bot(intents=intents, command_prefix=data['Prefix'], status=Status.dnd, activity=Activity(type=ActivityType.playing, name="Booting..."))
+#bot.remove_command('help') #Removes the default help command
 bot.load_extensions("cogs") #Loads all cogs in the cogs folder
 BOOTED = False
 @bot.event

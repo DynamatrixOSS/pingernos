@@ -1,16 +1,14 @@
 from os import listdir
+from discord import slash_command
 from discord.ext import commands
-from utils.getdata import getdata
-
+from utils import Utils
 class Cogs(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.info = getdata()
+        self.info = Utils.GetData()
 
-    @commands.command(description='Only the owner of the bot can run this command')
-    async def cogs(self, ctx, action, cog): #folder: discord.Option(autocomplete=getfolders)
-        if ctx.guild.id != 955135608228024394:
-            return
+    @slash_command(description='Only the owners of the bot can run this command', guild_ids=[773950337303314518])
+    async def cogs(self, ctx, action, cog):
         if ctx.author.id not in self.info['Owners']:
             return
         if cog.lower() not in [f"{fn[:-3]}" for fn in listdir("./cogs")]:
@@ -27,9 +25,9 @@ class Cogs(commands.Cog):
             if action.lower() == "reload":
                 self.bot.reload_extension(f"cogs.{cog}")
         except Exception as error:
-            await ctx.reply(f"```py\n{error}\n```", mention_author=False)
+            await ctx.respond(f"```py\n{error}\n```")
             return
-        await ctx.reply(f"{action}ed {cog}", mention_author=False)
+        await ctx.respond(f"{action}ed {cog}")
 
 def setup(bot):
     bot.add_cog(Cogs(bot))

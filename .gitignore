@@ -1,5 +1,6 @@
-utils/config.json
-utils/.env
+config.json
+.env
 .idea
 .vscode
-*/__pycache__
+cogs/__pycache__
+__pycache__
