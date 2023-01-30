@@ -9,7 +9,7 @@ except ModuleNotFoundError:
     print('You did not install the dotenv module! You will not be able to use a .env file.')
 class Utils:
     @staticmethod #This is a static method, you can call it without creating an instance of the class, but does not have access to the class or its attributes (self)
-    def remove_colors_from_string(text):
+    def remove_colors_from_string(text) -> str:
         text = sub(r"§[0-9a-r]", "", text)
         return text
     class Colors:
@@ -18,7 +18,7 @@ class Utils:
         green = 0x90ee90
         orange = 0xfaa61a
     @staticmethod
-    def get_data():
+    def get_data() -> dict:
         usejson = True #Set to False to use enviorment variables instead of config.json
         if usejson:
             try:
@@ -32,9 +32,6 @@ class Utils:
                 sysexit()
             except EncodingWarning:
                 print('config.json is not encoded in UTF-8! Exiting now...')
-                sysexit()
-            except Exception as error:
-                print(f'An error occured while reading config.json! Exiting now...\n{error}')
                 sysexit()
         if not usejson:
             #If you don't fill out the environment variables, it will return empty and probably crash, so make sure you fill them out!
