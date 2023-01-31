@@ -4,7 +4,7 @@ from utils import Utils
 data = Utils.get_data()
 intents = Intents(guilds=True, guild_messages=True)
 #intents.message_content = True #Uncomment this if you use prefixed command that are not mentions
-bot = Bot(intents=intents, command_prefix=data['Prefix'], status=Status.dnd, activity=Activity(type=ActivityType.playing, name="you (prefix: @mention)"))
+bot = Bot(intents=intents, command_prefix=data['Prefix'], status=Status.dnd, activity=Activity(type=ActivityType.watching, name="you (prefix: @mention)"))
 bot.load_extensions("cogs") #Loads all cogs in the cogs folder
 bot.help_command = Utils.help_cmd #Disables the default help command
 BOOTED = False
