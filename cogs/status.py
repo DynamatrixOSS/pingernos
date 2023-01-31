@@ -12,7 +12,7 @@ class Status(commands.Cog):
             #Until Miataboy implements the default server, this will appear
             return await ctx.respond("Please provide a valid Aternos server ip!\nExample: example.aternos.me")
         if not serverip.endswith(".aternos.me"):
-            return await ctx.respond("Please provide a valid Aternos server ip!\nExample: example.aternos.me")
+            serverip += ".aternos.me"
         if serverip.count(".") > 2:
             return await ctx.respond("Please provide a valid Aternos server ip!\nExample: example.aternos.me")
         await ctx.defer()
