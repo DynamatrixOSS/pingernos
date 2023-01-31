@@ -31,7 +31,7 @@ class CheckIP(commands.Cog):
             embed.description=f"**{address}** is free to use!\nTo use it as your server address, head to **[the options of your server](https://aternos.org/options)**"
             embed.colour = Utils.Colors.green
         else:
-            embed.description=f"**{address}.aternos.me** is already taken!"
+            embed.description=f"**{address}** is already taken!"
             embed.colour = Utils.Colors.red
         await ctx.respond(embed=embed)
 
