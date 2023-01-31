@@ -1,7 +1,7 @@
 from os import listdir
 from discord.ext.commands import slash_command
 from discord.ext import commands
-from discord import Option
+import discord
 #from discord.errors import ExtensionAlreadyLoaded
 from utils import Utils
 class Cogs(commands.Cog):
@@ -19,7 +19,7 @@ class Cogs(commands.Cog):
         return cogs
 
     @slash_command(description='Only the owners of the bot can run this command', guild_ids=[773950337303314518])
-    async def cogs(self, ctx, action: Option(choices=["Load", "Unload", "Reload"]), cog: Option(autocomplete=getcogs)):
+    async def cogs(self, ctx, action: discord.Option(choices=["Load", "Unload", "Reload"]), cog: discord.Option(autocomplete=getcogs)):
         if ctx.author.id not in self.info['Owners']:
             return
         if cog.lower() not in [f"{fn[:-3]}" for fn in listdir("./cogs")]:
