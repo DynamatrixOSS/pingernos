@@ -13,9 +13,9 @@ class Cogs(commands.Cog):
         if ctx.interaction.user.id not in self.info['Owners']:
             return ["You are not an owner of the bot!"]
         cogs = []
-        for fn in listdir("./cogs"):
-            if fn.endswith(".py"):
-                cogs.append(fn[:-3])
+        for file in listdir("./cogs"):
+            if file.endswith(".py"):
+                cogs.append(file[:-3])
         return cogs
 
     @slash_command(description='Only the owners of the bot can run this command', guild_ids=[773950337303314518])
@@ -35,9 +35,9 @@ class Cogs(commands.Cog):
                 self.bot.unload_extension(f"cogs.{cog}")
             elif action == "Reload":
                 self.bot.reload_extension(f"cogs.{cog}")
-        except Exception as e:
-            await ctx.respond(f"An error has occured!\n{e}")
-            raise e
+        except Exception as error:
+            await ctx.respond(f"An error has occured!\n{error}")
+            raise error
         await ctx.respond(f"{action}ed {cog}")
 
 def setup(bot):

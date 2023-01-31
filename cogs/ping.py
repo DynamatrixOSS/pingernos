@@ -1,5 +1,5 @@
-from discord.ext import commands, bridge
 from asyncio import wait_for
+from discord.ext import commands, bridge
 from utils import Utils
 class Ping(commands.Cog):
     def __init__(self, bot):

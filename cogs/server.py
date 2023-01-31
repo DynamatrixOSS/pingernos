@@ -1,6 +1,6 @@
+from asyncio import wait_for
 from discord.ext import commands, bridge
 from discord import Embed, utils as dutils
-from asyncio import wait_for
 from utils import Utils
 class Server(commands.Cog):
     def __init__(self, bot):
@@ -19,7 +19,7 @@ class Server(commands.Cog):
         try:
             stat = await wait_for(Utils.get_server_status(serverip), timeout=3)
         except TimeoutError:
-            return await ctx.respond(f"Uh oh! The protocol took too long to respond! This will likely fix itself.")
+            return await ctx.respond("Uh oh! The protocol took too long to respond! This will likely fix itself.")
         embed = Embed(title=serverip)
         if stat.version.name == "§4● Offline":
             embed.description = "We are not able to gather info from offline servers, sorry!\nProtocol Latency: " + str(round(stat.latency)) + "ms\n\nIf you believe this is wrong, please [join our discord server](https://discord.gg/G2AaJbvdHT)."

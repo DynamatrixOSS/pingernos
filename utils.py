@@ -11,7 +11,7 @@ try:
     from mcstatus import JavaServer
 except ModuleNotFoundError:
     print('You did not install the mcstatus module! Exiting now...')
-    sysexit
+    sysexit()
 class Utils:
     @staticmethod #This is a static method, you can call it without creating an instance of the class, but does not have access to the class or its attributes (self)
     def remove_colors_from_string(text) -> str:
