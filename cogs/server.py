@@ -1,6 +1,6 @@
 from discord.ext import commands, bridge
 from discord import Embed, utils as dutils
-from mcstatus import JavaServer
+from asyncio import wait_for
 from utils import Utils
 class Server(commands.Cog):
     def __init__(self, bot):
@@ -9,14 +9,17 @@ class Server(commands.Cog):
     @bridge.bridge_command(aliases=["s"], description="Get the server status")
     async def status(self, ctx, serverip = None):
         if serverip is None:
-            return await ctx.reply("Please provide a valid Aternos server ip!\nExample: example.aternos.me")
+            #Until Miataboy implements the default server, this will appear
+            return await ctx.respond("Please provide a valid Aternos server ip!\nExample: example.aternos.me")
         if not serverip.endswith(".aternos.me"):
-            return await ctx.reply("Please provide a valid Aternos server ip!\nExample: example.aternos.me")
+            return await ctx.respond("Please provide a valid Aternos server ip!\nExample: example.aternos.me")
         if serverip.count(".") > 2:
-            return await ctx.reply("Please provide a valid Aternos server ip!\nExample: example.aternos.me")
+            return await ctx.respond("Please provide a valid Aternos server ip!\nExample: example.aternos.me")
         await ctx.defer()
-        server = await JavaServer.async_lookup(serverip)
-        stat = await server.async_status()
+        try:
+            stat = await wait_for(Utils.get_server_status(serverip), timeout=3)
+        except TimeoutError:
+            return await ctx.respond(f"Uh oh! The protocol took too long to respond! This will likely fix itself.")
         embed = Embed(title=serverip)
         if stat.version.name == "§4● Offline":
             embed.description = "We are not able to gather info from offline servers, sorry!\nProtocol Latency: " + str(round(stat.latency)) + "ms\n\nIf you believe this is wrong, please [join our discord server](https://discord.gg/G2AaJbvdHT)."

@@ -7,6 +7,11 @@ try:
     load_dotenv()
 except ModuleNotFoundError:
     print('You did not install the dotenv module! You will not be able to use a .env file.')
+try:
+    from mcstatus import JavaServer
+except ModuleNotFoundError:
+    print('You did not install the mcstatus module! Exiting now...')
+    sysexit
 class Utils:
     @staticmethod #This is a static method, you can call it without creating an instance of the class, but does not have access to the class or its attributes (self)
     def remove_colors_from_string(text) -> str:
@@ -48,3 +53,8 @@ class Utils:
                 }
             }
         return data
+    @staticmethod
+    async def get_server_status(serverip: str) -> dict:
+        server = await JavaServer.async_lookup(serverip)
+        stat = await server.async_status()
+        return stat
