@@ -1,4 +1,4 @@
-from re import match
+#from re import match
 from discord.ext import commands, bridge
 from discord import Embed
 from mcstatus import JavaServer
@@ -11,8 +11,10 @@ class CheckIP(commands.Cog):
     async def checkip(self, ctx, address = None):
         if address is None:
             return await ctx.respond("Please provide a Aternos server ip!\nExample: example.aternos.me")
-        if not match(r"^(\w+)(?:\.aternos\.me)?$", address):
-            return await ctx.respond(f"`{address}`is not a valid Aternos server IP or name.")
+        #if not match(r"^(\w+)(?:\.aternos\.me)?$", address):
+        #    return await ctx.respond(f"`{address}`is not a valid Aternos server IP or name.")
+        if not address.endswith(".aternos.me"):
+            address += ".aternos.me"
         if address.count(".") > 2:
             return await ctx.respond("Please provide a valid Aternos server ip!\nExample: example.aternos.me")
         nip = address.split(".")[0]
