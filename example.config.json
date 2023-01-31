@@ -1,11 +1,13 @@
 {
-  "token": "your_token_here",
-  "prefix": "<@!BotID> ",
-  "owners": ["OwnerID"],
-  "database": {
-    "host": "DB host IP",
-    "user": "DB user",
-    "password": "DB Password",
-    "database": "DB name"
-  }
+    "Configuration": "See configuration.md",
+    "Token": "YOURBOTTOKEN",
+    "Prefix": "YOURBOTPREFIX",
+    "Owners": [123, 456],
+    "Database": {
+        "Host": "DB host IP",
+        "User": "DB user",
+        "Password": "DB Password",
+        "Database": "DB name",
+        "Port": 3306
+      }
 }
