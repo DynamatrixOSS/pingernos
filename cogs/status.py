@@ -2,7 +2,7 @@ from asyncio import wait_for
 from discord.ext import commands, bridge
 from discord import Embed, utils as dutils
 from utils import Utils
-class Server(commands.Cog):
+class Status(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -42,4 +42,4 @@ class Server(commands.Cog):
         await ctx.respond(embed=embed)
 
 def setup(bot):
-    bot.add_cog(Server(bot))
+    bot.add_cog(Status(bot))
