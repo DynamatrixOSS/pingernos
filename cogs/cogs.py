@@ -28,6 +28,7 @@ class Cogs(commands.Cog):
         if action.lower() not in ["load", "unload", "reload"]:
             await ctx.respond("That action doesn't exist!", ephemeral=True)
             return
+        await ctx.defer()
         try:
             if action == "Load":
                 self.bot.load_extension(f"cogs.{cog}")
@@ -38,7 +39,12 @@ class Cogs(commands.Cog):
         except Exception as error:
             await ctx.respond(f"An error has occured!\n{error}")
             raise error
-        await ctx.respond(f"{action}ed {cog}")
+        try:
+            await self.bot.sync_commands()
+        except Exception as error:
+            await ctx.respond(f"An error has occured!\n{error}")
+            raise error
+        await ctx.respond(f"{action}ed {cog} and reloaded all commands!")
 
 def setup(bot):
     bot.add_cog(Cogs(bot))
