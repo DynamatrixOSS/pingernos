@@ -4,7 +4,7 @@ from utils import Utils
 data = Utils.get_data()
 intents = Intents(guilds=True, guild_messages=True)
 #intents.message_content = True #Uncomment this if you use prefixed command that are not mentions
-bot = Bot(intents=intents, command_prefix=data['Prefix'], status=Status.dnd, activity=Activity(type=ActivityType.playing, name="you (prefix: @mention)"), debug_guilds=[773950337303314518, 1041398130677141564])
+bot = Bot(intents=intents, command_prefix=data['Prefix'], status=Status.dnd, activity=Activity(type=ActivityType.playing, name="you (prefix: @mention)"))
 bot.load_extensions("cogs") #Loads all cogs in the cogs folder
 BOOTED = False
 @bot.listen()

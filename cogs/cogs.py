@@ -18,7 +18,7 @@ class Cogs(commands.Cog):
                 cogs.append(file[:-3])
         return cogs
 
-    @slash_command(description='Only the owners of the bot can run this command', guild_ids=[773950337303314518, 1041398130677141564])
+    @slash_command(description='Only the owners of the bot can run this command', guild_ids=[1041398130677141564])
     async def cogs(self, ctx, action: Option(choices=["Load", "Unload", "Reload"]), cog: Option(autocomplete=getcogs)):
         if ctx.author.id not in self.info['Owners']:
             return
