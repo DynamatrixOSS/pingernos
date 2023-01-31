@@ -2,6 +2,7 @@ from re import sub
 from json import load, decoder
 from os import getenv
 from sys import exit as sysexit
+from discord.ext.commands import HelpCommand
 try:
     from dotenv import load_dotenv
     load_dotenv()
@@ -58,3 +59,8 @@ class Utils:
         server = await JavaServer.async_lookup(serverip)
         stat = await server.async_status()
         return stat
+
+    class help_cmd(HelpCommand):
+        async def send_bot_help(self, mapping):
+            channel = self.get_destination()
+            await channel.send("Type in **/** to see the commands!")
