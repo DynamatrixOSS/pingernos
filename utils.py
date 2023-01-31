@@ -24,7 +24,7 @@ class Utils:
         orange = 0xfaa61a
     @staticmethod
     def get_data() -> dict:
-        usejson = False #Set to False to use enviorment variables instead of config.json
+        usejson = False #Set to True to a config.json
         if usejson:
             try:
                 with open('config.json', 'r', encoding="UTF-8") as file:
