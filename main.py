@@ -14,7 +14,6 @@ async def on_connect():
 
 @bot.listen()
 async def on_ready():
-    print (len(bot.guilds))
     global BOOTED
     if BOOTED:
         print ("Reconnect(?)")
