@@ -40,19 +40,23 @@ class Utils:
                 print('config.json is not encoded in UTF-8! Exiting now...')
                 sysexit()
         if not usejson:
-            #If you don't fill out the environment variables, it will return empty and probably crash, so make sure you fill them out!
-            data = {
-                "Token": getenv('TOKEN'),
-                "Prefix": getenv('PREFIX'),
-                "Owners": getenv('OWNERS').split(','),
-                "Database": {
-                    "Host": getenv('DB_HOST'),
-                    "User": getenv('DB_USER'),
-                    "Password": getenv('DB_PASSWORD'),
-                    "Database": getenv('DB_DATABASE'),
-                    "Port": getenv('DB_PORT')
+            try:
+                data = {
+                    "Token": getenv('TOKEN'),
+                    "Prefix": getenv('PREFIX'),
+                    "Owners": getenv('OWNERS').split(','),
+                    "FeatureGuilds": getenv('FEATURE_GUILDS').split(','),
+                    "Database": {
+                        "Host": getenv('DB_HOST'),
+                        "User": getenv('DB_USER'),
+                        "Password": getenv('DB_PASSWORD'),
+                        "Database": getenv('DB_DATABASE'),
+                        "Port": getenv('DB_PORT')
+                    }
                 }
-            }
+            except AttributeError:
+                print('You did not fill out the environment variables! Exiting now...')
+                sysexit()
         return data
     @staticmethod
     async def get_server_status(serverip: str) -> dict:
@@ -63,4 +67,4 @@ class Utils:
     class HelpCmd(HelpCommand):
         async def send_bot_help(self, mapping):
             channel = self.get_destination()
-            await channel.send("Type in **/** to see the commands!")
+            await channel.send("Type in `/` to see the commands!", reference=self.context.message, mention_author=False, delete_after=15)
