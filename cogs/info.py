@@ -7,7 +7,7 @@ class Info(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @bridge.bridge_command(aliases=["information"], description = "Displays information about Pingernos")
+    @bridge.bridge_command(aliases=["information", "ping", "latency", "pong", "servers", "guilds"], description = "Displays information about Pingernos")
     async def info(self, ctx):
         embed = Embed()
         try:
