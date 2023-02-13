@@ -8,7 +8,6 @@ The bot displays:
 - Server status (online, offline, loading)
 - Server MOTD
 - Server software (Vanilla, Paper, Forge, etc)
-Additionally it displays the latency of the API we use.
 
 The API we use is not affiliated with Aternos, Minecraft or any server host. This bot is also not affiliated with Aternos.
 
