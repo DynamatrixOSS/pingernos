@@ -64,7 +64,7 @@ class Utils:
         stat = await server.async_status()
         return stat
 
-    class HelpCmd(HelpCommand):
+    class Help_Cmd(HelpCommand):
         async def send_bot_help(self, mapping):
             channel = self.get_destination()
             await channel.send("Type in `/` to see the commands!", reference=self.context.message, mention_author=False, delete_after=15)
