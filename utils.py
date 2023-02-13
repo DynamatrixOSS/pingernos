@@ -67,4 +67,4 @@ class Utils:
     class HelpCmd(HelpCommand):
         async def send_bot_help(self, mapping):
             channel = self.get_destination()
-            await channel.send("Type in **/** to see the commands!", reference=self.context.message, mention_author=False)
+            await channel.send("Type in `/` to see the commands!", reference=self.context.message, mention_author=False, delete_after=15)
