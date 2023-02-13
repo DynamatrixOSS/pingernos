@@ -1,7 +1,7 @@
+from asyncio import wait_for
 from discord.ext import commands, bridge
 from discord import Embed
 from utils import Utils
-from asyncio import wait_for, TimeoutError
 
 class Info(commands.Cog):
     def __init__(self, bot):
