@@ -88,8 +88,8 @@ class Utils:
 
         try:
             database.execute(statement)
-        except Exception as e:
-            print("Failed to execute database command: ", e)
+        except mysql.Error as database_error:
+            print("Failed to execute database command: ", database_error)
 
         database.close()
 
