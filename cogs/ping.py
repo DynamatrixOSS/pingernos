@@ -7,7 +7,6 @@ class Ping(commands.Cog):
 
     @bridge.bridge_command(aliases=["latency", "pong"], description="Get the bot and websocket latency")
     async def ping(self, ctx):
-        #await ctx.defer()
         try:
             stat = await wait_for(Utils.get_server_status("example.aternos.me"), timeout=2)
         except TimeoutError:

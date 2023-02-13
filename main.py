@@ -14,13 +14,14 @@ async def on_connect():
 
 @bot.listen()
 async def on_ready():
+    print (len(bot.guilds))
     global BOOTED
+    if BOOTED:
+        print ("Reconnect(?)")
     if not BOOTED:
-        await bot.sync_commands()
+        #await bot.sync_commands()
         print(f'Logged in as {bot.user}')
         print('------')
         BOOTED = True
-    if BOOTED:
-        print ("Reconnect(?)")
 
 bot.run(data['Token'])
