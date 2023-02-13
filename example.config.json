@@ -3,6 +3,7 @@
     "Token": "YOURBOTTOKEN",
     "Prefix": "YOURBOTPREFIX",
     "Owners": [123, 456],
+    "FeatureGuilds": [123, 456], 
     "Database": {
         "Host": "DB host IP",
         "User": "DB user",
