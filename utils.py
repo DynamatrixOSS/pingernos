@@ -3,8 +3,11 @@ from json import load, decoder
 from os import getenv
 from sys import exit as sysexit
 from discord.ext.commands import HelpCommand
+import mysql.connector as mysql
+
 try:
     from dotenv import load_dotenv
+
     load_dotenv()
 except ModuleNotFoundError:
     print('You did not install the dotenv module! You will not be able to use a .env file.')
@@ -13,19 +16,23 @@ try:
 except ModuleNotFoundError:
     print('You did not install the mcstatus module! Exiting now...')
     sysexit()
+
+
 class Utils:
-    @staticmethod #This is a static method, you can call it without creating an instance of the class, but does not have access to the class or its attributes (self)
+    @staticmethod  # This is a static method, you can call it without creating an instance of the class, but does not have access to the class or its attributes (self)
     def remove_colors_from_string(text) -> str:
         text = sub(r"§[0-9a-r]", "", text)
         return text
+
     class Colors:
         blue = 0xadd8e6
         red = 0xf04747
         green = 0x90ee90
         orange = 0xfaa61a
+
     @staticmethod
     def get_data() -> dict:
-        usejson = False #Set to True to a config.json
+        usejson = False  # Set to True to a config.json
         if usejson:
             try:
                 with open('config.json', 'r', encoding="UTF-8") as file:
@@ -58,13 +65,36 @@ class Utils:
                 print('You did not fill out the environment variables! Exiting now...')
                 sysexit()
         return data
+
     @staticmethod
     async def get_server_status(serverip: str) -> dict:
         server = await JavaServer.async_lookup(serverip)
         stat = await server.async_status()
         return stat
 
+    @staticmethod
+    async def mysql_connection(statement):
+        data = Utils.get_data()
+
+        print(data['Database'])
+
+        cursor = mysql.connect(
+            host=data['Database']['Host'],
+            user=data['Database']['User'],
+            password=data['Database']['Password'],
+            database=data['Database']['Database'])
+
+        database = cursor.cursor()
+
+        try:
+            database.execute(statement)
+        except Exception as e:
+            print("Failed to execute database command: ", e)
+
+        database.close()
+
     class HelpCmd(HelpCommand):
         async def send_bot_help(self, mapping):
             channel = self.get_destination()
-            await channel.send("Type in `/` to see the commands!", reference=self.context.message, mention_author=False, delete_after=15)
+            await channel.send("Type in `/` to see the commands!", reference=self.context.message, mention_author=False,
+                               delete_after=15)
