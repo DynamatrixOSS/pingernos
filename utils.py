@@ -73,25 +73,14 @@ class Utils:
         return stat
 
     @staticmethod
-    async def mysql_connection(statement):
+    async def mysql_login():
         data = Utils.get_data()
 
-        print(data['Database'])
-
-        cursor = mysql.connect(
+        return mysql.connect(
             host=data['Database']['Host'],
             user=data['Database']['User'],
             password=data['Database']['Password'],
             database=data['Database']['Database'])
-
-        database = cursor.cursor()
-
-        try:
-            database.execute(statement)
-        except mysql.Error as database_error:
-            print("Failed to execute database command: ", database_error)
-
-        database.close()
 
     class HelpCmd(HelpCommand):
         async def send_bot_help(self, mapping):
