@@ -15,14 +15,16 @@ class Status(commands.Cog):
         if serverip is None:
             cursor = await Utils.mysql_login()
             database = cursor.cursor()
-            database.execute("SELECT server_ip FROM servers WHERE guild_id = %s", [ctx.guild.id])
+            database.execute("SELECT server_ip FROM server WHERE guild_id = %s", [ctx.guild.id])
             try:
                 result = database.fetchone()[0]
             except TypeError:
                 database.close()
+                cursor.close()
                 return await ctx.respond("Sorry, but this server does not have an IP registered. Please use `setserver` for that.")
             serverip = result
             database.close()
+            cursor.close()
         if not serverip.endswith(".aternos.me"):
             serverip += ".aternos.me"
         if serverip.count(".") > 2:
