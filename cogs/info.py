@@ -3,6 +3,7 @@ from discord.ext import commands, bridge
 from discord import Embed
 from utils import Utils
 
+
 class Info(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -21,13 +22,14 @@ class Info(commands.Cog):
 
 **Guilds:** {len(self.bot.guilds)}
 **Users:** {sum(x.member_count for x in self.bot.guilds)}
-**API Latency:** {round(self.bot.latency*1000)}ms
+**API Latency:** {round(self.bot.latency * 1000)}ms
 **Protocol Latency:** {latency}ms
 
 [[Invite]](https://discord.com/api/oauth2/authorize?client_id=889197952994791434&permissions=274878286912&scope=bot%20applications.commands) [[Support]](https://discord.gg/Ukr89GrMBk) [[Github]](https://github.com/BlackFurORG/pingernos) [[Privacy Policy]](https://gist.github.com/MiataBoy/20fda9024f277ea5eb2421adbebc2f23) [[Terms of Service]](https://gist.github.com/MiataBoy/81e96023a2aa055a038edab02e7e7792)
         """
         embed.colour = Utils.Colors.blue
         await ctx.respond(embed=embed)
+
 
 def setup(bot):
     bot.add_cog(Info(bot))
