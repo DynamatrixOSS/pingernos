@@ -4,7 +4,6 @@ from os import getenv
 from sys import exit as sysexit
 from discord.ext.commands import HelpCommand
 import mysql.connector as mysql
-from mcstatus.pinger import PingResponse
 
 try:
     from dotenv import load_dotenv
@@ -14,6 +13,7 @@ except ModuleNotFoundError:
     print('You did not install the dotenv module! You will not be able to use a .env file.')
 try:
     from mcstatus import JavaServer
+    from mcstatus.pinger import PingResponse
 except ModuleNotFoundError:
     print('You did not install the mcstatus module! Exiting now...')
     sysexit()
