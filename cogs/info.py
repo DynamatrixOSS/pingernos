@@ -3,11 +3,13 @@ from discord.ext import commands, bridge
 from discord import Embed
 from utils import Utils
 
+
 class Info(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @bridge.bridge_command(aliases=["information", "ping", "latency", "pong", "servers", "guilds"], description = "Displays information about Pingernos")
+    @bridge.bridge_command(aliases=["information", "ping", "latency", "pong", "servers", "guilds"],
+                           description="Displays information about Pingernos")
     async def info(self, ctx):
         embed = Embed()
         try:
@@ -21,13 +23,14 @@ class Info(commands.Cog):
 
 **Guilds:** {len(self.bot.guilds)}
 **Users:** {sum(x.member_count for x in self.bot.guilds)}
-**API Latency:** {round(self.bot.latency*1000)}ms
+**API Latency:** {round(self.bot.latency * 1000)}ms
 **Protocol Latency:** {latency}ms
 
 [[Support]](https://discord.gg/Ukr89GrMBk) [[Github]](https://github.com/BlackFurORG/pingernos)
         """
         embed.colour = Utils.Colors.blue
         await ctx.respond(embed=embed)
+
 
 def setup(bot):
     bot.add_cog(Info(bot))

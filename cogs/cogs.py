@@ -2,8 +2,10 @@ from os import listdir
 from discord.ext.commands import slash_command
 from discord.ext import commands
 from discord import Option
-#from discord.errors import ExtensionAlreadyLoaded
+# from discord.errors import ExtensionAlreadyLoaded
 from utils import Utils
+
+
 class Cogs(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -18,7 +20,8 @@ class Cogs(commands.Cog):
                 cogs.append(file[:-3])
         return cogs
 
-    @slash_command(description='Only the owners of the bot can run this command', guild_ids=Utils.get_data()['FeatureGuilds'])
+    @slash_command(description='Only the owners of the bot can run this command',
+                   guild_ids=Utils.get_data()['FeatureGuilds'])
     async def cogs(self, ctx, action: Option(choices=["Load", "Unload", "Reload"]), cog: Option(autocomplete=getcogs)):
         if ctx.author.id not in self.info['Owners']:
             return
@@ -45,6 +48,7 @@ class Cogs(commands.Cog):
             await ctx.respond(f"An error has occured!\n{error}")
             raise error
         await ctx.respond(f"{action}ed {cog} and reloaded all commands!")
+
 
 def setup(bot):
     bot.add_cog(Cogs(bot))

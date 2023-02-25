@@ -4,6 +4,7 @@ from os import getenv
 from sys import exit as sysexit
 from discord.ext.commands import HelpCommand
 import mysql.connector as mysql
+from mcstatus.pinger import PingResponse
 
 try:
     from dotenv import load_dotenv
@@ -67,7 +68,7 @@ class Utils:
         return data
 
     @staticmethod
-    async def get_server_status(serverip: str) -> dict:
+    async def get_server_status(serverip: str) -> PingResponse:
         server = await JavaServer.async_lookup(serverip)
         stat = await server.async_status()
         return stat
