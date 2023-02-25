@@ -1,6 +1,4 @@
 from asyncio import wait_for
-
-import mysql.connector
 from discord.ext import commands, bridge
 from discord import Embed, utils as dutils
 from utils import Utils
