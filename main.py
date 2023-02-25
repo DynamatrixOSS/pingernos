@@ -12,7 +12,10 @@ BOOTED = False
 @bot.listen()
 async def on_connect():
     print('Connected to Discord!')
-    await Utils.mysql_connection("CREATE TABLE IF NOT EXISTS servers (guild_id VARCHAR(255) PRIMARY KEY, server_ip TEXT NOT NULL)")
+    cursor = await Utils.mysql_login()
+    database = cursor.cursor()
+    database.execute("CREATE TABLE IF NOT EXISTS servers (guild_id VARCHAR(255) PRIMARY KEY, server_ip TEXT NOT NULL)")
+    database.close()
 
 @bot.listen()
 async def on_ready():
