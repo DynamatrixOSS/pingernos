@@ -7,7 +7,6 @@ import mysql.connector as mysql
 
 try:
     from dotenv import load_dotenv
-
     load_dotenv()
 except ModuleNotFoundError:
     print('You did not install the dotenv module! You will not be able to use a .env file.')
@@ -43,9 +42,6 @@ class Utils:
                 sysexit()
             except decoder.JSONDecodeError:
                 print('config.json is not valid! Exiting now...')
-                sysexit()
-            except EncodingWarning:
-                print('config.json is not encoded in UTF-8! Exiting now...')
                 sysexit()
         if not usejson:
             try:
