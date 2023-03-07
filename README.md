@@ -8,7 +8,6 @@ The bot displays:
 - Server status (online, offline, loading)
 - Server MOTD
 - Server software (Vanilla, Paper, Forge, etc)
-Additionally it displays the latency of the API we use.
 
 The API we use is not affiliated with Aternos, Minecraft or any server host. This bot is also not affiliated with Aternos.
 
@@ -16,3 +15,5 @@ You can invite the bot here: https://discord.com/api/oauth2/authorize?client_id=
 
 ## NOTE
 Pingernos has been transferred to BlackFur Studios ORG. and will from now on fall under authority and legal notice/compliance of BlackFur Studios ORG. The privacy policy and legal terms of former PsychOps Studios are no longer present and will be rewritten in name of BlackFur Studios. Please bear with us as we attempt to do this as fast as we can. BlackFur Studios ORG. does not have any affiliations with the now-inactive PsychOps Studios and only takes authority over Pingernos and any entities that are directly related to Pingernos.
+
+[![wakatime](https://wakatime.com/badge/user/d52b1622-edc5-41bf-860e-61df4e51e8d7/project/b18f7808-ec5f-4fd8-b123-50ea6a031909.svg)](https://wakatime.com/badge/user/d52b1622-edc5-41bf-860e-61df4e51e8d7/project/b18f7808-ec5f-4fd8-b123-50ea6a031909)
