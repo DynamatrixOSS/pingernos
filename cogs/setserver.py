@@ -1,7 +1,6 @@
 from discord.ext import commands, bridge
 from utils import Utils
 
-
 class SetServer(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -9,6 +8,8 @@ class SetServer(commands.Cog):
     @bridge.bridge_command(aliases=["set"],
                            description="Set the default server to use if no argument is provided in the status command.")
     async def setserver(self, ctx, server=None):
+        if not ctx.author.guild_permissions.manage_guild:
+            return await ctx.respond("You need the `Manage Server` permission to use this command.")
         if server is None:
             return await ctx.respond(
                 "Please provide a server IP to register to this guild. If an IP is already registered, it'll be overwritten")
@@ -24,7 +25,7 @@ class SetServer(commands.Cog):
         cursor.commit()
         database.close()
         cursor.close()
-        return await ctx.respond(f'The IP has been set to {server}. Use `status` without an argument to view it.')
+        await ctx.respond(f'The IP has been set to {server}. Use `status` without an argument to view it.')
 
 
 def setup(bot):
