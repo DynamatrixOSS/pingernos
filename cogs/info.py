@@ -18,7 +18,7 @@ class Info(commands.Cog):
         else:
             latency = round(stat.latency)
         embed.description = f"""
-{self.bot.user.name} is a bot developed by BlackFur Studios to service Aternos users by displaying server statuses. We are not affiliated with Aternos and are an independent FOSSDEV organization.
+{self.bot.user.name} is a bot developed by Blue Atomic to service Aternos users by displaying server statuses. We are not affiliated with Aternos and are an independent FOSSDEV organization.
 
 **Guilds:** {len(self.bot.guilds)}
 **Users:** {sum(x.member_count for x in self.bot.guilds)}
