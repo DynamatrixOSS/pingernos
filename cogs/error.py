@@ -9,6 +9,8 @@ class Error(commands.Cog):
     async def on_command_error(self, ctx, error):
         if isinstance(error, commands.CommandNotFound):
             return await ctx.respond("That command doesn't exist!")
+        elif isinstance(error, commands.MissingPermissions):
+            return await ctx.respond("You need the `Manage Server` permission to use this command.")
         await ctx.respond("An unknown error has occured!\nThis has been logged")
         raise error
 
