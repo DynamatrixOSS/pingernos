@@ -11,7 +11,6 @@ bot.load_extensions("cogs")  # Loads all cogs in the cogs folder
 bot.help_command = Utils.HelpCmd()  # Disables the default help command
 BOOTED = False
 
-
 @bot.listen()
 async def on_connect():
     print('Connected to Discord!')
@@ -19,7 +18,6 @@ async def on_connect():
     database = cursor.cursor()
     database.execute("CREATE TABLE IF NOT EXISTS server (guild_id VARCHAR(255) PRIMARY KEY, server_ip TEXT NOT NULL)")
     database.close()
-
 
 @bot.listen()
 async def on_ready():
@@ -31,6 +29,5 @@ async def on_ready():
         print(f'Logged in as {bot.user}')
         print('------')
         BOOTED = True
-
 
 bot.run(data['Token'])

@@ -3,7 +3,6 @@ from discord.ext import commands, bridge
 from discord import Embed, utils as dutils
 from utils import Utils
 
-
 class Status(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -27,6 +26,9 @@ class Status(commands.Cog):
             serverip += ".aternos.me"
         if serverip.count(".") > 2:
             return await ctx.respond("Please provide a valid Aternos server ip!\nExample: example.aternos.me")
+        if serverip.count(":") == 1:
+            if len(serverip.split(":")[1]) != 5:
+                return await ctx.respond("Please provide a valid Aternos server ip!\nExample: example.aternos.me")
         await ctx.defer()
         try:
             stat = await wait_for(Utils.get_server_status(serverip), timeout=3)
@@ -43,6 +45,13 @@ class Status(commands.Cog):
         elif stat.version.name == "⚠ Error":
             embed.description = "Server does not exist\nProtocol Latency: " + str(round(
                 stat.latency)) + "ms\n\nIf you believe this is wrong, please [join our discord server](https://discord.gg/G2AaJbvdHT)."
+            embed.colour = Utils.Colors.red
+            embed.timestamp = dutils.utcnow()
+            embed.set_footer(text="Command executed by " + ctx.author.name + "#" + ctx.author.discriminator)
+        elif stat.version.name == "§4● Starting":
+            embed.description = "We are not able to gather info from starting servers, sorry!\nProtocol Latency: " + str(
+                round(
+                    stat.latency)) + "ms\n\nIf you believe this is wrong, please [join our discord server](https://discord.gg/G2AaJbvdHT)."
             embed.colour = Utils.Colors.red
             embed.timestamp = dutils.utcnow()
             embed.set_footer(text="Command executed by " + ctx.author.name + "#" + ctx.author.discriminator)
