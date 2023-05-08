@@ -1,3 +1,7 @@
+# THIS IS A RUST VERSION OF PINGERNOS THAT IS HIGHLY UNSTABLE AND IS NOT LIKELY TO EVER BE MADE DEFAULT
+
+# Original description
+
 # Pingernos
 Pingernos is a Discord bot that lets you grab the status of any Aternos server.
 
