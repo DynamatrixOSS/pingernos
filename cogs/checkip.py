@@ -1,9 +1,9 @@
 from discord.ext import commands, bridge
 from discord import Embed
 from mcstatus import JavaServer
-from utils import Utils
 from discord.ext.bridge import Bot
 from discord.ext.bridge.context import BridgeContext
+from utils import Utils
 
 class CheckIP(commands.Cog):
     def __init__(self, bot: Bot):

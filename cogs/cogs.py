@@ -26,10 +26,10 @@ class Cogs(commands.Cog):
         if ctx.author.id not in self.info['Owners']:
             return
         if cog.lower() not in [f"{fn[:-3]}" for fn in listdir("./cogs")]:
-            await Utils.respond(ctx, "That cog doesn't exist!", ephemeral=True)
+            await Utils.respond(ctx, "That cog doesn't exist!")
             return
         if action.lower() not in ["load", "unload", "reload"]:
-            await Utils.respond(ctx, "That action doesn't exist!", ephemeral=True)
+            await Utils.respond(ctx, "That action doesn't exist!")
             return
         await ctx.defer()
         try:

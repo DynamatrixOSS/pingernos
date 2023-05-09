@@ -93,13 +93,13 @@ class Utils:
 
     @staticmethod
     async def respond(ctx: BridgeContext, message: str="", embed: Embed=None) -> None:
-        if type(ctx) == BridgeApplicationContext:
+        if isinstance(ctx, BridgeApplicationContext):
             if embed is not None:
                 await ctx.respond(message, embed=embed)
                 return
             await ctx.respond(message)
             return
-        elif type(ctx) == BridgeExtContext:
+        if isinstance(ctx, BridgeExtContext):
             if embed is not None:
                 await ctx.respond(message, embed=embed, mention_author=False)
                 return
