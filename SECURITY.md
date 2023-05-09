@@ -8,7 +8,7 @@ We only support the following versions with security updates:
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 2.1.x   | :white_check_mark: |
+| 2.3.0   | :white_check_mark: |
 | < 2.0   | :x:                |
 
 ## Reporting a Vulnerability

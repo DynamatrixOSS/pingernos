@@ -11,7 +11,7 @@ class Cogs(commands.Cog):
         self.bot = bot
         self.info = Utils.get_data()
 
-    def getcogs(self, ctx: BridgeContext) -> list | str:
+    def getcogs(self, ctx: BridgeContext) -> list:
         if ctx.interaction.user.id not in self.info['Owners']:
             return ["You are not an owner of the bot!"]
         cogs = []
