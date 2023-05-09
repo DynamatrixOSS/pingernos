@@ -3,6 +3,8 @@ from json import load, decoder
 from os import getenv
 from sys import exit as sysexit
 from discord.ext.commands import HelpCommand
+from discord.ext.bridge.context import BridgeContext, BridgeExtContext, BridgeApplicationContext
+from discord import Embed
 import mysql.connector as mysql
 
 try:
@@ -32,7 +34,7 @@ class Utils:
 
     @staticmethod
     def get_data() -> dict:
-        usejson = False  # Set to True to a config.json
+        usejson = True  # Set to True to a config.json
         if usejson:
             try:
                 with open('config.json', 'r', encoding="UTF-8") as file:
@@ -56,6 +58,10 @@ class Utils:
                         "Password": getenv('DB_PASSWORD'),
                         "Database": getenv('DB_DATABASE'),
                         "Port": getenv('DB_PORT')
+                    },
+                    "Logs": {
+                        "JoinWebhook": getenv('LOGS_JOINWEBHOOK'),
+                        "LeaveWebhook": getenv('LOGS_LEAVEWEBHOOK')
                     }
                 }
             except AttributeError:
@@ -84,3 +90,23 @@ class Utils:
             channel = self.get_destination()
             await channel.send("Type in `/` to see the commands!", reference=self.context.message, mention_author=False,
                                delete_after=15)
+
+    @staticmethod
+    async def respond(ctx: BridgeContext, message: str="", embed: Embed=None) -> None:
+        if isinstance(ctx, BridgeApplicationContext):
+            if embed is not None:
+                await ctx.respond(message, embed=embed)
+                return
+            await ctx.respond(message)
+            return
+        if isinstance(ctx, BridgeExtContext):
+            if embed is not None:
+                await ctx.respond(message, embed=embed, mention_author=False)
+                return
+            await ctx.respond(message, mention_author=False)
+            return
+        if embed is not None:
+            await ctx.respond(message, embed=embed)
+            return
+        await ctx.respond(message)
+        return
