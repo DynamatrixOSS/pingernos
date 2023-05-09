@@ -18,7 +18,7 @@ class InteralLogs(commands.Cog):
         embed.set_thumbnail(url=guild.icon.url)
         async with aiohttp.ClientSession() as client_session:
             webhook = Webhook.from_url(Utils.get_data()['Logs']["JoinWebhook"], session=client_session)
-            await webhook.send(embed=embed)
+            await webhook.send(embed=embed, username="Pingernos Logs", avatar_url=self.bot.user.avatar.url)
 
     @commands.Cog.listener()
     async def on_guild_remove(self, guild: Guild):
@@ -30,7 +30,7 @@ class InteralLogs(commands.Cog):
         embed.set_thumbnail(url=guild.icon.url)
         async with aiohttp.ClientSession() as client_session:
             webhook = Webhook.from_url(Utils.get_data()['Logs']["LeaveWebhook"], session=client_session)
-            await webhook.send(embed=embed)
+            await webhook.send(embed=embed, username="Pingernos Logs", avatar_url=self.bot.user.avatar.url)
 
 def setup(bot: Bot):
     bot.add_cog(InteralLogs(bot))
