@@ -2,9 +2,9 @@ from os import listdir
 from discord.ext.commands import slash_command
 from discord.ext import commands
 from discord import Option
-from utils import Utils
 from discord.ext.bridge import Bot
 from discord.ext.bridge.context import BridgeContext
+from utils import Utils
 
 class Cogs(commands.Cog):
     def __init__(self, bot: Bot):

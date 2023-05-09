@@ -105,9 +105,8 @@ class Utils:
                 return
             await ctx.respond(message, mention_author=False)
             return
-        else:
-            if embed is not None:
-                await ctx.respond(message, embed=embed)
-                return
-            await ctx.respond(message)
+        if embed is not None:
+            await ctx.respond(message, embed=embed)
             return
+        await ctx.respond(message)
+        return
