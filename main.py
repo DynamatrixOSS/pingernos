@@ -17,6 +17,7 @@ async def on_connect():
     cursor = await Utils.mysql_login()
     database = cursor.cursor()
     database.execute("CREATE TABLE IF NOT EXISTS server (guild_id VARCHAR(255) PRIMARY KEY, server_ip TEXT NOT NULL)")
+    database.execute("CREATE TABLE IF NOT EXISTS blacklist (guild_id VARCHAR(21) PRIMARY KEY, reason TEXT NOT NULL)")
     database.close()
 
 @bot.listen()
