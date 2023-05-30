@@ -20,7 +20,7 @@ class InteralLogs(commands.Cog):
             embed = Embed(title="Joined a guild!", color=Utils.Colors.red)
             embed.add_field(name="Name", value=guild.name, inline=True)
             embed.add_field(name="ID", value=guild.id, inline=True)
-            embed.description(f'Guild attempted to add {self.bot.user.name}, but is blacklisted.')
+            embed.description(f'Guild attempted to add {self.bot.user.name}, but is blacklisted:\n**{result["reason"]}**')
             embed.set_thumbnail(url=guild.icon.url)
             async with aiohttp.ClientSession() as client_session:
                 webhook = Webhook.from_url(Utils.get_data()['Logs']["JoinWebhook"], session=client_session)
