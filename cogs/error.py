@@ -17,6 +17,10 @@ class Error(commands.Cog):
 
     @commands.Cog.listener()
     async def on_application_command_error(self, ctx, error):
+        if isinstance(error, commands.NotOwner):
+            return await ctx.respond("This command is for owners only.")
+        if isinstance(error, commands.GuildNotFound):
+            return await ctx.respond("Could not find this guild.")
         await Utils.respond(ctx, "An unknown error has occured!\nThis has been logged")
         raise error
 
