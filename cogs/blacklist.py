@@ -21,6 +21,9 @@ class Blacklist(commands.Cog):
         cursor.commit()
         database.close()
         cursor.close()
+
+        guild = self.bot.get_guild(server.id)
+        await guild.leave()
         return await ctx.respond(f'Successfully added guild {server} to the blacklist for:\n**{reason}**')
 
 
