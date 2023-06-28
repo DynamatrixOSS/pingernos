@@ -46,7 +46,7 @@ class Cogs(commands.Cog):
         try:
             await self.bot.sync_commands()
         except Exception as error:
-            await Utils.ctx(f"An error has occured!\n{error}")
+            await ctx.respond(f"An error has occured!\n{error}")
             raise error
         await ctx.respond(f"{action}ed {cog} and reloaded all commands!")
 
