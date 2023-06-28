@@ -10,12 +10,11 @@ class SetServer(commands.Cog):
     @bridge.has_permissions(manage_guild=True)
     async def setserver(self, ctx, server=None):
         if server is None:
-            return await Utils.respond(ctx,
-                "Please provide a server IP to register to this guild. If an IP is already registered, it'll be overwritten")
+            return await ctx.respond("Please provide a server IP to register to this guild. If an IP is already registered, it'll be overwritten")
         if not server.endswith(".aternos.me"):
             server += ".aternos.me"
         if server.count(".") > 2:
-            return await Utils.respond(ctx, "Please provide a valid Aternos server ip!\nExample: example.aternos.me")
+            return await ctx.respond("Please provide a valid Aternos server ip!\nExample: example.aternos.me")
         cursor = await Utils.mysql_login()
         database = cursor.cursor()
         database.execute(
@@ -24,7 +23,7 @@ class SetServer(commands.Cog):
         cursor.commit()
         database.close()
         cursor.close()
-        await Utils.respond(ctx, f'The IP has been set to {server}. Use `status` without an argument to view it.')
+        await ctx.respond(f'The IP has been set to {server}. Use `status` without an argument to view it.')
 
 def setup(bot: bridge.Bot):
     bot.add_cog(SetServer(bot))
