@@ -1,6 +1,6 @@
 from discord.ext import commands, bridge
 from discord.ext.bridge import Bot
-from utilities.database import mysql_login
+from utilities.database import modifier
 
 
 class SetServer(commands.Cog):
@@ -11,7 +11,8 @@ class SetServer(commands.Cog):
     @bridge.has_permissions(manage_guild=True)
     async def setserver(self, ctx, server=None):
         if server is None:
-            return await ctx.respond("Please provide a server IP to register to this guild. If an IP is already registered, it'll be overwritten")
+            await modifier("DELETE FROM server WHERE guild_id = %s", [ctx.guild_id])
+            return await ctx.respond("Default server has been removed. Use `setserver <server>` to set a new one.")
         if not server.endswith(".aternos.me"):
             server += ".aternos.me"
         if server.count(".") > 2:
