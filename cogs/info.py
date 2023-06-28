@@ -30,7 +30,7 @@ class Info(commands.Cog):
 [[Invite]](https://discord.com/api/oauth2/authorize?client_id=889197952994791434&permissions=274878286912&scope=bot%20applications.commands) [[Support]](https://discord.gg/Ukr89GrMBk) [[Github]](https://github.com/BlackFurORG/pingernos) [[Privacy Policy]](https://gist.github.com/MiataBoy/20fda9024f277ea5eb2421adbebc2f23) [[Terms of Service]](https://gist.github.com/MiataBoy/81e96023a2aa055a038edab02e7e7792)
         """
         embed.colour = Utils.Colors.blue
-        await Utils.respond(ctx=ctx, embed=embed)
+        await ctx.respond(embed=embed)
 
 def setup(bot: bridge.Bot):
     bot.add_cog(Info(bot))
