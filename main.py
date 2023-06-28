@@ -8,7 +8,6 @@ intents = Intents(guilds=True, guild_messages=True)
 bot = AutoShardedBot(intents=intents, command_prefix=data['Prefix'], status=Status.dnd,
           activity=Activity(type=ActivityType.watching, name="Starting..."))
 bot.load_extensions("cogs")  # Loads all cogs in the cogs folder
-bot.help_command = Utils.HelpCmd()  # Disables the default help command
 BOOTED = False
 
 @bot.listen()
