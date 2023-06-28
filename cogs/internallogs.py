@@ -5,7 +5,8 @@ from discord.ext.bridge import Bot
 from utilities.database import mysql_login
 from utilities.data import Colors, get_data
 
-class InteralLogs(commands.Cog):
+
+class InternalLogs(commands.Cog):
     def __init__(self, bot: Bot):
         self.bot = bot
 
@@ -53,4 +54,4 @@ class InteralLogs(commands.Cog):
             await webhook.send(embed=embed, username="Pingernos Logs", avatar_url=self.bot.user.avatar.url)
 
 def setup(bot: Bot):
-    bot.add_cog(InteralLogs(bot))
+    bot.add_cog(InternalLogs(bot))
