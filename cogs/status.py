@@ -19,22 +19,22 @@ class Status(commands.Cog):
             except TypeError:
                 database.close()
                 cursor.close()
-                return await Utils.respond(ctx, "Sorry, but this server does not have an IP registered. Please use `setserver` for that.")
+                return await ctx.respond("Sorry, but this server does not have an IP registered. Please use `setserver` for that.")
             serverip = result
             database.close()
             cursor.close()
         if not serverip.endswith(".aternos.me"):
             serverip += ".aternos.me"
         if serverip.count(".") > 2:
-            return await Utils.respond(ctx, "Please provide a valid Aternos server ip!\nExample: example.aternos.me")
+            return await ctx.respond("Please provide a valid Aternos server ip!\nExample: example.aternos.me")
         if serverip.count(":") == 1:
             if len(serverip.split(":")[1]) != 5:
-                return await Utils.respond(ctx, "Please provide a valid Aternos server ip!\nExample: example.aternos.me")
+                return await ctx.respond("Please provide a valid Aternos server ip!\nExample: example.aternos.me")
         await ctx.defer()
         try:
             stat = await wait_for(Utils.get_server_status(serverip), timeout=3)
         except TimeoutError:
-            return await Utils.respond(ctx, "Uh oh! The protocol took too long to respond! This will likely fix itself.")
+            return await ctx.respond("Uh oh! The protocol took too long to respond! This will likely fix itself.")
         embed = Embed(title=serverip)
         if stat.version.name == "§4● Offline":
             embed.description = "We are not able to gather info from offline servers, sorry!\nProtocol Latency: " + str(
@@ -65,7 +65,7 @@ class Status(commands.Cog):
             embed.colour = Utils.Colors.green
             embed.timestamp = dutils.utcnow()
             embed.set_footer(text="Command executed by " + ctx.author.name + "#" + ctx.author.discriminator)
-        await Utils.respond(ctx, embed=embed)
+        await ctx.respond(embed=embed)
 
 
 def setup(bot: Bot):
