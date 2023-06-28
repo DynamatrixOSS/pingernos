@@ -50,5 +50,6 @@ class Cogs(commands.Cog):
             raise error
         await ctx.respond(f"{action}ed {cog} and reloaded all commands!")
 
+
 def setup(bot: Bot):
     bot.add_cog(Cogs(bot))
