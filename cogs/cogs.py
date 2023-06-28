@@ -40,12 +40,12 @@ class Cogs(commands.Cog):
             elif action == "Reload":
                 self.bot.reload_extension(f"cogs.{cog}")
         except Exception as error:
-            await ctx.respond(f"An error has occured!\n{error}")
+            await ctx.respond(f"An error has occurred!\n{error}")
             raise error
         try:
             await self.bot.sync_commands()
         except Exception as error:
-            await ctx.respond(f"An error has occured!\n{error}")
+            await ctx.respond(f"An error has occurred!\n{error}")
             raise error
         await ctx.respond(f"{action}ed {cog} and reloaded all commands!")
 
