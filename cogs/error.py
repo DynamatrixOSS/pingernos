@@ -9,10 +9,10 @@ class Error(commands.Cog):
     @commands.Cog.listener()
     async def on_command_error(self, ctx, error):
         if isinstance(error, commands.CommandNotFound):
-            return await Utils.respond(ctx, "That command doesn't exist!")
+            return await ctx.respond("That command doesn't exist!")
         if isinstance(error, commands.MissingPermissions):
-            return await Utils.respond(ctx, "You need the `Manage Server` permission to use this command.")
-        await Utils.respond(ctx, "An unknown error has occured!\nThis has been logged")
+            return await ctx.respond("You need the `Manage Server` permission to use this command.")
+        await ctx.respond("An unknown error has occured!\nThis has been logged")
         raise error
 
     @commands.Cog.listener()
@@ -21,7 +21,7 @@ class Error(commands.Cog):
             return await ctx.respond("This command is for owners only.")
         if isinstance(error, commands.GuildNotFound):
             return await ctx.respond("Could not find this guild.")
-        await Utils.respond(ctx, "An unknown error has occured!\nThis has been logged")
+        await ctx.respond("An unknown error has occured!\nThis has been logged")
         raise error
 
 def setup(bot: Bot):
