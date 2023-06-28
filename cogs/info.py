@@ -9,7 +9,7 @@ class Info(commands.Cog):
     def __init__(self, bot: Bot):
         self.bot = bot
 
-    @bridge.bridge_command(aliases=["information", "ping", "latency", "pong", "servers", "guilds", "support", "invite"], description = "Displays information about Pingernos")
+    @bridge.bridge_command(aliases=["information", "ping", "latency", "pong", "servers", "guilds", "support", "invite"], description="Displays information about Pingernos")
     async def info(self, ctx: bridge.BridgeContext):
         embed = Embed()
         try:
@@ -32,6 +32,7 @@ class Info(commands.Cog):
         """
         embed.colour = Colors.blue
         await ctx.respond(embed=embed)
+
 
 def setup(bot: bridge.Bot):
     bot.add_cog(Info(bot))
