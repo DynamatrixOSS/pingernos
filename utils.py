@@ -32,7 +32,12 @@ class Utils:
 
     @staticmethod
     def get_data() -> dict:
-        usejson = True  # Set to True to a config.json
+        """
+        This function is used to get the data from the config.json file.
+        If you do not have a config.json file, you can use environment variables.
+        :return: The data from the config.json file.
+        """
+        usejson = False  # Set to True to a config.json
         if usejson:
             try:
                 with open('config.json', 'r', encoding="UTF-8") as file:
@@ -69,16 +74,59 @@ class Utils:
 
     @staticmethod
     async def get_server_status(serverip: str) -> PingResponse:
+        """
+        This function is used to get the status of a server.
+        :param serverip: The ip of the server.
+        :return: The status of the server.
+        """
         server = await JavaServer.async_lookup(serverip)
         stat = await server.async_status()
         return stat
 
     @staticmethod
     async def mysql_login():
-        data = Utils.get_data()
+        """
+        This function is used to login to the database.
+        :return: The cursor to use for queries.
+        """
+        database = Utils.get_data()['Database']
 
         return mysql.connect(
-            host=data['Database']['Host'],
-            user=data['Database']['User'],
-            password=data['Database']['Password'],
-            database=data['Database']['Database'])
+            host=database['host'],
+            user=database['user'],
+            password=database['password'],
+            database=database['database'])
+
+    @staticmethod
+    async def selector(query: str, variables: list):
+        """
+        This function is used to select data from the database. It is used for SELECT queries.
+        :param query: The query to execute. Use %s for variables. Example: "SELECT * FROM table WHERE column = %s"
+        :param variables: The variables to use in the query. If there are no variables, use an empty list.
+        :return: The result of the query. If there is no result, it will return False.
+        """
+        cursor = await Utils.mysql_login()
+        db = cursor.cursor()
+        db.execute(query, variables)
+        try:
+            result = db.fetchall()[0]
+        except IndexError:
+            return False
+        db.close()
+        cursor.close()
+        return result
+
+    @staticmethod
+    async def modifyData(query: str, variables: list) -> None:
+        """
+        This function is used to modify data in the database. It is used for INSERT, UPDATE, and DELETE queries.
+        :param query: The query to execute. Use %s for variables. Example: "INSERT INTO table (column) VALUES (%s)"
+        :param variables: The variables to use in the query. If there are no variables, use an empty list.
+        :return: None
+         """
+        cursor = await Utils.mysql_login()
+        db = cursor.cursor()
+        db.execute(query, variables)
+        cursor.commit()
+        db.close()
+        cursor.close()
