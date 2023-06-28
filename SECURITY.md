@@ -22,7 +22,7 @@ Amongst other things, things that counts as a security vulnerability include, bu
 
 ### How to report it
 We ask you to report any and all vulnerabilities to us in one of the following ways:
-- Sending a mail to [stormsnuitje@gmail.com](mailto:stormsnuitje@gmail.com)
+- Sending a mail to [joshuaslui0203@gmail.com](mailto:joshuaslui0203@gmail.com)
 - Creating a [security advisory](https://github.com/BlueAtomic/pingernos/security/advisories/new)
 
 ... ***Do not report security vulnerabilities in discord, this is highly unsafe and will have consequences on your stay there.***
