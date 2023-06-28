@@ -84,29 +84,3 @@ class Utils:
             user=data['Database']['User'],
             password=data['Database']['Password'],
             database=data['Database']['Database'])
-
-    class HelpCmd(HelpCommand):
-        async def send_bot_help(self, mapping):
-            channel = self.get_destination()
-            await channel.send("Type in `/` to see the commands!", reference=self.context.message, mention_author=False,
-                               delete_after=15)
-
-    @staticmethod
-    async def respond(ctx: BridgeContext, message: str="", embed: Embed=None) -> None:
-        if isinstance(ctx, BridgeApplicationContext):
-            if embed is not None:
-                await ctx.respond(message, embed=embed)
-                return
-            await ctx.respond(message)
-            return
-        if isinstance(ctx, BridgeExtContext):
-            if embed is not None:
-                await ctx.respond(message, embed=embed, mention_author=False)
-                return
-            await ctx.respond(message, mention_author=False)
-            return
-        if embed is not None:
-            await ctx.respond(message, embed=embed)
-            return
-        await ctx.respond(message)
-        return
