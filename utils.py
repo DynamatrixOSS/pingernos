@@ -2,9 +2,6 @@ from re import sub
 from json import load, decoder
 from os import getenv
 from sys import exit as sysexit
-from discord.ext.commands import HelpCommand
-from discord.ext.bridge.context import BridgeContext, BridgeExtContext, BridgeApplicationContext
-from discord import Embed
 import mysql.connector as mysql
 
 try:
