@@ -6,6 +6,7 @@ import mysql.connector as mysql
 
 try:
     from dotenv import load_dotenv
+
     load_dotenv()
 except ModuleNotFoundError:
     print('You did not install the dotenv module! You will not be able to use a .env file.')
