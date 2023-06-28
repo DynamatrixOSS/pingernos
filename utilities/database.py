@@ -1,5 +1,5 @@
-from utilities.data import get_data
 from mysql import connector as mysql
+from utilities.data import get_data
 
 
 async def mysql_login():
@@ -24,18 +24,18 @@ async def selector(query: str, variables: list):
     :return: The result of the query. If there is no result, it will return False.
     """
     cursor = await mysql_login()
-    db = cursor.cursor()
-    db.execute(query, variables)
+    database = cursor.cursor()
+    database.execute(query, variables)
     try:
-        result = db.fetchall()[0]
+        result = database.fetchall()[0]
     except IndexError:
         return False
-    db.close()
+    database.close()
     cursor.close()
     return result
 
 
-async def modifyData(query: str, variables: list) -> None:
+async def modifier(query: str, variables: list) -> None:
     """
     This function is used to modify data in the database. It is used for INSERT, UPDATE, and DELETE queries.
     :param query: The query to execute. Use %s for variables. Example: "INSERT INTO table (column) VALUES (%s)"
@@ -43,8 +43,8 @@ async def modifyData(query: str, variables: list) -> None:
     :return: None
      """
     cursor = await mysql_login()
-    db = cursor.cursor()
-    db.execute(query, variables)
+    database = cursor.cursor()
+    database.execute(query, variables)
     cursor.commit()
-    db.close()
+    database.close()
     cursor.close()
