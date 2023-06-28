@@ -5,10 +5,10 @@ from utils import Utils
 data = Utils.get_data()
 intents = Intents(guilds=True, guild_messages=True)
 # intents.message_content = True #Uncomment this if you use prefixed command that are not mentions
-bot = AutoShardedBot(intents=intents, command_prefix=data['Prefix'], status=Status.dnd,
-          activity=Activity(type=ActivityType.watching, name="Starting..."))
+bot = AutoShardedBot(intents=intents, command_prefix=data['Prefix'], status=Status.dnd, activity=Activity(type=ActivityType.watching, name="Starting..."))
 bot.load_extensions("cogs")  # Loads all cogs in the cogs folder
 BOOTED = False
+
 
 @bot.listen()
 async def on_connect():
@@ -19,13 +19,15 @@ async def on_connect():
     database.execute("CREATE TABLE IF NOT EXISTS blacklist (guild_id VARCHAR(21) PRIMARY KEY, reason TEXT NOT NULL)")
     database.close()
 
+
 @bot.listen()
 async def on_reconnect():
     print('Reconnected to Discord!')
 
+
 @bot.listen()
 async def on_ready():
-    global BOOTED #I'm sorry, but there's no other way to do this without classes which I want only in the cogs
+    global BOOTED  # I'm sorry, but there's no other way to do this without classes which I want only in the cogs
     if BOOTED:
         print("Reconnect(?)")
     if not BOOTED:
