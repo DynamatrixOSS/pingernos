@@ -4,13 +4,13 @@ from discord.ext import commands
 from discord import Option
 from discord.ext.bridge import Bot
 from discord.ext.bridge.context import BridgeContext
-from utils import Utils
+from utilities.data import get_data
 
 
 class Cogs(commands.Cog):
     def __init__(self, bot: Bot):
         self.bot = bot
-        self.info = Utils.get_data()
+        self.info = get_data()
 
     def getcogs(self, ctx: BridgeContext) -> list:
         if ctx.interaction.user.id not in self.info['Owners']:
@@ -21,8 +21,7 @@ class Cogs(commands.Cog):
                 cogs.append(file[:-3])
         return cogs
 
-    @slash_command(description='Only the owners of the bot can run this command',
-                   guild_ids=Utils.get_data()['FeatureGuilds'])
+    @slash_command(description='Only the owners of the bot can run this command', guild_ids=get_data()['FeatureGuilds'])
     async def cogs(self, ctx: BridgeContext, action: Option(choices=["Load", "Unload", "Reload"]), cog: Option(autocomplete=getcogs)):
         if ctx.author.id not in self.info['Owners']:
             return
