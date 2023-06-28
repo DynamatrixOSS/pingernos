@@ -35,5 +35,6 @@ class CheckIP(commands.Cog):
             embed.colour = Colors.red
         await ctx.respond(embed=embed)
 
+
 def setup(bot: Bot):
     bot.add_cog(CheckIP(bot))
