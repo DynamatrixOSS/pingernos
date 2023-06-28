@@ -6,8 +6,7 @@ class SetServer(commands.Cog):
     def __init__(self, bot: Bot):
         self.bot = bot
 
-    @bridge.bridge_command(aliases=["set"],
-                           description="Set the default server to use if no argument is provided in the status command.")
+    @bridge.bridge_command(aliases=["set"], description="Set the default server to use if no argument is provided in the status command.")
     @bridge.has_permissions(manage_guild=True)
     async def setserver(self, ctx, server=None):
         if server is None:
