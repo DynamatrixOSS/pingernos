@@ -4,10 +4,10 @@
 
 We only support the following versions with security updates:
 
-*This'll usually be limited to the latest version.*
+*This will usually be limited to the latest version.*
 
 | Version | Supported          |
-| ------- | ------------------ |
+|---------|--------------------|
 | 2.3.x   | :white_check_mark: |
 | < 2.0   | :x:                |
 
