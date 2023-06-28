@@ -6,6 +6,7 @@ from discord.ext.bridge import Bot
 from discord.ext.bridge.context import BridgeContext
 from utils import Utils
 
+
 class Cogs(commands.Cog):
     def __init__(self, bot: Bot):
         self.bot = bot
