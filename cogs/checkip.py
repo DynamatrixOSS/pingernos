@@ -3,7 +3,8 @@ from discord import Embed
 from mcstatus import JavaServer
 from discord.ext.bridge import Bot
 from discord.ext.bridge.context import BridgeContext
-from utils import Utils
+from utilities.data import Colors
+
 
 class CheckIP(commands.Cog):
     def __init__(self, bot: Bot):
@@ -28,10 +29,10 @@ class CheckIP(commands.Cog):
         stat = await server.async_status()
         if stat.version.name == "⚠ Error":
             embed.description = f"**{address}** is free to use!\nTo use it as your server address, head to **[the options of your server](https://aternos.org/options)**"
-            embed.colour = Utils.Colors.green
+            embed.colour = Colors.green
         else:
             embed.description = f"**{address}** is already taken!"
-            embed.colour = Utils.Colors.red
+            embed.colour = Colors.red
         await ctx.respond(embed=embed)
 
 def setup(bot: Bot):
