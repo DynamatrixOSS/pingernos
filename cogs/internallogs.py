@@ -53,5 +53,6 @@ class InternalLogs(commands.Cog):
             webhook = Webhook.from_url(get_data()['Logs']["LeaveWebhook"], session=client_session)
             await webhook.send(embed=embed, username="Pingernos Logs", avatar_url=self.bot.user.avatar.url)
 
+
 def setup(bot: Bot):
     bot.add_cog(InternalLogs(bot))
