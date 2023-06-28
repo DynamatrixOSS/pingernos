@@ -24,5 +24,6 @@ class Error(commands.Cog):
         await ctx.respond("An unknown error has occured!\nThis has been logged")
         raise error
 
+
 def setup(bot: Bot):
     bot.add_cog(Error(bot))
