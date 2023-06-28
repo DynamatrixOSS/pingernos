@@ -1,6 +1,6 @@
 from discord.ext import commands, bridge
 from discord.ext.bridge import Bot
-from utils import Utils
+from utilities.database import mysql_login
 
 class SetServer(commands.Cog):
     def __init__(self, bot: Bot):
@@ -15,7 +15,7 @@ class SetServer(commands.Cog):
             server += ".aternos.me"
         if server.count(".") > 2:
             return await ctx.respond("Please provide a valid Aternos server ip!\nExample: example.aternos.me")
-        cursor = await Utils.mysql_login()
+        cursor = await mysql_login()
         database = cursor.cursor()
         database.execute(
             "INSERT INTO server (guild_id, server_ip) VALUES (%s, %s) ON DUPLICATE KEY UPDATE server_ip = %s",
