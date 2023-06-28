@@ -26,10 +26,10 @@ class Cogs(commands.Cog):
         if ctx.author.id not in self.info['Owners']:
             return
         if cog.lower() not in [f"{fn[:-3]}" for fn in listdir("./cogs")]:
-            await Utils.respond(ctx, "That cog doesn't exist!")
+            await ctx.respond("That cog doesn't exist!")
             return
         if action.lower() not in ["load", "unload", "reload"]:
-            await Utils.respond(ctx, "That action doesn't exist!")
+            await ctx.respond("That action doesn't exist!")
             return
         await ctx.defer()
         try:
@@ -40,14 +40,14 @@ class Cogs(commands.Cog):
             elif action == "Reload":
                 self.bot.reload_extension(f"cogs.{cog}")
         except Exception as error:
-            await Utils.respond(ctx, f"An error has occured!\n{error}")
+            await ctx.respond(f"An error has occured!\n{error}")
             raise error
         try:
             await self.bot.sync_commands()
         except Exception as error:
-            await Utils.respond(ctx, f"An error has occured!\n{error}")
+            await Utils.ctx(f"An error has occured!\n{error}")
             raise error
-        await Utils.respond(ctx, f"{action}ed {cog} and reloaded all commands!")
+        await ctx.respond(f"{action}ed {cog} and reloaded all commands!")
 
 def setup(bot: Bot):
     bot.add_cog(Cogs(bot))
