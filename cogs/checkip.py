@@ -1,9 +1,10 @@
 from discord.ext import commands, bridge
 from discord import Embed
-from mcstatus import JavaServer
+from asyncio import wait_for
 from discord.ext.bridge import Bot
 from discord.ext.bridge.context import BridgeContext
-from utilities.data import Colors
+from utilities.data import Colors, get_server_status
+from utilities.utility import check_ip
 
 
 class CheckIP(commands.Cog):
