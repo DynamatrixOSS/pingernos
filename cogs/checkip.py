@@ -17,10 +17,9 @@ class CheckIP(commands.Cog):
         if not address:
             return await ctx.respond("Please provide a valid Aternos IP.")
         nip = address.split(".")[0]
-        if len(nip) > 20:
-            return await ctx.respond("Aternos IPs can only be 20 characters long, please try a shorter one. Yours is " + str(len(nip)) + " characters long.")
-        if len(nip) < 4:
-            return await ctx.respond("Aternos IPs must be at least 4 characters long, please try a longer one. Yours is " + str(len(nip)) + " characters long.")
+        print(nip)
+        if len(nip) > 20 or len(nip) < 4:
+            return await ctx.respond(f"Aternos IPs must contain between 4 to 20 characters. You have {len(nip)}/20 characters.")
         await ctx.defer()
         embed = Embed()
         server = await JavaServer.async_lookup(address)
