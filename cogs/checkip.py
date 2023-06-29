@@ -13,12 +13,9 @@ class CheckIP(commands.Cog):
 
     @bridge.bridge_command(aliases=["checkserverip", "check"], description="Checks if an Aternos-IP is free to use.")
     async def checkip(self, ctx: BridgeContext, address=None):
-        if address is None:
-            return await ctx.respond("Please provide a Aternos server ip!\nExample: example.aternos.me")
-        if not address.endswith(".aternos.me"):
-            address += ".aternos.me"
-        if address.count(".") > 2:
-            return await ctx.respond("Please provide a valid Aternos server ip!\nExample: example.aternos.me")
+        address = check_ip(address)
+        if not address:
+            return await ctx.respond("Please provide a valid Aternos IP.")
         nip = address.split(".")[0]
         if len(nip) > 20:
             return await ctx.respond("Aternos IPs can only be 20 characters long, please try a shorter one. Yours is " + str(len(nip)) + " characters long.")
