@@ -22,8 +22,7 @@ class CheckIP(commands.Cog):
             return await ctx.respond(f"Aternos IPs must contain between 4 to 20 characters. You have {len(nip)}/20 characters.")
         await ctx.defer()
         embed = Embed()
-        server = await JavaServer.async_lookup(address)
-        stat = await server.async_status()
+        stat = await wait_for(get_server_status(address), timeout=2)
         if stat.version.name == "⚠ Error":
             embed.description = f"**{address}** is free to use!\nTo use it as your server address, head to **[the options of your server](https://aternos.org/options)**"
             embed.colour = Colors.green
