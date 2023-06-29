@@ -4,6 +4,7 @@ from discord.ext.bridge import Bot
 from discord import Embed, utils as dutils
 from utilities.data import remove_colors_from_string, Colors, get_server_status
 from utilities.database import selector
+from utilities.utility import check_ip
 
 
 class Status(commands.Cog):
@@ -16,13 +17,9 @@ class Status(commands.Cog):
             serverip = (await selector('SELECT server_ip FROM server WHERE guild_id = %s', [ctx.guild.id]))[0]
             if not serverip:
                 return await ctx.respond("Sorry, but this server does not have an IP registered. Please use `setserver` for that.")
-        if not serverip.endswith(".aternos.me"):
-            serverip += ".aternos.me"
-        if serverip.count(".") > 2:
-            return await ctx.respond("Please provide a valid Aternos server ip!\nExample: example.aternos.me")
-        if serverip.count(":") == 1:
-            if len(serverip.split(":")[1]) != 5:
-                return await ctx.respond("Please provide a valid Aternos server ip!\nExample: example.aternos.me")
+        serverip = check_ip(serverip)
+        if not serverip:
+            return await ctx.respond("Please provide a valid Aternos IP.")
         await ctx.defer()
         try:
             stat = await wait_for(get_server_status(serverip), timeout=3)
