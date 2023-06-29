@@ -5,8 +5,7 @@ from utilities.data import get_data
 
 data = get_data()
 intents = Intents(guilds=True, guild_messages=True)
-# intents.message_content = True #Uncomment this if you use prefixed command that are not mentions
-bot = AutoShardedBot(intents=intents, command_prefix=data['Prefix'], status=Status.dnd, activity=Activity(type=ActivityType.watching, name="Starting..."))
+bot = AutoShardedBot(intents=intents, status=Status.dnd, activity=Activity(type=ActivityType.watching, name="Starting..."))
 bot.load_extensions("cogs")  # Loads all cogs in the cogs folder
 BOOTED = False
 
