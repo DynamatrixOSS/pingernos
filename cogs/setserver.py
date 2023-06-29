@@ -1,6 +1,7 @@
 from discord.ext import commands, bridge
 from discord.ext.bridge import Bot
 from utilities.database import modifier
+from utilities.utility import check_ip
 
 
 class SetServer(commands.Cog):
@@ -13,10 +14,9 @@ class SetServer(commands.Cog):
         if server is None:
             await modifier("DELETE FROM server WHERE guild_id = %s", [ctx.guild_id])
             return await ctx.respond("Default server has been removed. Use `setserver <server>` to set a new one.")
-        if not server.endswith(".aternos.me"):
-            server += ".aternos.me"
-        if server.count(".") > 2:
-            return await ctx.respond("Please provide a valid Aternos server ip!\nExample: example.aternos.me")
+        server = check_ip(server)
+        if not server:
+            return await ctx.respond("Please provide a valid Aternos IP.")
 
         await modifier("INSERT INTO server (guild_id, server_ip) VALUES (%s, %s) ON DUPLICATE KEY UPDATE server_ip = %s", [ctx.guild_id, server, server])
         await ctx.respond(f'The IP has been set to {server}. Use `status` without an argument to view it.')
