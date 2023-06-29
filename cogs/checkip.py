@@ -17,7 +17,6 @@ class CheckIP(commands.Cog):
         if not address:
             return await ctx.respond("Please provide a valid Aternos IP.")
         nip = address.split(".")[0]
-        print(nip)
         if len(nip) > 20 or len(nip) < 4:
             return await ctx.respond(f"Aternos IPs must contain between 4 to 20 characters. You have {len(nip)}/20 characters.")
         await ctx.defer()
