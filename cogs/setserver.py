@@ -1,5 +1,6 @@
-from discord.ext import commands, bridge
-from discord.ext.bridge import Bot
+from discord import slash_command
+from discord.ext import commands
+from discord.ext.commands import Bot
 from utilities.database import modifier
 from utilities.utility import check_ip
 
@@ -8,8 +9,8 @@ class SetServer(commands.Cog):
     def __init__(self, bot: Bot):
         self.bot = bot
 
-    @bridge.bridge_command(aliases=["set"], description="Set the default server to use if no argument is provided in the status command.")
-    @bridge.has_permissions(manage_guild=True)
+    @slash_command(aliases=["set"], description="Set the default server to use if no argument is provided in the status command.")
+    @commands.has_permissions(manage_guild=True)
     async def setserver(self, ctx, server=None):
         if server is None:
             await modifier("DELETE FROM server WHERE guild_id = %s", [ctx.guild_id])
@@ -22,5 +23,5 @@ class SetServer(commands.Cog):
         await ctx.respond(f'The IP has been set to {server}. Use `status` without an argument to view it.')
 
 
-def setup(bot: bridge.Bot):
+def setup(bot: Bot):
     bot.add_cog(SetServer(bot))
