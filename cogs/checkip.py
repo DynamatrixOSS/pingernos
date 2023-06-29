@@ -1,8 +1,7 @@
 from asyncio import wait_for
-from discord.ext import commands, bridge
-from discord import Embed
-from discord.ext.bridge import Bot
-from discord.ext.bridge.context import BridgeContext
+from discord import slash_command, option, Embed
+from discord.ext import commands
+from discord.ext.commands import Bot
 from utilities.data import Colors, get_server_status
 from utilities.utility import check_ip
 
@@ -11,8 +10,9 @@ class CheckIP(commands.Cog):
     def __init__(self, bot: Bot):
         self.bot = bot
 
-    @bridge.bridge_command(aliases=["checkserverip", "check"], description="Checks if an Aternos-IP is free to use.")
-    async def checkip(self, ctx: BridgeContext, address):
+    @slash_command(aliases=["checkserverip", "check"], description="Checks if an Aternos-IP is free to use.")
+    @option("address", str, description="The Aternos-IP to check")
+    async def checkip(self, ctx, address):
         address = check_ip(address)
         if not address:
             return await ctx.respond("Please provide a valid Aternos IP.")
