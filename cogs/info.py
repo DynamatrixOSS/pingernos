@@ -1,7 +1,7 @@
 from asyncio import wait_for
-from discord.ext import commands, bridge
-from discord.ext.bridge import Bot
-from discord import Embed
+from discord import slash_command, Embed
+from discord.ext import commands
+from discord.ext.commands import Bot
 from utilities.data import Colors, get_server_status
 
 
@@ -9,8 +9,8 @@ class Info(commands.Cog):
     def __init__(self, bot: Bot):
         self.bot = bot
 
-    @bridge.bridge_command(aliases=["information", "ping", "latency", "pong", "servers", "guilds", "support", "invite"], description="Displays information about Pingernos")
-    async def info(self, ctx: bridge.BridgeContext):
+    @slash_command(aliases=["information", "ping", "latency", "pong", "servers", "guilds", "support", "invite"], description="Displays information about Pingernos")
+    async def info(self, ctx):
         embed = Embed()
         try:
             stat = await wait_for(get_server_status("example.aternos.me"), timeout=2)
@@ -34,5 +34,5 @@ class Info(commands.Cog):
         await ctx.respond(embed=embed)
 
 
-def setup(bot: bridge.Bot):
+def setup(bot: Bot):
     bot.add_cog(Info(bot))
