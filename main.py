@@ -36,7 +36,7 @@ async def on_ready():
         print(f'Logged in as {bot.user} with {bot.shard_count+1} shards!')
         print('------')
         for shard in bot.shards:
-            await bot.change_presence(status=Status.dnd, activity=Activity(type=ActivityType.watching, name=f"you (prefix: @mention) | Shard: {shard+1}"), shard_id=shard)
+            await bot.change_presence(status=Status.online, activity=Activity(type=ActivityType.watching, name=f"Aternos | Shard: {shard+1}"), shard_id=shard)
         BOOTED = True
 
 bot.run(data['Token'])
