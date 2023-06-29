@@ -1,7 +1,7 @@
+from discord import slash_command, option, Embed, utils as dutils
+from discord.ext import commands
+from discord.ext.commands import Bot
 from asyncio import wait_for
-from discord.ext import commands, bridge
-from discord.ext.bridge import Bot
-from discord import Embed, utils as dutils
 from utilities.data import remove_colors_from_string, Colors, get_server_status
 from utilities.database import selector
 from utilities.utility import check_ip
@@ -11,7 +11,8 @@ class Status(commands.Cog):
     def __init__(self, bot: Bot):
         self.bot = bot
 
-    @bridge.bridge_command(aliases=["s"], description="Get the server status")
+    @slash_command(aliases=["s"], description="Get the server status")
+    @option("serverip", str, description="The Aternos-IP to check")
     async def status(self, ctx, serverip=None):
         if serverip is None:
             serverip = (await selector('SELECT server_ip FROM server WHERE guild_id = %s', [ctx.guild.id]))[0]
