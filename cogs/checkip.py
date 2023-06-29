@@ -1,6 +1,6 @@
+from asyncio import wait_for
 from discord.ext import commands, bridge
 from discord import Embed
-from asyncio import wait_for
 from discord.ext.bridge import Bot
 from discord.ext.bridge.context import BridgeContext
 from utilities.data import Colors, get_server_status
