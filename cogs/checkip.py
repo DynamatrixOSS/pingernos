@@ -12,7 +12,7 @@ class CheckIP(commands.Cog):
         self.bot = bot
 
     @bridge.bridge_command(aliases=["checkserverip", "check"], description="Checks if an Aternos-IP is free to use.")
-    async def checkip(self, ctx: BridgeContext, address=None):
+    async def checkip(self, ctx: BridgeContext, address):
         address = check_ip(address)
         if not address:
             return await ctx.respond("Please provide a valid Aternos IP.")
