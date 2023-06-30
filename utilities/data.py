@@ -34,7 +34,7 @@ def get_data() -> dict:
     If you do not have a config.json file, you can use environment variables.
     :return: The data from the config.json file.
     """
-    usejson = False  # Set to True to a config.json
+    usejson = True  # Set to True to a config.json
     if usejson:
         try:
             with open('config.json', 'r', encoding="UTF-8") as file:
