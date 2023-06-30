@@ -20,7 +20,7 @@ class SetServer(commands.Cog):
             return await ctx.respond("Please provide a valid Aternos IP.")
 
         await modifier("INSERT INTO server (guild_id, server_ip) VALUES (%s, %s) ON DUPLICATE KEY UPDATE server_ip = %s", [ctx.guild_id, server, server])
-        await ctx.respond(f'The IP has been set to {server}. Use `status` without an argument to view it.')
+        await ctx.respond(f'The IP has been set to {server}. Use `status` without an argument to view it.' , ephemeral=True)
 
 
 def setup(bot: Bot):
