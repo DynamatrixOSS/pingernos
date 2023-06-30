@@ -25,7 +25,7 @@ class Status(commands.Cog):
         try:
             stat = await wait_for(get_server_status(serverip), timeout=3)
         except TimeoutError:
-            return await ctx.respond("Uh oh! The protocol took too long to respond! This will likely fix itself.")
+            return await ctx.respond("Uh oh! The protocol took too long to respond! This will likely fix itself.", ephemeral=True)
         embed = Embed(title=serverip)
         if stat.version.name == "§4● Offline":
             embed.description = "We are not able to gather info from offline servers, sorry!\nProtocol Latency: " + str(
