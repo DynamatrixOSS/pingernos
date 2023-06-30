@@ -14,7 +14,7 @@ class SetServer(commands.Cog):
     async def setserver(self, ctx, server=None):
         if server is None:
             await modifier("DELETE FROM server WHERE guild_id = %s", [ctx.guild_id])
-            return await ctx.respond("Default server has been removed. Use `setserver <server>` to set a new one.")
+            return await ctx.respond("Default server has been removed. Use `setserver <server>` to set a new one.", ephemeral=True)
         server = check_ip(server)
         if not server:
             return await ctx.respond("Please provide a valid Aternos IP.")
