@@ -20,7 +20,7 @@ class Status(commands.Cog):
                 return await ctx.respond("Sorry, but this server does not have an IP registered. Please use `setserver` for that.", ephemeral=True)
         serverip = check_ip(serverip)
         if not serverip:
-            return await ctx.respond("Please provide a valid Aternos IP.")
+            return await ctx.respond("Please provide a valid Aternos IP.", ephemeral=True)
         await ctx.defer()
         try:
             stat = await wait_for(get_server_status(serverip), timeout=3)
