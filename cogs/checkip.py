@@ -28,7 +28,7 @@ class CheckIP(commands.Cog):
         else:
             embed.description = f"**{address}** is already taken!"
             embed.colour = Colors.red
-        await ctx.respond(embed=embed)
+        await ctx.respond(embed=embed, ephemeral=True)
 
 
 def setup(bot: Bot):
