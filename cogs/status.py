@@ -17,7 +17,7 @@ class Status(commands.Cog):
         if serverip is None:
             serverip = (await selector('SELECT server_ip FROM server WHERE guild_id = %s', [ctx.guild.id]))[0]
             if not serverip:
-                return await ctx.respond("Sorry, but this server does not have an IP registered. Please use `setserver` for that.")
+                return await ctx.respond("Sorry, but this server does not have an IP registered. Please use `setserver` for that.", ephemeral=True)
         serverip = check_ip(serverip)
         if not serverip:
             return await ctx.respond("Please provide a valid Aternos IP.")
