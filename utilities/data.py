@@ -4,11 +4,6 @@ from os import getenv
 from sys import exit as sysexit
 
 try:
-    from dotenv import load_dotenv
-    load_dotenv()
-except ModuleNotFoundError:
-    print('You did not install the dotenv module! You will not be able to use a .env file.')
-try:
     from mcstatus import JavaServer
     from mcstatus.pinger import PingResponse
 except ModuleNotFoundError:
@@ -43,7 +38,7 @@ def get_data() -> dict:
             from dotenv import load_dotenv
             load_dotenv()
         except ModuleNotFoundError:
-            exit("You did not install the dotenv module! Exiting now...")
+            sysexit("You did not install the dotenv module! Exiting now...")
         else:
             try:
                 data = {
@@ -66,8 +61,7 @@ def get_data() -> dict:
             except AttributeError:
                 exit('No environment variables could be found. Exiting now...')
     except decoder.JSONDecodeError:
-        print('config.json is not valid! Exiting now...')
-        sysexit()
+        sysexit('config.json is not valid! Exiting now...')
     return data
 
 
