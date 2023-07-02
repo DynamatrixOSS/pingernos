@@ -3,17 +3,20 @@ from json import load, decoder
 from os import getenv
 from sys import exit as sysexit
 
+DOTENV_INSTALLED = True
+
 try:
     from dotenv import load_dotenv
+
     load_dotenv()
 except ModuleNotFoundError:
-    print('You did not install the dotenv module! You will not be able to use a .env file.')
+    print("You did not install the dotenv module! .env files can not be used.")
+    DOTENV_INSTALLED = False
 try:
     from mcstatus import JavaServer
     from mcstatus.pinger import PingResponse
 except ModuleNotFoundError:
-    print('You did not install the mcstatus module! Exiting now...')
-    sysexit()
+    sysexit('You did not install the mcstatus module! Exiting now...')
 
 
 class Colors:
@@ -34,39 +37,36 @@ def get_data() -> dict:
     If you do not have a config.json file, you can use environment variables.
     :return: The data from the config.json file.
     """
-    usejson = True  # Set to True to a config.json
-    if usejson:
-        try:
-            with open('config.json', 'r', encoding="UTF-8") as file:
-                data = load(file)
-        except FileNotFoundError:
-            print('config.json not found! Exiting now...')
-            sysexit()
-        except decoder.JSONDecodeError:
-            print('config.json is not valid! Exiting now...')
-            sysexit()
-    if not usejson:
-        try:
-            data = {
-                "Token": getenv('TOKEN'),
-                "Prefix": getenv('PREFIX'),
-                "Owners": getenv('OWNERS').split(','),
-                "FeatureGuilds": getenv('FEATURE_GUILDS').split(','),
-                "Database": {
-                    "Host": getenv('DB_HOST'),
-                    "User": getenv('DB_USER'),
-                    "Password": getenv('DB_PASSWORD'),
-                    "Database": getenv('DB_DATABASE'),
-                    "Port": getenv('DB_PORT')
-                },
-                "Logs": {
-                    "JoinWebhook": getenv('LOGS_JOINWEBHOOK'),
-                    "LeaveWebhook": getenv('LOGS_LEAVEWEBHOOK')
+    try:
+        with open('config.json', 'r', encoding="UTF-8") as file:
+            data = load(file)
+    except FileNotFoundError:
+        print("No config.json file found. Trying to use dotenv...")
+        if not DOTENV_INSTALLED:
+            sysexit('You did not install the dotenv module and no config.json was provided! Exiting now...')
+        else:
+            try:
+                data = {
+                    "Token": getenv('TOKEN'),
+                    "Prefix": getenv('PREFIX'),
+                    "Owners": getenv('OWNERS').split(','),
+                    "FeatureGuilds": getenv('FEATURE_GUILDS').split(','),
+                    "Database": {
+                        "Host": getenv('DB_HOST'),
+                        "User": getenv('DB_USER'),
+                        "Password": getenv('DB_PASSWORD'),
+                        "Database": getenv('DB_DATABASE'),
+                        "Port": getenv('DB_PORT')
+                    },
+                    "Logs": {
+                        "JoinWebhook": getenv('LOGS_JOINWEBHOOK'),
+                        "LeaveWebhook": getenv('LOGS_LEAVEWEBHOOK')
+                    }
                 }
-            }
-        except AttributeError:
-            print('You did not fill out the environment variables! Exiting now...')
-            sysexit()
+            except AttributeError:
+                sysexit('One or more environment variables could be found. Exiting now...')
+    except decoder.JSONDecodeError:
+        sysexit('config.json is not valid! Exiting now...')
     return data
 
 
