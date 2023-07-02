@@ -34,39 +34,40 @@ def get_data() -> dict:
     If you do not have a config.json file, you can use environment variables.
     :return: The data from the config.json file.
     """
-    usejson = True  # Set to True to a config.json
-    if usejson:
+    try:
+        with open('config.json', 'r', encoding="UTF-8") as file:
+            data = load(file)
+    except FileNotFoundError:
+        print("No config.json file found. Trying to use dotenv...")
         try:
-            with open('config.json', 'r', encoding="UTF-8") as file:
-                data = load(file)
-        except FileNotFoundError:
-            print('config.json not found! Exiting now...')
-            sysexit()
-        except decoder.JSONDecodeError:
-            print('config.json is not valid! Exiting now...')
-            sysexit()
-    if not usejson:
-        try:
-            data = {
-                "Token": getenv('TOKEN'),
-                "Prefix": getenv('PREFIX'),
-                "Owners": getenv('OWNERS').split(','),
-                "FeatureGuilds": getenv('FEATURE_GUILDS').split(','),
-                "Database": {
-                    "Host": getenv('DB_HOST'),
-                    "User": getenv('DB_USER'),
-                    "Password": getenv('DB_PASSWORD'),
-                    "Database": getenv('DB_DATABASE'),
-                    "Port": getenv('DB_PORT')
-                },
-                "Logs": {
-                    "JoinWebhook": getenv('LOGS_JOINWEBHOOK'),
-                    "LeaveWebhook": getenv('LOGS_LEAVEWEBHOOK')
+            from dotenv import load_dotenv
+            load_dotenv()
+        except ModuleNotFoundError:
+            exit("You did not install the dotenv module! Exiting now...")
+        else:
+            try:
+                data = {
+                    "Token": getenv('TOKEN'),
+                    "Prefix": getenv('PREFIX'),
+                    "Owners": getenv('OWNERS').split(','),
+                    "FeatureGuilds": getenv('FEATURE_GUILDS').split(','),
+                    "Database": {
+                        "Host": getenv('DB_HOST'),
+                        "User": getenv('DB_USER'),
+                        "Password": getenv('DB_PASSWORD'),
+                        "Database": getenv('DB_DATABASE'),
+                        "Port": getenv('DB_PORT')
+                    },
+                    "Logs": {
+                        "JoinWebhook": getenv('LOGS_JOINWEBHOOK'),
+                        "LeaveWebhook": getenv('LOGS_LEAVEWEBHOOK')
+                    }
                 }
-            }
-        except AttributeError:
-            print('You did not fill out the environment variables! Exiting now...')
-            sysexit()
+            except AttributeError:
+                exit('No environment variables could be found. Exiting now...')
+    except decoder.JSONDecodeError:
+        print('config.json is not valid! Exiting now...')
+        sysexit()
     return data
 
 
