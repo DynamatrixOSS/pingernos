@@ -33,7 +33,6 @@ class InternalLogs(commands.Cog):
     @commands.Cog.listener()
     async def on_guild_remove(self, guild: Guild):
         result = (await selector("SELECT * FROM blacklist WHERE guild_id = %s", [guild.id]))
-        print(result)
         embed = Embed(title="Left a guild!", color=Colors.red)
         embed.add_field(name="Name", value=guild.name, inline=True)
         embed.add_field(name="ID", value=guild.id, inline=True)
