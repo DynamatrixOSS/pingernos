@@ -12,7 +12,7 @@ class InternalLogs(commands.Cog):
 
     @commands.Cog.listener()
     async def on_guild_join(self, guild: Guild):
-        result = (await selector("SELECT * FROM blacklist WHERE guild_id = %s", [guild.id]))
+        result = await selector("SELECT * FROM blacklist WHERE guild_id = %s", [guild.id])
 
         if result:
             await guild.leave()
@@ -32,7 +32,7 @@ class InternalLogs(commands.Cog):
 
     @commands.Cog.listener()
     async def on_guild_remove(self, guild: Guild):
-        result = (await selector("SELECT * FROM blacklist WHERE guild_id = %s", [guild.id]))
+        result = await selector("SELECT * FROM blacklist WHERE guild_id = %s", [guild.id])
         embed = Embed(title="Left a guild!", color=Colors.red)
         embed.add_field(name="Name", value=guild.name, inline=True)
         embed.add_field(name="ID", value=guild.id, inline=True)
