@@ -1,3 +1,4 @@
+import discord
 from discord.ext import commands
 from discord.ext.bridge import Bot
 
@@ -17,6 +18,9 @@ class Error(commands.Cog):
 
     @commands.Cog.listener()
     async def on_application_command_error(self, ctx, error):
+        if isinstance(error, discord.CheckFailure):
+            if not ctx.guild:
+                return await ctx.respond("This command can only be used in a server.", ephemeral=True)
         if isinstance(error, commands.NotOwner):
             return await ctx.respond("This command is for owners only.")
         if isinstance(error, commands.GuildNotFound):
