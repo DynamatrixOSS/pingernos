@@ -12,7 +12,7 @@ class InternalLogs(commands.Cog):
 
     @commands.Cog.listener()
     async def on_guild_join(self, guild: Guild):
-        result = (await selector("SELECT * FROM blacklist WHERE guild_id = %s", [guild.id]))[1]
+        result = await selector("SELECT * FROM blacklist WHERE guild_id = %s", [guild.id])
 
         if result:
             await guild.leave()
@@ -23,7 +23,7 @@ class InternalLogs(commands.Cog):
         embed.add_field(name="Guild member count", value=guild.member_count, inline=True)
         embed.add_field(name="Current server count", value=len(self.bot.guilds), inline=True)
         if result:
-            embed.description = f'**THIS GUILD IS BLACKLISTED**\n**Reason:** {result}'
+            embed.description = f'**THIS GUILD IS BLACKLISTED**\n**Reason:** {result[1]}'
         if guild.icon is not None:
             embed.set_thumbnail(url=guild.icon)
         async with aiohttp.ClientSession() as client_session:
@@ -32,14 +32,14 @@ class InternalLogs(commands.Cog):
 
     @commands.Cog.listener()
     async def on_guild_remove(self, guild: Guild):
-        result = (await selector("SELECT * FROM blacklist WHERE guild_id = %s", [guild.id]))[1]
+        result = await selector("SELECT * FROM blacklist WHERE guild_id = %s", [guild.id])
         embed = Embed(title="Left a guild!", color=Colors.red)
         embed.add_field(name="Name", value=guild.name, inline=True)
         embed.add_field(name="ID", value=guild.id, inline=True)
         embed.add_field(name="Guild member count", value=guild.member_count, inline=True)
         embed.add_field(name="Current server count", value=len(self.bot.guilds), inline=True)
         if result:
-            embed.description = f'**THIS GUILD IS BLACKLISTED**\n**Reason:** {result}'
+            embed.description = f'**THIS GUILD IS BLACKLISTED**\n**Reason:** {result[1]}'
         if guild.icon is not None:
             embed.set_thumbnail(url=guild.icon)
         async with aiohttp.ClientSession() as client_session:

@@ -29,7 +29,7 @@ async def selector(query: str, variables: list):
     try:
         result = database.fetchall()[0]
     except IndexError:
-        return [False]
+        return ()
     database.close()
     cursor.close()
     return result
