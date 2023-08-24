@@ -38,4 +38,10 @@ async def on_ready():
             await bot.change_presence(status=Status.online, activity=Activity(type=ActivityType.watching, name=f"Aternos | Shard: {shard+1}"), shard_id=shard)
         BOOTED = True
 
+
+@bot.check
+async def guild_only(ctx):
+    return ctx.guild is not None
+
+
 bot.run(data['Token'])
