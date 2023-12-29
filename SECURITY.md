@@ -8,8 +8,8 @@ We only support the following versions with security updates:
 
 | Version | Supported          |
 |---------|--------------------|
-| 2.3.x   | :white_check_mark: |
-| < 2.0   | :x:                |
+| 3.0.x   | :white_check_mark: |
+| < 3.0   | :x:                |
 
 ## Reporting a Vulnerability
 
@@ -22,8 +22,8 @@ Amongst other things, things that counts as a security vulnerability include, bu
 
 ### How to report it
 We ask you to report any and all vulnerabilities to us in one of the following ways:
-- Sending a mail to [joshuaslui0203@gmail.com](mailto:joshuaslui0203@gmail.com)
-- Creating a [security advisory](https://github.com/BlueAtomic/pingernos/security/advisories/new)
+- Sending a mail to [support@wolfsvale.tech](mailto:support@wolfsvale.tech)
+- Creating a [security advisory](https://github.com/Wolfsvale/pingernos/security/advisories/new)
 
 ... ***Do not report security vulnerabilities in discord, this is highly unsafe and will have consequences on your stay there.***
 
