@@ -12,7 +12,7 @@ class Blacklist(discord.Cog):
 
     @slash_command()
     @commands.is_owner()
-    @option("server", int, description="The server ID of the server to blacklist")
+    @option("server", discord.Guild, description="The server ID of the server to blacklist")
     @option("reason", str, description="The reason for the blacklist")
     async def blacklist(self, ctx, server, reason):
         """ Blacklist a server from the bot """
