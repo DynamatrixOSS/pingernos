@@ -1,4 +1,5 @@
 import aiohttp
+import discord
 from discord.ext import commands
 from discord import Guild, Embed, Webhook
 from discord.ext.bridge import Bot
@@ -6,7 +7,7 @@ from utilities.database import selector
 from utilities.data import Colors, get_data
 
 
-class InternalLogs(commands.Cog):
+class InternalLogs(discord.Cog):
     def __init__(self, bot: Bot):
         self.bot = bot
 

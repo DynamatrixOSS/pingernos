@@ -5,13 +5,13 @@ from discord.ext.bridge import Bot
 from utilities.database import modifier
 
 
-class Blacklist(commands.Cog):
+class Blacklist(discord.Cog):
     def __init__(self, bot: Bot):
         self.bot = bot
 
     @slash_command()
     @commands.is_owner()
-    @option("server", discord.Guild, description="The server to blacklist")
+    @option("server", str, description="The server ID of the server to blacklist")
     @option("reason", str, description="The reason for the blacklist")
     async def blacklist(self, ctx, server, reason):
         """ Blacklist a server from the bot """

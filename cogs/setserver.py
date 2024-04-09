@@ -1,3 +1,4 @@
+import discord
 from discord import slash_command
 from discord.ext import commands
 from discord.ext.commands import Bot
@@ -5,7 +6,7 @@ from utilities.database import modifier
 from utilities.utility import check_ip
 
 
-class SetServer(commands.Cog):
+class SetServer(discord.Cog):
     def __init__(self, bot: Bot):
         self.bot = bot
 

@@ -1,12 +1,12 @@
 from os import listdir
+import discord
 from discord.ext.commands import slash_command
-from discord.ext import commands
 from discord import Option
 from discord.ext.bridge import Bot
 from utilities.data import get_data
 
 
-class Cogs(commands.Cog):
+class Cogs(discord.Cog):
     def __init__(self, bot: Bot):
         self.bot = bot
         self.info = get_data()
