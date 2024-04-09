@@ -1,7 +1,9 @@
 from asyncio import wait_for
+
 import discord
 from discord import slash_command, option, Embed, utils as dutils
 from discord.ext.commands import Bot
+
 from utilities.data import remove_colors_from_string, Colors, get_server_status
 from utilities.database import selector
 from utilities.utility import check_ip

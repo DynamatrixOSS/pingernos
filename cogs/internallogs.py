@@ -1,10 +1,11 @@
 import aiohttp
 import discord
-from discord.ext import commands
 from discord import Guild, Embed, Webhook
+from discord.ext import commands
 from discord.ext.bridge import Bot
-from utilities.database import selector
+
 from utilities.data import Colors, get_data
+from utilities.database import selector
 
 
 class InternalLogs(discord.Cog):

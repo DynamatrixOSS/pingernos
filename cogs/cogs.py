@@ -1,8 +1,10 @@
 from os import listdir
+
 import discord
-from discord.ext.commands import slash_command
 from discord import Option
 from discord.ext.bridge import Bot
+from discord.ext.commands import slash_command
+
 from utilities.data import get_data
 
 
