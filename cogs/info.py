@@ -10,8 +10,9 @@ class Info(discord.Cog):
     def __init__(self, bot: discord.Bot):
         self.bot = bot
 
-    @slash_command(aliases=["information", "ping", "latency", "pong", "servers", "guilds", "support", "invite"], description="Displays information about Pingernos")
+    @slash_command()
     async def info(self, ctx):
+        """ Displays information about Pingernos """
         embed = Embed()
         try:
             stat = await wait_for(get_server_status("example.aternos.me"), timeout=2)

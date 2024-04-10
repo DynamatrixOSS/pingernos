@@ -21,8 +21,9 @@ class Cogs(discord.Cog):
                 cogs.append(file[:-3])
         return cogs
 
-    @slash_command(description='Only the owners of the bot can run this command', guild_ids=get_data()['FeatureGuilds'])
+    @slash_command(guild_ids=get_data()['FeatureGuilds'])
     async def cogs(self, ctx, action: Option(choices=["Load", "Unload", "Reload"]), cog: Option(autocomplete=getcogs)):
+        """ Only the owners of the bot can run this command """
         if ctx.author.id not in self.info['Owners']:
             return
         if cog.lower() not in [f"{fn[:-3]}" for fn in listdir("./cogs")]:

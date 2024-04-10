@@ -10,9 +10,10 @@ class SetServer(discord.Cog):
     def __init__(self, bot: discord.Bot):
         self.bot = bot
 
-    @slash_command(aliases=["set"], description="Set the default server to use if no argument is provided in the status command.")
+    @slash_command()
     @commands.has_permissions(manage_guild=True)
     async def setserver(self, ctx, server=None):
+        """ Set the default server to use if no argument is provided in the status command """
         if server is None:
             await modifier("DELETE FROM server WHERE guild_id = %s", [ctx.guild_id])
             return await ctx.respond("Default server has been removed. Use `setserver <server>` to set a new one.", ephemeral=True)

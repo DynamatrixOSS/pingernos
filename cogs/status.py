@@ -12,9 +12,10 @@ class Status(discord.Cog):
     def __init__(self, bot: discord.Bot):
         self.bot = bot
 
-    @slash_command(aliases=["s"], description="Get the server status")
+    @slash_command()
     @option("serverip", str, description="The Aternos-IP to check")
     async def status(self, ctx, serverip=None):
+        """ Get the server status """
         if serverip is None:
             serverip = (await selector('SELECT server_ip FROM server WHERE guild_id = %s', [ctx.guild.id]))[0]
             if not serverip:

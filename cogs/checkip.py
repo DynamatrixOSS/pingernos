@@ -11,9 +11,10 @@ class CheckIP(discord.Cog):
     def __init__(self, bot: discord.Bot):
         self.bot = bot
 
-    @slash_command(aliases=["checkserverip", "check"], description="Checks if an Aternos-IP is free to use.")
+    @slash_command()
     @option("address", str, description="The Aternos-IP to check")
     async def checkip(self, ctx, address):
+        """ Checks if an Aternos-IP is free to use. """
         address = check_ip(address)
         if not address:
             return await ctx.respond("Please provide a valid Aternos IP.", ephemeral=True)
