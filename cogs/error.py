@@ -21,7 +21,7 @@ class Error(discord.Cog):
             if not ctx.guild:
                 return await ctx.respond("This command can only be used in a server.", ephemeral=True)
         if isinstance(error, commands.NotOwner):
-            return await ctx.respond("This command is for owners only.")
+            return await ctx.respond("This command is for owners only.", ephemeral=True)
         if isinstance(error, commands.GuildNotFound):
             return await ctx.respond("Could not find this guild.")
         await ctx.respond("An unknown error has occurred!\nThis has been logged")
