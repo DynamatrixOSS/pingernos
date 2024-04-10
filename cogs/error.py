@@ -3,7 +3,7 @@ from discord.ext import commands
 from discord.ext.bridge import Bot
 
 
-class Error(commands.Cog):
+class Error(discord.Cog):
     def __init__(self, bot: Bot):
         self.bot = bot
 

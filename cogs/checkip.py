@@ -1,12 +1,14 @@
 from asyncio import wait_for
+
+import discord
 from discord import slash_command, option, Embed
-from discord.ext import commands
 from discord.ext.commands import Bot
+
 from utilities.data import Colors, get_server_status
 from utilities.utility import check_ip
 
 
-class CheckIP(commands.Cog):
+class CheckIP(discord.Cog):
     def __init__(self, bot: Bot):
         self.bot = bot
 

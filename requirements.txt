@@ -1,4 +1,4 @@
-py-cord[speed]==2.4.1
-python-dotenv==0.21.1
-mcstatus==11.0.1
-mysql-connector-python==8.0.32
+py-cord>=2.5.0
+python-dotenv>=0.21.1
+mcstatus>=11.1.1
+mysql-connector-python>=8.3.0

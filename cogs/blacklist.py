@@ -2,10 +2,11 @@ import discord
 from discord import slash_command, option
 from discord.ext import commands
 from discord.ext.bridge import Bot
+
 from utilities.database import modifier
 
 
-class Blacklist(commands.Cog):
+class Blacklist(discord.Cog):
     def __init__(self, bot: Bot):
         self.bot = bot
 
