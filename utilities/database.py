@@ -35,7 +35,7 @@ async def selector(query: str, variables: list):
     return result
 
 
-async def modifier(query: str, variables: list) -> None:
+async def modifier(query: str, variables: list):
     """
     This function is used to modify data in the database. It is used for INSERT, UPDATE, and DELETE queries.
     :param query: The query to execute. Use %s for variables. Example: "INSERT INTO table (column) VALUES (%s)"
