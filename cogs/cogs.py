@@ -1,7 +1,7 @@
 from os import listdir
 
 import discord
-from discord import Option
+from discord import option
 from discord.ext.commands import slash_command
 
 from utilities.data import get_data
@@ -22,16 +22,16 @@ class Cogs(discord.Cog):
         return cogs
 
     @slash_command(guild_ids=get_data()['FeatureGuilds'])
-    async def cogs(self, ctx, action: Option(choices=["Load", "Unload", "Reload"]), cog: Option(autocomplete=get_cogs)):
+    @option("action", choices=["Load", "Unload", "Reload"])
+    @option("cog", autocomplete=get_cogs)
+    async def cogs(self, ctx, action, cog):
         """ Only the owners of the bot can run this command """
         if ctx.author.id not in self.info['Owners']:
-            return
+            return await ctx.respond("This command is for owners only.", ephemeral=True)
         if cog.lower() not in [f"{fn[:-3]}" for fn in listdir("./cogs")]:
-            await ctx.respond("That cog doesn't exist!")
-            return
-        if action.lower() not in ["load", "unload", "reload"]:
-            await ctx.respond("That action doesn't exist!")
-            return
+            return await ctx.respond("That cog doesn't exist!")
+        if action not in ["Load", "Unload", "Reload"]:
+            return await ctx.respond("That action doesn't exist!")
         await ctx.defer()
         try:
             if action == "Load":
