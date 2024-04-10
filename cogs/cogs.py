@@ -2,14 +2,13 @@ from os import listdir
 
 import discord
 from discord import Option
-from discord.ext.bridge import Bot
 from discord.ext.commands import slash_command
 
 from utilities.data import get_data
 
 
 class Cogs(discord.Cog):
-    def __init__(self, bot: Bot):
+    def __init__(self, bot: discord.Bot):
         self.bot = bot
         self.info = get_data()
 
@@ -51,5 +50,5 @@ class Cogs(discord.Cog):
         await ctx.respond(f"{action}ed {cog} and reloaded all commands!")
 
 
-def setup(bot: Bot):
+def setup(bot: discord.Bot):
     bot.add_cog(Cogs(bot))

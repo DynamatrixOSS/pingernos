@@ -2,7 +2,6 @@ from asyncio import wait_for
 
 import discord
 from discord import slash_command, option, Embed, utils as dutils
-from discord.ext.commands import Bot
 
 from utilities.data import remove_colors_from_string, Colors, get_server_status
 from utilities.database import selector
@@ -10,7 +9,7 @@ from utilities.utility import check_ip
 
 
 class Status(discord.Cog):
-    def __init__(self, bot: Bot):
+    def __init__(self, bot: discord.Bot):
         self.bot = bot
 
     @slash_command(aliases=["s"], description="Get the server status")
@@ -61,5 +60,5 @@ class Status(discord.Cog):
         await ctx.respond(embed=embed)
 
 
-def setup(bot: Bot):
+def setup(bot: discord.Bot):
     bot.add_cog(Status(bot))

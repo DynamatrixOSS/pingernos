@@ -2,14 +2,13 @@ from asyncio import wait_for
 
 import discord
 from discord import slash_command, option, Embed
-from discord.ext.commands import Bot
 
 from utilities.data import Colors, get_server_status
 from utilities.utility import check_ip
 
 
 class CheckIP(discord.Cog):
-    def __init__(self, bot: Bot):
+    def __init__(self, bot: discord.Bot):
         self.bot = bot
 
     @slash_command(aliases=["checkserverip", "check"], description="Checks if an Aternos-IP is free to use.")
@@ -33,5 +32,5 @@ class CheckIP(discord.Cog):
         await ctx.respond(embed=embed, ephemeral=True)
 
 
-def setup(bot: Bot):
+def setup(bot: discord.Bot):
     bot.add_cog(CheckIP(bot))

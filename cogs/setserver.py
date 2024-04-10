@@ -1,14 +1,13 @@
 import discord
 from discord import slash_command
 from discord.ext import commands
-from discord.ext.commands import Bot
 
 from utilities.database import modifier
 from utilities.utility import check_ip
 
 
 class SetServer(discord.Cog):
-    def __init__(self, bot: Bot):
+    def __init__(self, bot: discord.Bot):
         self.bot = bot
 
     @slash_command(aliases=["set"], description="Set the default server to use if no argument is provided in the status command.")
@@ -25,5 +24,5 @@ class SetServer(discord.Cog):
         await ctx.respond(f'The IP has been set to {server}. Use `status` without an argument to view it.' , ephemeral=True)
 
 
-def setup(bot: Bot):
+def setup(bot: discord.Bot):
     bot.add_cog(SetServer(bot))

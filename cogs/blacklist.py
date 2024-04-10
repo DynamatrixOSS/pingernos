@@ -1,13 +1,12 @@
 import discord
 from discord import slash_command, option
 from discord.ext import commands
-from discord.ext.bridge import Bot
 
 from utilities.database import modifier
 
 
 class Blacklist(discord.Cog):
-    def __init__(self, bot: Bot):
+    def __init__(self, bot: discord.Bot):
         self.bot = bot
 
     @slash_command()
@@ -22,5 +21,5 @@ class Blacklist(discord.Cog):
         return await ctx.respond(f'Successfully added guild {server} to the blacklist for:\n**{reason}**')
 
 
-def setup(bot: Bot):
+def setup(bot: discord.Bot):
     bot.add_cog(Blacklist(bot))

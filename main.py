@@ -1,5 +1,4 @@
-from discord import Intents, Status, Activity, ActivityType
-from discord.ext.bridge import AutoShardedBot
+from discord import Intents, Status, Activity, ActivityType, AutoShardedBot
 from utilities.database import mysql_login
 from utilities.data import get_data
 

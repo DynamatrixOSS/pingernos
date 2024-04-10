@@ -1,10 +1,9 @@
 import discord
 from discord.ext import commands
-from discord.ext.bridge import Bot
 
 
 class Error(discord.Cog):
-    def __init__(self, bot: Bot):
+    def __init__(self, bot: discord.Bot):
         self.bot = bot
 
     @commands.Cog.listener()
@@ -29,5 +28,5 @@ class Error(discord.Cog):
         raise error
 
 
-def setup(bot: Bot):
+def setup(bot: discord.Bot):
     bot.add_cog(Error(bot))
