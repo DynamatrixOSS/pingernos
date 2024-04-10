@@ -13,13 +13,14 @@ class Status(discord.Cog):
         self.bot = bot
 
     @slash_command()
-    @option("serverip", str, description="The Aternos-IP to check")
-    async def status(self, ctx, serverip=None):
+    @option("serverip", str, description="The Aternos-IP to check", default=None)
+    async def status(self, ctx, serverip):
         """ Get the server status """
-        if serverip is None:
+        if not serverip:
             serverip = (await selector('SELECT server_ip FROM server WHERE guild_id = %s', [ctx.guild.id]))[0]
             if not serverip:
-                return await ctx.respond("Sorry, but this server does not have an IP registered. Please use `setserver` for that.", ephemeral=True)
+                setserver_command = self.bot.get_application_command("setserver")
+                return await ctx.respond(f"Sorry, but this server does not have an IP registered. Please use </{setserver_command.name}:{setserver_command.id}> for that.", ephemeral=True)
         serverip = check_ip(serverip)
         if not serverip:
             return await ctx.respond("Please provide a valid Aternos IP.", ephemeral=True)
