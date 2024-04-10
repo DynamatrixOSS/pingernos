@@ -12,7 +12,7 @@ class Cogs(discord.Cog):
         self.bot = bot
         self.info = get_data()
 
-    def getcogs(self, ctx) -> list:
+    def get_cogs(self, ctx) -> list:
         if ctx.interaction.user.id not in self.info['Owners']:
             return ["You are not an owner of the bot!"]
         cogs = []
@@ -22,7 +22,7 @@ class Cogs(discord.Cog):
         return cogs
 
     @slash_command(guild_ids=get_data()['FeatureGuilds'])
-    async def cogs(self, ctx, action: Option(choices=["Load", "Unload", "Reload"]), cog: Option(autocomplete=getcogs)):
+    async def cogs(self, ctx, action: Option(choices=["Load", "Unload", "Reload"]), cog: Option(autocomplete=get_cogs)):
         """ Only the owners of the bot can run this command """
         if ctx.author.id not in self.info['Owners']:
             return
