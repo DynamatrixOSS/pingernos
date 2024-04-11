@@ -1,5 +1,7 @@
+import mysql as my
 from mysql import connector as mysql
 from utilities.data import get_data
+
 
 async def mysql_login():
     """
