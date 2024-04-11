@@ -22,8 +22,8 @@ Amongst other things, things that counts as a security vulnerability include, bu
 
 ### How to report it
 We ask you to report any and all vulnerabilities to us in one of the following ways:
-- Sending a mail to [support@wolfsvale.tech](mailto:support@wolfsvale.tech)
-- Creating a [security advisory](https://github.com/Wolfsvale/pingernos/security/advisories/new)
+- Sending a mail to [support@nightem.com](mailto:support@nightem.com)
+- Creating a [security advisory](https://github.com/Nightem/pingernos/security/advisories/new)
 
 ... ***Do not report security vulnerabilities in discord, this is highly unsafe and will have consequences on your stay there.***
 
