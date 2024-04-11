@@ -1,4 +1,5 @@
-from mysql import connector as mysql
+from mysql.connector.aio import connect
+
 from utilities.data import get_data
 
 
@@ -9,7 +10,7 @@ async def mysql_login():
     """
     database = get_data()['Database']
 
-    return mysql.connect(
+    return await connect(
         host=database['Host'],
         user=database['User'],
         password=database['Password'],
@@ -24,14 +25,15 @@ async def selector(query: str, variables: list) -> tuple:
     :return: The result of the query. If there is no result, it will return False.
     """
     cursor = await mysql_login()
-    database = cursor.cursor()
-    database.execute(query, variables)
+    database = await cursor.cursor()
+    await database.execute(query, variables)
     try:
-        result = database.fetchall()[0]
+        result = await database.fetchall()
+        result = result[0]
     except IndexError:
         return ()
-    database.close()
-    cursor.close()
+    await database.close()
+    await cursor.close()
     return result
 
 
@@ -43,8 +45,8 @@ async def modifier(query: str, variables: list) -> None:
     :return: None
      """
     cursor = await mysql_login()
-    database = cursor.cursor()
-    database.execute(query, variables)
-    cursor.commit()
-    database.close()
-    cursor.close()
+    database = await cursor.cursor()
+    await database.execute(query, variables)
+    await cursor.commit()
+    await database.close()
+    await cursor.close()
