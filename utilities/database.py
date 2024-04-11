@@ -16,7 +16,7 @@ async def mysql_login():
         database=database['Database'])
 
 
-async def selector(query: str, variables: list):
+async def selector(query: str, variables: list) -> tuple:
     """
     This function is used to select data from the database. It is used for SELECT queries.
     :param query: The query to execute. Use %s for variables. Example: "SELECT * FROM table WHERE column = %s"

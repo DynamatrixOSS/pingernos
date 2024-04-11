@@ -1,19 +1,18 @@
 from os import listdir
 
 import discord
-from discord import Option
-from discord.ext.bridge import Bot
+from discord import option
 from discord.ext.commands import slash_command
 
 from utilities.data import get_data
 
 
 class Cogs(discord.Cog):
-    def __init__(self, bot: Bot):
+    def __init__(self, bot: discord.Bot):
         self.bot = bot
         self.info = get_data()
 
-    def getcogs(self, ctx) -> list:
+    def get_cogs(self, ctx) -> list:
         if ctx.interaction.user.id not in self.info['Owners']:
             return ["You are not an owner of the bot!"]
         cogs = []
@@ -22,16 +21,17 @@ class Cogs(discord.Cog):
                 cogs.append(file[:-3])
         return cogs
 
-    @slash_command(description='Only the owners of the bot can run this command', guild_ids=get_data()['FeatureGuilds'])
-    async def cogs(self, ctx, action: Option(choices=["Load", "Unload", "Reload"]), cog: Option(autocomplete=getcogs)):
+    @slash_command(guild_ids=get_data()['FeatureGuilds'])
+    @option("action", choices=["Load", "Unload", "Reload"])
+    @option("cog", autocomplete=get_cogs)
+    async def cogs(self, ctx, action, cog):
+        """ Only the owners of the bot can run this command """
         if ctx.author.id not in self.info['Owners']:
-            return
+            return await ctx.respond("This command is for owners only.", ephemeral=True)
         if cog.lower() not in [f"{fn[:-3]}" for fn in listdir("./cogs")]:
-            await ctx.respond("That cog doesn't exist!")
-            return
-        if action.lower() not in ["load", "unload", "reload"]:
-            await ctx.respond("That action doesn't exist!")
-            return
+            return await ctx.respond("That cog doesn't exist!")
+        if action not in ["Load", "Unload", "Reload"]:
+            return await ctx.respond("That action doesn't exist!")
         await ctx.defer()
         try:
             if action == "Load":
@@ -51,5 +51,5 @@ class Cogs(discord.Cog):
         await ctx.respond(f"{action}ed {cog} and reloaded all commands!")
 
 
-def setup(bot: Bot):
+def setup(bot: discord.Bot):
     bot.add_cog(Cogs(bot))

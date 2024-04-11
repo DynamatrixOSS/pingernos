@@ -2,14 +2,13 @@ import aiohttp
 import discord
 from discord import Guild, Embed, Webhook
 from discord.ext import commands
-from discord.ext.bridge import Bot
 
 from utilities.data import Colors, get_data
 from utilities.database import selector
 
 
 class InternalLogs(discord.Cog):
-    def __init__(self, bot: Bot):
+    def __init__(self, bot: discord.Bot):
         self.bot = bot
 
     @commands.Cog.listener()
@@ -49,5 +48,5 @@ class InternalLogs(discord.Cog):
             await webhook.send(embed=embed, username="Pingernos Logs", avatar_url=self.bot.user.avatar.url)
 
 
-def setup(bot: Bot):
+def setup(bot: discord.Bot):
     bot.add_cog(InternalLogs(bot))
