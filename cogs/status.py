@@ -2,7 +2,6 @@ from asyncio import wait_for
 
 import discord
 from discord import slash_command, option, Embed, utils as dutils
-from discord.ext.commands import Bot
 
 from utilities.data import remove_colors_from_string, Colors, get_server_status
 from utilities.database import selector
@@ -10,16 +9,18 @@ from utilities.utility import check_ip
 
 
 class Status(discord.Cog):
-    def __init__(self, bot: Bot):
+    def __init__(self, bot: discord.Bot):
         self.bot = bot
 
-    @slash_command(aliases=["s"], description="Get the server status")
-    @option("serverip", str, description="The Aternos-IP to check")
-    async def status(self, ctx, serverip=None):
-        if serverip is None:
+    @slash_command()
+    @option("serverip", str, description="The Aternos-IP to check", default=None)
+    async def status(self, ctx, serverip):
+        """ Get the server status """
+        if not serverip:
             serverip = (await selector('SELECT server_ip FROM server WHERE guild_id = %s', [ctx.guild.id]))[0]
             if not serverip:
-                return await ctx.respond("Sorry, but this server does not have an IP registered. Please use `setserver` for that.", ephemeral=True)
+                setserver_command = self.bot.get_application_command("setserver")
+                return await ctx.respond(f"Sorry, but this server does not have an IP registered. Please use </{setserver_command.name}:{setserver_command.id}> for that.", ephemeral=True)
         serverip = check_ip(serverip)
         if not serverip:
             return await ctx.respond("Please provide a valid Aternos IP.", ephemeral=True)
@@ -61,5 +62,5 @@ class Status(discord.Cog):
         await ctx.respond(embed=embed)
 
 
-def setup(bot: Bot):
+def setup(bot: discord.Bot):
     bot.add_cog(Status(bot))

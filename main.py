@@ -1,5 +1,4 @@
-from discord import Intents, Status, Activity, ActivityType
-from discord.ext.bridge import AutoShardedBot
+from discord import Intents, Status, Activity, ActivityType, AutoShardedBot
 from utilities.database import mysql_login
 from utilities.data import get_data
 
@@ -32,7 +31,7 @@ async def on_ready():
         print("Reconnect(?)")
     if not BOOTED:
         # await bot.sync_commands() #You might need to uncomment this if the slash commands aren't appearing
-        print(f'Logged in as {bot.user} with {bot.shard_count+1} shards!')
+        print(f'Logged in as {bot.user} with {bot.shard_count} shards!')
         print('------')
         for shard in bot.shards:
             await bot.change_presence(status=Status.online, activity=Activity(type=ActivityType.watching, name=f"Aternos | Shard: {shard+1}"), shard_id=shard)

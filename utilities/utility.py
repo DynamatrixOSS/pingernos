@@ -1,7 +1,7 @@
 import re
 
 
-def check_ip(server: str) -> str:
+def check_ip(server: str) -> str | bool:
     if not server.endswith('.aternos.me'):
         server += '.aternos.me'
     regex = re.compile(r"\w+\.aternos\.me")

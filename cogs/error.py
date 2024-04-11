@@ -1,10 +1,9 @@
 import discord
 from discord.ext import commands
-from discord.ext.bridge import Bot
 
 
 class Error(discord.Cog):
-    def __init__(self, bot: Bot):
+    def __init__(self, bot: discord.Bot):
         self.bot = bot
 
     @commands.Cog.listener()
@@ -22,12 +21,12 @@ class Error(discord.Cog):
             if not ctx.guild:
                 return await ctx.respond("This command can only be used in a server.", ephemeral=True)
         if isinstance(error, commands.NotOwner):
-            return await ctx.respond("This command is for owners only.")
+            return await ctx.respond("This command is for owners only.", ephemeral=True)
         if isinstance(error, commands.GuildNotFound):
             return await ctx.respond("Could not find this guild.")
         await ctx.respond("An unknown error has occurred!\nThis has been logged")
         raise error
 
 
-def setup(bot: Bot):
+def setup(bot: discord.Bot):
     bot.add_cog(Error(bot))
