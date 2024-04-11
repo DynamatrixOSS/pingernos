@@ -1,5 +1,6 @@
-from utilities.data import get_data
 from mysql.connector.aio import connect
+
+from utilities.data import get_data
 
 
 async def mysql_login():
