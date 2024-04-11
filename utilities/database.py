@@ -1,7 +1,6 @@
 from mysql import connector as mysql
 from utilities.data import get_data
 
-
 async def mysql_login():
     """
     This function is used to log in to the database.
@@ -35,7 +34,7 @@ async def selector(query: str, variables: list):
     return result
 
 
-async def modifier(query: str, variables: list):
+async def modifier(query: str, variables: list) -> None:
     """
     This function is used to modify data in the database. It is used for INSERT, UPDATE, and DELETE queries.
     :param query: The query to execute. Use %s for variables. Example: "INSERT INTO table (column) VALUES (%s)"
