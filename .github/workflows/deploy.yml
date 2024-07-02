@@ -1,0 +1,31 @@
+name: Deploy to VPS
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.5.4
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE }}
+
+          
+      - name: Deploy to VPS
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_IP }} << 'EOF'
+            cd pingernos
+            git pull origin Python
+            venv/bin/pip install -r requirements.txt
+            WATCH_MODE=$(pm2 jlist | jq -r '.[] | select(.name == "pingernos") | .pm2_env.watch')
+            if [[ "$WATCH_MODE" != "true" ]]; then
+              pm2 restart pingernos --watch
+            fi
+          EOF
