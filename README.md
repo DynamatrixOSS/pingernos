@@ -1,8 +1,8 @@
 # Pingernos
 Pingernos is a Discord bot that lets you grab the status of any Aternos server.
 
-This bot takes **mentions** and slash commands as prefix. You can type in **/** to view a list of the commands.
-The command to grab the status of the server is **<@889197952994791434> status [Aternos name or IP]**.
+This bot only takes slash commands as prefix. You can type in **/** to view a list of the commands.
+The command to grab the status of the server is **/status [Aternos name or IP]**.
 The bot displays:
 - Player amount
 - Server status (online, offline, loading)
