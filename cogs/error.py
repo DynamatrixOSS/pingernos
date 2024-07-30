@@ -20,6 +20,8 @@ class Error(discord.Cog):
         if isinstance(error, discord.CheckFailure):
             if not ctx.guild:
                 return await ctx.respond("This command can only be used in a server.", ephemeral=True)
+            return await ctx.respond("We have decided to revise Pingernos due to complications with Aternos.\n"
+                                     "Read more [here](<https://github.com/DynamatrixOSS/pingernos/blob/Python/release-4.0.0.md>) and [join our discord for updates](<https://discord.gg/Z8KGvGWZcY>).")
         if isinstance(error, commands.NotOwner):
             return await ctx.respond("This command is for owners only.", ephemeral=True)
         if isinstance(error, commands.GuildNotFound):

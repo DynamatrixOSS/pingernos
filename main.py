@@ -43,4 +43,9 @@ async def guild_only(ctx):
     return ctx.guild is not None
 
 
+@bot.check
+async def on_command(ctx):
+    return False
+
+
 bot.run(data['Token'])
