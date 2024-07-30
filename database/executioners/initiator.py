@@ -1,5 +1,5 @@
-import aiomysql
 import asyncio
+import aiomysql
 from config.app import Settings
 
 
