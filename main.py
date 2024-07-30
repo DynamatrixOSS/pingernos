@@ -1,13 +1,10 @@
 import asyncio
 import atexit
 import socket
-from datetime import datetime
+
 from providers.modifiers.logger import setup_logger
 from database.executioners.initiator import db_pool
-
-import discord
-import json
-from discord import Intents, Status, Activity, ActivityType
+from discord import Intents, Status, Activity, ActivityType, Bot
 from providers.database.migration_provider import run_migrations
 from providers.database.seeding_provider import run_seeders
 
@@ -17,7 +14,7 @@ logger = setup_logger()
 
 
 intents = Intents(guilds=True)
-bot = discord.Bot(intents=intents, status=Status.online,
+bot = Bot(intents=intents, status=Status.online,
                   activity=Activity(type=ActivityType.playing, name="starting up script..."))
 
 

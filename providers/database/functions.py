@@ -31,9 +31,9 @@ async def run_tasks(directory_name, task_name, task_type):
         if not hasattr(module, task_type):
             raise AttributeError(f"{task_type} class not found in {task_name}")
 
-        TaskClass = getattr(module, task_type)
+        task_class = getattr(module, task_type)
 
-        task_instance = TaskClass()
+        task_instance = task_class()
 
         task_data = {
             "name": task_instance.get_table() if task_type == "Seeder" else task_instance.get_name(),

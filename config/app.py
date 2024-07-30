@@ -1,5 +1,6 @@
 from config.vault import get_vault
 
+
 class Settings:
     def __init__(self):
         self.environment = "development"
