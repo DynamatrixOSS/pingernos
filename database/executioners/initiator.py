@@ -1,6 +1,6 @@
-from config.app import Settings
 import aiomysql
 import asyncio
+from config.app import Settings
 
 
 class DBPool:

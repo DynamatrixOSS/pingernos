@@ -27,8 +27,8 @@ async def execute(statement: str, args: [] = None):
 
                     if cursor.description:
                         return await cursor.fetchall()
-                    else:
-                        return []
+
+                    return []
     except pymysql.err.Warning:
         pass
     except aiomysql.Error as err:

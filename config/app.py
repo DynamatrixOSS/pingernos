@@ -9,7 +9,7 @@ class Settings:
         self.migrations = True
 
     def get_setting(self, setting):
-        return self.__getattribute__(setting)
+        return getattr(self, setting)
 
     def get_settings(self):
         return self

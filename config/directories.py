@@ -1,9 +1,9 @@
 class Directories:
-    migrations = f"database/migrations"
-    seeders = f"database/seeders"
+    migrations = "database/migrations"
+    seeders = "database/seeders"
 
     def get_directory(self, directory):
-        return self.__getattribute__(directory)
+        return getattr(self, directory)
 
     def get_directories(self):
         return self

@@ -2,9 +2,9 @@ import asyncio
 import atexit
 import socket
 
+from discord import Intents, Status, Activity, ActivityType, Bot
 from providers.modifiers.logger import setup_logger
 from database.executioners.initiator import db_pool
-from discord import Intents, Status, Activity, ActivityType, Bot
 from providers.database.migration_provider import run_migrations
 from providers.database.seeding_provider import run_seeders
 
@@ -29,19 +29,18 @@ def check_hostname():
 
 
 def setup_settings():
-    token = Settings.get_token()
     seeding = Settings().get_setting('seeding')
     environment = Settings().get_environment()
-    return token, seeding, environment
+    return seeding, environment
 
 
 async def main():
-    token, seeding, environment = setup_settings()
+    seeding, environment = setup_settings()
     if check_hostname() and environment != 'production':
         logger.warning(
             'Environment was set to "{}" on a production machine and has been set to "production".'.format(environment))
         Settings().set_environment('production')
-    if environment != 'testing' and environment != 'development':
+    if environment not in ('testing', 'development'):
         logger.warning(
             'Environment was set to "{}" on a non-production machine and has been set to "development".'.format(environment))
         Settings().set_environment('development')
