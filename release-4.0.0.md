@@ -1,7 +1,7 @@
 <h1 align="center">Release 4.0.0</h1>
 <p align="center">
   Pingernos has long served as a status checker for Aternos servers, with the first commit being made on September 19th, 2021. This means that Pingernos is almost three years old.
-  Unfortunately, the bot has been blocked out of the provider that Aternos uses for most servers through their DdoS protection. This means only a small scale of servers can still have their status checked at all times.
+  Unfortunately, the bot has been blocked out of the provider that Aternos uses for most servers through their DdoS protection. This means only a small scale of servers can still have     their status checked at all times.
   <b>This means, pingernos will no longer serve as a status checker.</b>
 </p>
 
@@ -22,3 +22,8 @@ As such, we also accept suggestions for features to implement into Pingernos as 
 > [!CAUTION]
 > You may find that the username and avatar of Pingernos will also change as we continue to build it into something new.
 > You will hear it when this happens through our discord server. 
+
+<h2 align="center">Your data</h2>
+<p>
+  All data is to be removed on the 30th of August. If, for any reason you'd want your data from our database, feel free to contact us through support@nightem.com in your mail. We will     respond swiftly with all your data, as long as you have proven yourself to be the person that the data is relevant to.
+</p>
