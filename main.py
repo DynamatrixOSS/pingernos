@@ -1,5 +1,3 @@
-import asyncio
-import atexit
 import socket
 
 from discord import Intents, Status, Activity, ActivityType, Bot
