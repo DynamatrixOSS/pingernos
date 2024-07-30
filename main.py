@@ -29,13 +29,14 @@ def check_hostname():
 
 
 def setup_settings():
+    token = Settings().get_token()
     seeding = Settings().get_setting('seeding')
     environment = Settings().get_environment()
-    return seeding, environment
+    return token, seeding, environment
 
 
 async def main():
-    seeding, environment = setup_settings()
+    token, seeding, environment = setup_settings() # pylint: disable=unused-variable
     if check_hostname() and environment != 'production':
         logger.warning(
             'Environment was set to "{}" on a production machine and has been set to "production".'.format(environment))
@@ -82,6 +83,5 @@ async def on_disconnect():
     logger.info('Pool has been closed successfully.')
     logger.info(f'{bot.user} has disconnected from Discord successfully.')
 
-atexit.register(lambda: asyncio.run(db_pool.close_pool()))
 
 bot.run(setup_settings()[0])
