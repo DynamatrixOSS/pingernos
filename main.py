@@ -44,7 +44,7 @@ async def guild_only(ctx):
 
 
 @bot.check
-async def on_command():
+async def on_command(ctx):
     return False
 
 
