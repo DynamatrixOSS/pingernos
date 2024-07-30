@@ -14,8 +14,12 @@ logger = setup_logger()
 
 
 intents = Intents(guilds=True)
-bot = Bot(intents=intents, status=Status.online,
-                  activity=Activity(type=ActivityType.playing, name="starting up script..."))
+bot = Bot(
+    intents=intents,
+    status=Status.online,
+    activity=Activity(
+        type=ActivityType.playing,
+        name="starting up script..."))
 
 
 def check_hostname():
@@ -34,10 +38,12 @@ def setup_settings():
 async def main():
     token, seeding, environment = setup_settings()
     if check_hostname() and environment != 'production':
-        logger.warning('Environment was set to "{}" on a production machine and has been set to "production".'.format(environment))
+        logger.warning(
+            'Environment was set to "{}" on a production machine and has been set to "production".'.format(environment))
         Settings().set_environment('production')
     if environment != 'testing' and environment != 'development':
-        logger.warning('Environment was set to "{}" on a non-production machine and has been set to "development".'.format(environment))
+        logger.warning(
+            'Environment was set to "{}" on a non-production machine and has been set to "development".'.format(environment))
         Settings().set_environment('development')
 
     migrations = False if environment != 'development' else Settings().get_setting('migrations')
