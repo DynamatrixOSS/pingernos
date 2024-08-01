@@ -14,7 +14,7 @@ class Translation:
                 translation_map[dirname.removeprefix("./translations/")] = json_data
         return translation_map
     def get_translation(self, language: str, message_code: str) -> str:
-        translation_map = Translation._get_translation_map()
+        translation_map = self._get_translation_map()
         try:
             return translation_map[language][message_code]
         except KeyError:
