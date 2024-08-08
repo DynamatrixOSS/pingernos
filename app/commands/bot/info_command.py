@@ -1,9 +1,8 @@
-from config.app import Settings
-
 from discord import Embed, Color, ButtonStyle, ApplicationContext
 from discord.ext import commands
 from discord.ui import Button, View
 
+from config.app import Settings
 from providers.modifiers.logger import setup_logger
 
 logger = setup_logger()
