@@ -27,10 +27,12 @@ def check_hostname():
 
 
 def setup_settings():
-    token = Settings().get_token()
-    seeding = Settings().get_setting('seeding')
-    environment = Settings().get_environment()
-    return token, seeding, environment
+    settings = Settings()
+    token = settings.get_token()
+    seeding = settings.get_setting('seeding')
+    environment = settings.get_environment()
+    manager_guilds = settings.get_setting('manager_guilds')
+    return token, seeding, environment, manager_guilds
 
 
 async def main():
@@ -64,6 +66,9 @@ async def on_connect():
     await db_pool.init_pool()
     logger.info('Running providers...')
     await main()
+    module_directory = Directories().get_directory('modules')
+    bot.load_extensions(module_directory, recursive=True)
+    await bot.sync_commands(guild_ids=setup_settings()[-1])
     logger.info(f'{bot.user} has connected to Discord successfully.')
 
 
