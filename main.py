@@ -1,6 +1,8 @@
 import socket
 
 from discord import Intents, Status, Activity, ActivityType, Bot
+
+from config.directories import Directories
 from providers.modifiers.logger import setup_logger
 from database.executioners.initiator import db_pool
 from providers.database.migration_provider import run_migrations
