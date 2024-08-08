@@ -36,7 +36,7 @@ def setup_settings():
 
 
 async def main():
-    token, seeding, environment = setup_settings() # pylint: disable=unused-variable
+    token, seeding, environment, manager_guilds = setup_settings()  # pylint: disable=unused-variable
     if check_hostname() and environment != 'production':
         logger.warning(
             'Environment was set to "{}" on a production machine and has been set to "production".'.format(environment))
@@ -68,7 +68,8 @@ async def on_connect():
     await main()
     module_directory = Directories().get_directory('modules')
     bot.load_extensions(module_directory, recursive=True)
-    await bot.sync_commands(guild_ids=setup_settings()[-1])
+    if setup_settings()[2] == 'development':
+        await bot.sync_commands(guild_ids=setup_settings()[-1])
     logger.info(f'{bot.user} has connected to Discord successfully.')
 
 
