@@ -7,6 +7,12 @@ class Settings:
         self.debug = False
         self.seeding = False
         self.migrations = True
+        self.manager_guilds = [1256003845188882562]
+
+        self.github = "https://github.com/DynamatrixOSS/pingernos"
+        self.discord = "https://discord.gg/Z8KGvGWZcY"
+        self.privacy = "https://rebel.dynamatrix.com/privacy"
+        self.invite = "https://rebel.dynamatrix.com/invite"
 
     def get_setting(self, setting):
         return getattr(self, setting)
