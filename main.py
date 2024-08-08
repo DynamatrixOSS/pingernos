@@ -75,7 +75,6 @@ async def on_connect():
 
 @bot.listen()
 async def on_ready():
-    # bot.load_extensions("modules")
     await bot.change_presence(status=Status.online, activity=Activity(type=ActivityType.listening, name="interactions"))
     logger.info(f'{bot.user} has been logged into successfully.')
 
