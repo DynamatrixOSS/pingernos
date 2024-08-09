@@ -1,7 +1,6 @@
 from discord import Embed, Color, ButtonStyle, ApplicationContext
 from discord.ext import commands
 from discord.ui import Button, View
-
 from config.app import Settings
 from providers.modifiers.logger import setup_logger
 
@@ -9,33 +8,37 @@ logger = setup_logger()
 
 class Source(View):  # Create a class that subclasses discord.ui.View
     def __init__(self):
-        settings = Settings()
         super().__init__()
+        self.settings = Settings()
+        self.ctx = None  # Initialize ctx as None
+
+    async def add_buttons(self):
         # Add a URL button to the view
         self.add_item(Button(
-            label="Source",
+            label=await t(self.ctx, 'Source'),
             style=ButtonStyle.link,
             emoji="<github:1271230731691229265>",
-            url=settings.get_setting('github')
+            url=self.settings.get_setting('github')
         ))
         self.add_item(Button(
-            label="Support",
+            label=await t(self.ctx, 'Support'),
             style=ButtonStyle.link,
             emoji="<:discord:1271235054697189376>",
-            url=settings.get_setting('discord')
+            url=self.settings.get_setting('discord')
         ))
         self.add_item(Button(
-            label="Privacy",
+            label=await t(self.ctx, 'Privacy'),
             style=ButtonStyle.link,
             emoji="<:data:1271237825467121796>",
-            url=settings.get_setting('privacy')
+            url=self.settings.get_setting('privacy')
         ))
         self.add_item(Button(
-            label="Invite",
+            label=await t(self.ctx, 'Invite'),
             style=ButtonStyle.link,
             emoji="<:invite:1271238312077561917>",
-            url=settings.get_setting('invite')
+            url=self.settings.get_setting('invite')
         ))
+        return self  # Return self to use this View in ctx.respond()
 
 
 class Info(commands.Cog):
@@ -49,27 +52,23 @@ class Info(commands.Cog):
         :param ctx:
         :return:
         """
+        source = Source()
+        source.ctx = ctx
+
         information_embed = Embed()
         information_embed.colour = Color.purple()
         information_embed.set_author(
-            name='Dynamatrix OSS by Dynamatrix',
+            name=await t(ctx, 'Dynamatrix OSS by Dynamatrix'),
             icon_url=self.bot.user.avatar.url
         )
-        information_embed.set_footer(text=f'Response time: {round(self.bot.latency * 1000)}ms')
-        information_embed.description = f"""
-{self.bot.user.mention} is a bot developed by Dynamatrix OSS, an open-source team managed by the Dynamatrix company.
+        information_embed.set_footer(text=await t(ctx, 'Response time', [round(self.bot.latency * 1000)]))
+        information_embed.description = await t(
+            ctx,
+            'is a bot developed by Dynamatrix OSS',
+            [self.bot.user.mention, self.bot.user.display_name]
+        )
 
-The main goal of {self.bot.user.display_name} is to provide users with a convenient multi-module bot that can integrate a dozen bots into a single one along with easy managing through the web dashboard.
-
-As such, this bot currently offers:
-
->> Currency
->> Utility
->> Moderation
->> Levelling
->> Verification
-"""
-        await ctx.respond(embed=information_embed, view=Source(), ephemeral=True)
+        await ctx.respond(embed=information_embed, view=await source.add_buttons(), ephemeral=True)
 
 
 def setup(bot):
