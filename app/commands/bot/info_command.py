@@ -55,6 +55,7 @@ class Info(commands.Cog):
             name='Dynamatrix OSS by Dynamatrix',
             icon_url=self.bot.user.avatar.url
         )
+        information_embed.set_footer(text=f'Response time: {round(self.bot.latency * 1000)}ms')
         information_embed.description = f"""
 {self.bot.user.mention} is a bot developed by Dynamatrix OSS, an open-source team managed by the Dynamatrix company.
 
