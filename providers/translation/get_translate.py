@@ -1,10 +1,20 @@
 from os import walk
 from json import load
-from sys import exit as sysexit
+
+from discord import ApplicationContext
+
+from database.executioners.database import execute
+from providers.modifiers.logger import setup_logger
+
+logger = setup_logger()
+
 
 class Translation:
-    def _get_translation_map(self) -> dict:
-        "You shouldn't have to use this unless your debugging."
+
+
+    @staticmethod
+    def _get_translation_map() -> dict:
+        """You shouldn't have to use this unless your debugging."""
         translation_map = {}
         for dirname, _, filenames in walk("./translations/"):
             if dirname == "./translations/":
@@ -15,33 +25,15 @@ class Translation:
                 translation_map[dirname.removeprefix("./translations/")] = json_data
         return translation_map
 
-    def get_translation(self, language: str, message_code: str) -> str:
+    async def t(self, ctx: ApplicationContext, message_code: str, parameters: list = None) -> str:
         translation_map = self._get_translation_map()
+        guild_setting = next(iter((await execute('SELECT language FROM guild_settings WHERE guild_id = %s', ctx.guild.id))[0]))
+        logger.warning(guild_setting)
+
         try:
-            return translation_map[language][message_code]
+            return (translation_map[guild_setting][message_code]).format(*parameters) if parameters else translation_map[guild_setting][message_code]
         except KeyError:
             try:
-                return translation_map["en-US"][message_code] # Default to US
+                return translation_map["en"][message_code].format(*parameters) if parameters else translation_map["en"][message_code]  # Default to US
             except KeyError:
                 return "No message available for this given message code"
-
-if __name__ == "__main__":
-    #Just some tests
-    translation_class = Translation()
-    if translation_class.get_translation("en-GB", "test") != "British!":
-        print ("Test 1 failed")
-        sysexit(1)
-
-    if translation_class.get_translation("thislanguage-doesnotexist", "test") != "Works!":
-        print ("Test 2 failed")
-        sysexit(1)
-
-    if translation_class.get_translation("en-US", "test") != "Works!":
-        print ("Test 3 failed")
-        sysexit(1)
-
-    if translation_class.get_translation("en-US", "thisdoesnotexist") != "No message available for this given message code":
-        print ("Test 4 failed")
-        sysexit(1)
-
-    print ("All tests passed!")
