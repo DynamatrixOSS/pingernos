@@ -14,6 +14,7 @@ class Translation:
                 json_data = load(f)
                 translation_map[dirname.removeprefix("./translations/")] = json_data
         return translation_map
+
     def get_translation(self, language: str, message_code: str) -> str:
         translation_map = self._get_translation_map()
         try:
