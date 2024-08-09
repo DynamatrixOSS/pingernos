@@ -1,5 +1,5 @@
 import socket
-
+import builtins
 from discord import Intents, Status, Activity, ActivityType, Bot
 
 from config.directories import Directories
@@ -7,6 +7,7 @@ from providers.modifiers.logger import setup_logger
 from database.executioners.initiator import db_pool
 from providers.database.migration_provider import run_migrations
 from providers.database.seeding_provider import run_seeders
+from providers.translation.get_translate import Translation
 
 from config.app import Settings
 
@@ -77,6 +78,7 @@ async def on_connect():
 
 @bot.listen()
 async def on_ready():
+    builtins.t = Translation().t
     await bot.change_presence(status=Status.online, activity=Activity(type=ActivityType.listening, name="interactions"))
     logger.info(f'{bot.user} has been logged into successfully.')
 
