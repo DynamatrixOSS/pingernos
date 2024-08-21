@@ -5,5 +5,8 @@
     "Support": "Ondersteuning",
     "Privacy": "Privacy",
     "Invite": "Uitnodigen",
-    "Response time": "Reactietijd: {}ms"
+    "Response time": "Reactietijd: {}ms",
+    "User information": "**Gebruikers ID**: `{}`\n**Gemaakt**: {}\n**Lid sinds**: {}",
+    "User information without join date": "**Gebruikers ID**: `{}`\n**Gemaakt**: {}"
+
 }
