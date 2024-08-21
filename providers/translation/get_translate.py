@@ -27,11 +27,14 @@ class Translation:
 
     async def t(self, ctx: ApplicationContext, message_code: str, parameters: list = None) -> str:
         translation_map = self._get_translation_map()
-        guild_setting = next(iter((await execute('SELECT language FROM guild_settings WHERE guild_id = %s', ctx.guild.id))[0]))
-        logger.warning(guild_setting)
+        user_setting = await execute('SELECT language FROM user_settings WHERE user_id = %s', ctx.author.id)
+        user_language = next(iter(user_setting))[0] if user_setting else None
+        guild_setting = await execute('SELECT language FROM guild_settings WHERE guild_id = %s', ctx.guild.id)
+        guild_language = next(iter(guild_setting))[0] if guild_setting else None
 
+        setting = user_language if user_language else guild_language if guild_language else "en"
         try:
-            return (translation_map[guild_setting][message_code]).format(*parameters) if parameters else translation_map[guild_setting][message_code]
+            return (translation_map[setting][message_code]).format(*parameters) if parameters else translation_map[setting][message_code]
         except KeyError:
             try:
                 return translation_map["en"][message_code].format(*parameters) if parameters else translation_map["en"][message_code]  # Default to US
