@@ -5,5 +5,7 @@
     "Support": "Support",
     "Privacy": "Privacy",
     "Invite": "Invite",
-    "Response time": "Response time: {}ms"
+    "Response time": "Response time: {}ms",
+    "User information": "**User ID**: `{}`\n**Created**: {}\n**Joined**: {}",
+    "User information without join date": "**User ID**: `{}`\n**Created**: {}"
 }
