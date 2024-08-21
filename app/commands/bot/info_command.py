@@ -41,7 +41,7 @@ class Source(View):  # Create a class that subclasses discord.ui.View
         return self  # Return self to use this View in ctx.respond()
 
 
-class Info(commands.Cog):
+class BotInfo(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -72,4 +72,4 @@ class Info(commands.Cog):
 
 
 def setup(bot):
-    bot.add_cog(Info(bot))
+    bot.add_cog(BotInfo(bot))
