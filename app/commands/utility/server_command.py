@@ -26,7 +26,7 @@ class UtilityServer(commands.Cog):
         :param ctx:
         :return:
         """
-        features = '\n- `' + '`\n- `'.join(ctx.guild.features) if ctx.guild.features else 'None'
+        features = '\n- `' + '`\n- `'.join(ctx.guild.features) + '`' if ctx.guild.features else 'None'
         embed = Embed()
         embed.title = ctx.guild.name
         embed.thumbnail = ctx.guild.icon
@@ -39,7 +39,7 @@ class UtilityServer(commands.Cog):
 **Security measure(s)**: {VerificationLevels[str(ctx.guild.verification_level).upper()].value}
 **Premium tier**: {ctx.guild.premium_tier} with {len(ctx.guild.premium_subscribers)} subscribers
 
-**Features**: {features + '`'}
+**Features**: {features}
 """
 
         await ctx.respond(embed=embed)
