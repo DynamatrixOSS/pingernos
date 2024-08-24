@@ -28,7 +28,7 @@ class UtilityUser(commands.Cog):
         embed.thumbnail = user.avatar.url
         embed.colour = user.color
         user_in_guild = hasattr(user, 'joined_at')
-        embed.description = await t(ctx, 'User information' if user_in_guild else 'User information without join date', [user.id, f'<t:{int(user.created_at.timestamp())}>', f'{ f"<t:{int(user.joined_at.timestamp())}>" if user_in_guild else None}'])
+        embed.description = await t(ctx, 'User information' if user_in_guild else 'User information without join date', [user.id, f'<t:{int(user.created_at.timestamp())}:F>', f'{ f"<t:{int(user.joined_at.timestamp())}:F>" if user_in_guild else None}'])
 
         await ctx.respond(embed=embed)
 
