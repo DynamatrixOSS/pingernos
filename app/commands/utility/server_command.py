@@ -29,7 +29,8 @@ class UtilityServer(commands.Cog):
         features = '\n- `' + '`\n- `'.join(ctx.guild.features) + '`' if ctx.guild.features else 'None'
         embed = Embed()
         embed.title = ctx.guild.name
-        embed.thumbnail = ctx.guild.icon
+        embed.thumbnail = ctx.guild.icon.url if ctx.guild.icon else 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg'
+        embed.image = ctx.guild.banner.url if ctx.guild.banner else ''
         embed.description = f"""
 **Owner**: <@{ctx.guild.owner_id}> (ID: `{ctx.guild.owner_id}`)
 **Created**: <t:{int(ctx.guild.created_at.timestamp())}:F>
