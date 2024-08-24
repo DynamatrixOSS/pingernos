@@ -6,12 +6,14 @@ from providers.modifiers.logger import setup_logger
 
 logger = setup_logger()
 
+
 class VerificationLevels(Enum):
     NONE = 'No security measures.'
     LOW = 'Verified mail required.'
     MEDIUM = '\n- Verified mail\n- registered for 5+ minutes'
     HIGH = '\n- Verified mail\n- registered for 5+ minutes\n- member for 10+ minutes'
     HIGHEST = 'Verified phone number required.'
+
 
 class UtilityServer(commands.Cog):
     def __init__(self, bot):
