@@ -7,6 +7,11 @@
     "Invite": "Uitnodigen",
     "Response time": "Reactietijd: {}ms",
     "User information": "**Gebruikers ID**: `{}`\n**Gemaakt**: {}\n**Lid sinds**: {}",
-    "User information without join date": "**Gebruikers ID**: `{}`\n**Gemaakt**: {}"
-
+    "User information without join date": "**Gebruikers ID**: `{}`\n**Gemaakt**: {}",
+    "None": "Geen",
+    "server_security_low": "Geverifiëerde mail vereist.",
+    "server_security_medium": "\n- Geverifiëerde mail vereist\n- 5+ minuten geregistreerd",
+    "server_security_high": "\n- Geverifiëerde mail vereist\n- 5+ minuten geregistreerd\n- Lid voor 10+ minuten",
+    "server_security_highest": "Geverifiëerde telefoonnummer vereist.",
+    "server_info": "**Eigenaar**: <@{}> (ID: `{}`)\n**Gemaakt**: <t:{}:F>\n**Server ID**: `{}`\n\n**Leden**: {}\n**Veiligheidsmaatregelen**: {}\n**premium level**: {} met {} deelnemers\n\n**kenmerken**: {}"
 }
