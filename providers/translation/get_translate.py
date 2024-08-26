@@ -25,7 +25,7 @@ class Translation:
                 translation_map[dirname.removeprefix("./translations/")] = json_data
         return translation_map
 
-    async def t(self, ctx: ApplicationContext, message_code: str, parameters: list = None) -> str:
+    async def t(self, message_code: str, ctx: ApplicationContext, parameters: list = None) -> str:
         translation_map = self._get_translation_map()
         user_setting = await execute('SELECT language FROM user_settings WHERE user_id = %s', ctx.author.id)
         user_language = next(iter(user_setting))[0] if user_setting else None
