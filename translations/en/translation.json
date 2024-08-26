@@ -7,5 +7,11 @@
     "Invite": "Invite",
     "Response time": "Response time: {}ms",
     "User information": "**User ID**: `{}`\n**Created**: {}\n**Joined**: {}",
-    "User information without join date": "**User ID**: `{}`\n**Created**: {}"
+    "User information without join date": "**User ID**: `{}`\n**Created**: {}",
+    "None": "None",
+    "server_security_low": "Verified mail required.",
+    "server_security_medium": "\n- Verified mail required\n- Registered for 5+ minutes",
+    "server_security_high": "\n- Verified mail required\n- Registered for 5+ minutes\n- Member for 10+ minutes",
+    "server_security_highest": "Verified phone number required.",
+    "server_info": "**Owner**: <@{}> (ID: `{}`)\n**Created**: <t:{}:F>\n**Guild ID**: `{}`\n\n**Members**: {}\n**Security measure(s)**: {}\n**Premium tier**: {} with {} subscribers\n\n**Features**: {}"
 }
