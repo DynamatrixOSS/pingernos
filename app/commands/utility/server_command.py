@@ -7,12 +7,14 @@ from providers.modifiers.logger import setup_logger
 logger = setup_logger()
 
 
-class VerificationLevels(Enum):
-    NONE = 'No security measures.'
-    LOW = 'Verified mail required.'
-    MEDIUM = '\n- Verified mail\n- registered for 5+ minutes'
-    HIGH = '\n- Verified mail\n- registered for 5+ minutes\n- member for 10+ minutes'
-    HIGHEST = 'Verified phone number required.'
+async def get_verification_levels(ctx):
+    return {
+        'NONE': await t('None', ctx),
+        'LOW': await t('server_security_low', ctx),
+        'MEDIUM': await t('server_security_medium', ctx),
+        'HIGH': await t('server_security_high', ctx),
+        'HIGHEST': await t('server_security_highest', ctx)
+    }
 
 
 class UtilityServer(commands.Cog):
@@ -26,22 +28,27 @@ class UtilityServer(commands.Cog):
         :param ctx:
         :return:
         """
-        features = '\n- `' + '`\n- `'.join(ctx.guild.features) + '`' if ctx.guild.features else 'None'
+        features = '\n- `' + '`\n- `'.join(ctx.guild.features) + '`' if ctx.guild.features else await t('None', ctx)
+        verification_levels = await get_verification_levels(ctx)
         embed = Embed()
         embed.title = ctx.guild.name
         embed.thumbnail = ctx.guild.icon.url if ctx.guild.icon else 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg'
         embed.image = ctx.guild.banner.url if ctx.guild.banner else ''
-        embed.description = f"""
-**Owner**: <@{ctx.guild.owner_id}> (ID: `{ctx.guild.owner_id}`)
-**Created**: <t:{int(ctx.guild.created_at.timestamp())}:F>
-**Guild ID**: `{ctx.guild.id}`
-
-**Members**: {ctx.guild.member_count}
-**Security measure(s)**: {VerificationLevels[str(ctx.guild.verification_level).upper()].value}
-**Premium tier**: {ctx.guild.premium_tier} with {len(ctx.guild.premium_subscribers)} subscribers
-
-**Features**: {features}
-"""
+        embed.description = await t(
+            'server_info',
+            ctx,
+            [
+                ctx.guild.owner_id,
+                ctx.guild.owner_id,
+                int(ctx.guild.created_at.timestamp()),
+                ctx.guild.id,
+                ctx.guild.member_count,
+                verification_levels[str(ctx.guild.verification_level).upper()],
+                ctx.guild.premium_tier,
+                len(ctx.guild.premium_subscribers),
+                features
+            ]
+        )
 
         await ctx.respond(embed=embed)
 
