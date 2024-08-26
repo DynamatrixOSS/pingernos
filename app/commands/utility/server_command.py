@@ -1,5 +1,3 @@
-from enum import Enum
-
 from discord import Embed, ApplicationContext
 from discord.ext import commands
 from providers.modifiers.logger import setup_logger
